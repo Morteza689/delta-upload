@@ -97,3 +97,56 @@ def check_payment_secrets(app_configs, **kwargs):
         ))
 
     return problems
+
+
+@register('dup')
+def check_static_files_served(app_configs, **kwargs):
+    """With DEBUG off, something has to serve STATIC_URL.
+
+    Django deliberately serves nothing there and assumes a web server in front
+    is doing it. When nothing is, the site answers every request correctly and
+    arrives with no stylesheet and no scripts, which reads as a broken deploy
+    rather than a missing setting.
+    """
+    from pathlib import Path
+
+    if not looks_like_production():
+        return []
+
+    if not settings.STATIC_ROOT:
+        return [Error(
+            'STATIC_ROOT ست نشده.',
+            hint='بدون آن collectstatic جایی برای نوشتن ندارد و هیچ فایل '
+                 'استاتیکی سرو نمی‌شود.',
+            id='dup.E003',
+        )]
+
+    problems = []
+    root = Path(settings.STATIC_ROOT)
+
+    if not root.exists() or not any(root.iterdir()):
+        problems.append(Warning(
+            'STATIC_ROOT خالی است؛ collectstatic اجرا نشده.',
+            hint='python manage.py collectstatic --noinput  — بدون این، CSS و '
+                 'JS سایت لود نمی‌شوند.',
+            id='dup.W004',
+        ))
+
+    backend = settings.STORAGES['staticfiles']['BACKEND']
+    if 'Manifest' in backend and not (root / 'staticfiles.json').exists():
+        problems.append(Error(
+            'استوریج استاتیک manifest می‌خواهد ولی staticfiles.json نیست.',
+            hint='هر {% static %} با خطا بالا می‌آید تا collectstatic اجرا شود.',
+            id='dup.E004',
+        ))
+
+    if not any('whitenoise' in middleware for middleware in settings.MIDDLEWARE):
+        problems.append(Warning(
+            'WhiteNoise در MIDDLEWARE نیست.',
+            hint='اگر nginx یا وب‌سروری جلوی جنگو فایل‌های STATIC_ROOT را سرو '
+                 'می‌کند اشکالی ندارد. اگر نه — مثل دیپلوی سرورلس — هیچ CSS و '
+                 'JS ای به مرورگر نمی‌رسد.',
+            id='dup.W005',
+        ))
+
+    return problems

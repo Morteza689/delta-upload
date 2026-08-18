@@ -261,6 +261,28 @@ python manage.py check --deploy  # باید بدون هیچ ایرادی رد ش
 
 ---
 
+## ۸.۵. فایل‌های استاتیک
+
+`collectstatic` خروجی را در `staticfiles/` می‌گذارد (با `STATIC_ROOT` جای دیگری
+بگذار). WhiteNoise همان پوشه را از داخل خود اپلیکیشن سرو می‌کند، پس CSS و JS
+بدون هیچ تنظیم وب‌سروری بالا می‌آیند.
+
+نام هر فایل هش محتوایش را دارد، پس هدر کش یک‌ساله می‌گیرد و با هر تغییر نام
+عوض می‌شود. اگر `collectstatic` را اجرا نکنی، `check --deploy` با `dup.W004`
+جلویت را می‌گیرد؛ اگر manifest ساخته نشده باشد با `dup.E004`.
+
+سرو کردنشان با nginx سریع‌تر است و اختیاری:
+
+```nginx
+location /static/ {
+    alias /path/to/app/staticfiles/;
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+}
+```
+
+---
+
 ## ۹. nginx
 
 ```nginx

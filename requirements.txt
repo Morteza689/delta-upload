@@ -9,9 +9,17 @@ tzdata==2026.3
 # Public API: authentication, serialisers, throttling, and one error shape.
 djangorestframework==3.18.0
 
-# Postgres in production. Development falls back to SQLite when DATABASE_URL
-# is unset, so a fresh clone runs with no database to set up first.
+# Postgres, the only engine supported. DATABASE_URL is required; there is no
+# SQLite fallback, deliberately.
 psycopg[binary]==3.3.4
+
+# Serves the collected static files from the application process.
+#
+# With DEBUG=0 Django serves nothing under STATIC_URL, on the assumption that a
+# web server is in front doing it. On a platform where nothing is (a serverless
+# deploy, or nginx without a static alias) every stylesheet and script 404s and
+# the site arrives unstyled.
+whitenoise==6.12.0
 
 # S3 storage (USE_S3=1)
 boto3==1.43.70

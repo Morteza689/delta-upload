@@ -117,6 +117,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # Directly after SecurityMiddleware and before everything else: a request
+    # for a stylesheet has no business touching sessions, locale or auth.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # Must sit after Session and before Common.
     'django.middleware.locale.LocaleMiddleware',
@@ -327,12 +330,43 @@ if USE_S3:
     S3_DOWNLOAD_URL_EXPIRE = 60
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = '/home/dupir/public_html/static'
 
+# Where collectstatic writes. Overridable because a shared host often wants the
+# files under a document root outside the project.
+#
+# Deliberately not inside STATICFILES_DIRS: collecting into a directory that is
+# also a source directory makes the output an input on the next run, and every
+# collect nests another copy.
+STATIC_ROOT = Path(os.environ.get('STATIC_ROOT') or BASE_DIR / 'staticfiles')
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+
+# WhiteNoise serves STATIC_ROOT from inside the application.
+#
+# Without it, DEBUG=0 means Django refuses to serve anything under STATIC_URL
+# and expects a web server in front to do it. Where nothing is in front, the
+# site loads with no stylesheet and no scripts at all.
+#
+# Compressed and hashed: the filename contains a hash of the contents, so a
+# changed file gets a new name and a far-future cache header is safe. A stale
+# stylesheet cached for a year is otherwise unfixable from our side.
+STORAGES['staticfiles'] = {
+    'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+}
+
+if DEBUG or TESTING:
+    # The manifest only exists after collectstatic. In development it has not
+    # been run, and hashed lookups would fail on every page.
+    #
+    # Tests too: they run with DEBUG off, so without this every template that
+    # calls {% static %} would depend on someone having collected first, and a
+    # fresh clone would fail a thousand tests for a reason unrelated to any of
+    # them.
+    STORAGES['staticfiles'] = {
+        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+    }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
