@@ -1,0 +1,27 @@
+[Unit]
+Description=Delta Upload - Telegram transfer worker
+After=network-online.target postgresql.service redis-server.service
+Wants=network-online.target
+
+[Service]
+User=dup
+Group=dup
+WorkingDirectory=/opt/dup/app
+
+# The only background process the Telegram feature has. Without it, files a
+# user asked to move sit in the queue forever: they take up our disk and never
+# reach the user's channel.
+ExecStart=/opt/dup/venv/bin/python manage.py telegram_worker --interval 15
+
+Restart=always
+RestartSec=10
+
+MemoryMax=300M
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,25 @@
+# Delta Upload scheduled work.
+#
+#   sudo cp deploy/dup.cron /etc/cron.d/dup
+#   sudo chmod 644 /etc/cron.d/dup
+#
+# Without these the site runs and quietly misbehaves. Each line says what
+# breaks in its absence, because that is the part nobody remembers later.
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Moves confirmed ad revenue into wallets. Without it every earning stays
+# "pending" forever and no user can ever withdraw anything.
+0 3 * * * dup cd /opt/dup/app && /opt/dup/venv/bin/python manage.py confirm_ad_earnings >> /var/log/dup/cron.log 2>&1
+
+# Deletes guest files past their deadline. Without it the disk fills up.
+0 * * * * dup cd /opt/dup/app && /opt/dup/venv/bin/python manage.py purge_expired_uploads >> /var/log/dup/cron.log 2>&1
+
+# The toman rate. The ad rate is derived from it, so without a rate every
+# impression is worth zero and the site silently stops paying anyone.
+0 */6 * * * dup cd /opt/dup/app && /opt/dup/venv/bin/python manage.py update_exchange_rate >> /var/log/dup/cron.log 2>&1
+
+# Files on storage that no database row points at. They are invisible in every
+# panel and count against nothing, so nothing else will ever find them.
+30 4 * * 0 dup cd /opt/dup/app && /opt/dup/venv/bin/python manage.py purge_orphan_files --delete >> /var/log/dup/cron.log 2>&1

@@ -1,0 +1,50 @@
+[Unit]
+Description=Delta Upload - Django (gunicorn)
+After=network-online.target postgresql.service redis-server.service
+Wants=network-online.target
+
+[Service]
+User=dup
+Group=dup
+WorkingDirectory=/opt/dup/app
+
+# Settings read /opt/dup/app/.env themselves, so nothing is duplicated here.
+# One place holds the secrets, with one set of permissions.
+
+RuntimeDirectory=dup
+RuntimeDirectoryMode=0755
+
+# Threads rather than more processes. A download streamed out of Telegram
+# occupies its handler for as long as the transfer lasts, and on 2 GB of RAM
+# there is no room for the number of processes that would need. Threads wait on
+# the network for almost nothing.
+ExecStart=/opt/dup/venv/bin/gunicorn DUploaderProject.wsgi:application \
+    --bind unix:/run/dup/dup.sock \
+    --workers 2 \
+    --worker-class gthread \
+    --threads 4 \
+    --timeout 300 \
+    --graceful-timeout 30 \
+    --max-requests 800 \
+    --max-requests-jitter 100 \
+    --access-logfile - \
+    --error-logfile - \
+    --capture-output
+
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+Restart=always
+RestartSec=3
+
+# This box runs someone else's service too. Without a ceiling, a runaway here
+# gets that one killed by the OOM reaper instead.
+MemoryMax=700M
+MemoryHigh=600M
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

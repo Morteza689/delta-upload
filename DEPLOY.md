@@ -283,6 +283,32 @@ location /static/ {
 
 ---
 
+## ۸.۷. فایل‌های آماده‌ی سرویس
+
+پوشه‌ی `deploy/` همه‌ی چیزهایی را دارد که سرور لازم دارد. هر فایل توضیح خودش
+را دارد که اگر نباشد چه می‌شکند.
+
+```bash
+sudo cp deploy/dup-web.service /etc/systemd/system/
+sudo cp deploy/dup-telegram-worker.service /etc/systemd/system/
+sudo cp deploy/nginx-dup.conf /etc/nginx/sites-available/dup
+sudo ln -sf /etc/nginx/sites-available/dup /etc/nginx/sites-enabled/dup
+sudo cp deploy/dup.cron /etc/cron.d/dup && sudo chmod 644 /etc/cron.d/dup
+sudo mkdir -p /var/log/dup && sudo chown dup:dup /var/log/dup
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now dup-web dup-telegram-worker
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+گانیکورن روی سوکت یونیکس `/run/dup/dup.sock` گوش می‌دهد، نه یک پورت — چون
+ممکن است روی همان ماشین سرویس دیگری هم باشد و سوکت با هیچ‌چیز تصادم نمی‌کند.
+
+سرویس وب `MemoryMax` دارد. روی ماشین اشتراکی بدون سقف، یک نشتی حافظه اینجا
+باعث می‌شود OOM سرویس دیگری را بکشد، نه این را.
+
+---
+
 ## ۹. nginx
 
 ```nginx
