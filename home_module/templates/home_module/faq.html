@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "سوالات متداول" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-2xl">
+        <header class="mb-8">
+            <h1 class="text-2xl font-bold tracking-[-0.02em] sm:text-3xl">
+                {% translate "سوالات متداول" %}
+            </h1>
+        </header>
+
+        {% comment %}
+        <details> rather than a scripted accordion: it works without
+        JavaScript, the browser handles the accessibility itself, and Ctrl+F
+        finds text inside collapsed sections.
+        {% endcomment %}
+        <div class="space-y-8">
+            {% for group in groups %}
+                <section>
+                    <h2 class="label mb-3">{{ group.title }}</h2>
+                    <div class="panel divide-y hairline">
+                        {% for item in group.items %}
+                            <details class="group">
+                                <summary class="flex cursor-pointer list-none items-center
+                                                justify-between gap-4 p-4 text-sm font-medium
+                                                marker:content-none">
+                                    {{ item.q }}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2"
+                                         class="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
+                                         style="color: rgb(var(--ink-faint))" aria-hidden="true">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </summary>
+                                <p class="px-4 pb-4 text-sm leading-7 muted">{{ item.a }}</p>
+                            </details>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endfor %}
+        </div>
+
+        <div class="mt-10 border-t hairline pt-5">
+            <p class="text-sm muted">
+                {% translate "جوابت را پیدا نکردی؟" %}
+                <a class="hover:underline" style="color: rgb(var(--brand))"
+                   href="{% url 'ticket_new' %}">{% translate "تیکت بزن" %}</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

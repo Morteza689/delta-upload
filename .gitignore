@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# Django
+# SQLite is no longer used; these stay so an old checkout does not
+# commit a stray file.
+db.sqlite3
+db.sqlite3-journal
+
+# Database dumps taken before a migration. Real data, never committed.
+backups/
+
+# فایل‌های آپلودی کاربران — هرگز داخل مخزن نروند
+media/
+
+# فایل‌های جمع‌آوری‌شده‌ی collectstatic.
+# مسیر خروجی collectstatic نباید داخل static/ باشد؛ نسخه‌ی فعلی static/static/
+# یک کپی تکراری از static/ است و باید حذف شود.
+static/static/
+
+# IDE
+.idea/
+.vscode/
+
+# محیط — همه‌ی نسخه‌ها، نه فقط .env
+# (.env در گیت‌ایگنور فقط خودِ همان فایل را می‌گیرد،
+#  نه .env.production را)
+.env
+.env.*
+!.env.example
+*.local
+
+# نکته: static/css/tailwind.css و locale/**/*.mo عمداً ignore نشده‌اند —
+# روی هاست اشتراکی معمولاً npm و ابزار build نیست، پس خروجی build کامیت می‌شود.

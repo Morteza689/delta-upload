@@ -1,0 +1,31 @@
+{% load i18n %}
+{% comment %}
+Pagination. Other query string parameters are preserved so an active filter
+survives going to the next page.
+{% endcomment %}
+{% if page_obj.has_other_pages %}
+    <nav class="mt-4 flex items-center justify-between gap-3 text-sm"
+         aria-label="{% translate 'صفحه‌بندی' %}">
+        {% if page_obj.has_previous %}
+            <a class="btn-secondary btn-sm"
+               href="?{% if request.GET.status %}status={{ request.GET.status }}&{% endif %}page={{ page_obj.previous_page_number }}">
+                {% translate "قبلی" %}
+            </a>
+        {% else %}
+            <span></span>
+        {% endif %}
+
+        <span class="muted num text-xs">
+            {% blocktranslate with current=page_obj.number total=page_obj.paginator.num_pages %}صفحه {{ current }} از {{ total }}{% endblocktranslate %}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a class="btn-secondary btn-sm"
+               href="?{% if request.GET.status %}status={{ request.GET.status }}&{% endif %}page={{ page_obj.next_page_number }}">
+                {% translate "بعدی" %}
+            </a>
+        {% else %}
+            <span></span>
+        {% endif %}
+    </nav>
+{% endif %}

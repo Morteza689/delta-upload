@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "درخواست بیش از حد" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-md text-center">
+        <div class="panel">
+            <div class="panel-body">
+                <p class="mb-2 text-5xl font-bold pending">429</p>
+                <h1 class="mb-3 text-xl font-bold">{% translate "کمی آرام‌تر" %}</h1>
+                <p class="mb-6 muted">
+                    {{ message }}
+                </p>
+                <a class="btn-primary w-full" href="{% url 'home_page' %}">
+                    {% translate "بازگشت به صفحه اصلی" %}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

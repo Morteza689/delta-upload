@@ -1,0 +1,84 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "فضای ذخیره‌سازی" %}{% endblock %}
+{% block page_title %}{% translate "فضای ذخیره‌سازی" %}{% endblock %}
+
+{% block content %}
+    <div class="max-w-3xl">
+
+        {% if error %}
+            <p class="note note-error mb-5">{{ error }}</p>
+        {% endif %}
+
+        <div class="panel mb-5">
+            <div class="panel-body">
+                <div class="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                    <span class="label">{% translate "مصرف فضا" %}</span>
+                    <span class="num text-sm font-medium">{{ used }} / {{ limit }}</span>
+                </div>
+
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: {{ percent }}%"></div>
+                </div>
+
+                <p class="mt-3 text-xs muted">
+                    {% blocktranslate with base=free_base %}{{ base }} فضای پایه رایگان است. بیشتر از آن با خرید بسته باز می‌شود.{% endblocktranslate %}
+                </p>
+            </div>
+        </div>
+
+        {% if active %}
+            <div class="panel mb-5">
+                <div class="panel-head">
+                    <h2 class="panel-title">{% translate "بسته‌های فعال" %}</h2>
+                </div>
+                <div class="panel-body">
+                    <ul class="space-y-2 text-sm">
+                        {% for plan in active %}
+                            <li class="flex flex-wrap items-center justify-between gap-2
+                                       rounded-lg border hairline p-3">
+                                <span class="num font-medium">+{{ plan.bonus_bytes|convertor_byte }}</span>
+                                <span class="text-xs faint">
+                                    {% translate "تا" %} {{ plan.expires_at|date:"Y/m/d" }}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "خرید فضای اضافه" %}</h2>
+            </div>
+            <div class="panel-body">
+                {# Five packages, so the grid never leaves one card alone on a row. #}
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                    {% for plan in plans %}
+                        <form method="post" class="flex flex-col rounded-xl border hairline p-4">
+                            {% csrf_token %}
+                            <input type="hidden" name="plan" value="{{ plan.pk }}">
+
+                            <p class="metric num mb-1">{{ plan.bytes|convertor_byte }}</p>
+                            <p class="mb-4 text-xs faint">
+                                {% blocktranslate with days=plan.days %}{{ days }} روز{% endblocktranslate %}
+                            </p>
+
+                            <p class="mb-4 text-lg font-bold money">{{ plan.price_cents|money }}</p>
+
+                            <button type="submit" class="btn-primary mt-auto w-full">
+                                {% translate "خرید" %}
+                            </button>
+                        </form>
+                    {% endfor %}
+                </div>
+
+                <p class="mt-4 text-xs muted">
+                    {% translate "مبلغ از کیف پول کسر می‌شود. بسته‌ها روی هم جمع می‌شوند." %}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

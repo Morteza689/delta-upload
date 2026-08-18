@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "فایل های من" %}{% endblock %}
+
+{% block body %}
+    <h1 class="mb-5 text-2xl font-bold">{% translate "فایل های من" %}</h1>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {% for f in file %}
+            <div class="panel">
+                <div class="panel-body">
+                    <h2 class="mb-1 truncate font-semibold">
+                        {% if f.name %}{{ f.name }}{% else %}{{ f.file.name|split }}{% endif %}
+                    </h2>
+                    {% if f.description %}
+                        <p class="mb-3 line-clamp-2 text-sm faint">{{ f.description }}</p>
+                    {% endif %}
+                    <p class="mb-3 text-xs faint">
+                        {% blocktranslate with count=f.number_of_download %}تعداد دانلود: {{ count }}{% endblocktranslate %}
+                    </p>
+                    {% if f.is_public_now %}
+                        <a class="btn-secondary btn-sm w-full" href="{% url 'download_page' slug=f.slug %}">
+                            {% translate "لینک عمومی" %}
+                        </a>
+                    {% else %}
+                        <span class="chip chip-muted">{% translate "خصوصی" %}</span>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <p class="faint">{% translate "هنوز فایلی آپلود نکرده‌اید" %}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,387 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n static %}
+
+{% block title %}{% translate "ذخیره در تلگرام" %}{% endblock %}
+{% block page_title %}{% translate "ذخیره در تلگرام" %}{% endblock %}
+
+{% block content %}
+    {% if error %}<div class="note note-error mb-5">{{ error }}</div>{% endif %}
+
+    <div class="grid gap-5 lg:grid-cols-2">
+
+        {# ---------- Setup, one step at a time ---------- #}
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "راه‌اندازی" %}</h2>
+                {% if is_linked %}
+                    <span class="chip chip-money">{% translate "متصل" %}</span>
+                {% elif connection.status == 'broken' %}
+                    <span class="chip chip-pending">{% translate "قطع" %}</span>
+                {% elif has_bot %}
+                    <span class="chip chip-muted">{% translate "ربات ثبت شد" %}</span>
+                {% else %}
+                    <span class="chip chip-muted">{% translate "شروع نشده" %}</span>
+                {% endif %}
+            </div>
+            <div class="panel-body">
+
+                {% if is_linked %}
+                    <dl class="grid grid-cols-2 gap-3 text-sm">
+                        <dt class="muted">{% translate "ربات" %}</dt>
+                        <dd class="num" dir="ltr">@{{ connection.bot_username }}</dd>
+
+                        <dt class="muted">{% translate "کانال" %}</dt>
+                        <dd class="font-medium">{{ connection.chat_title|default:connection.chat_id }}</dd>
+
+                        <dt class="muted">{% translate "ذخیره شده" %}</dt>
+                        <dd class="num">{{ stored_bytes }}</dd>
+
+                        <dt class="muted">{% translate "در صف انتقال" %}</dt>
+                        <dd class="num">{{ staging_used }} / {{ staging_limit }}</dd>
+
+                        {% if failed_count %}
+                            <dt class="muted">{% translate "ناموفق" %}</dt>
+                            <dd class="num text-[rgb(var(--danger))]">{{ failed_count }}</dd>
+                        {% endif %}
+                    </dl>
+
+                    <div class="mt-5 grid gap-2 border-t hairline pt-4">
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="disconnect">
+                            <button type="submit" class="btn-ghost w-full text-xs">
+                                {% translate "قطع اتصال کانال" %}
+                            </button>
+                        </form>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="forget_bot">
+                            <button type="submit" class="btn-ghost w-full text-xs">
+                                {% translate "حذف ربات" %}
+                            </button>
+                        </form>
+                        <p class="text-xs muted">
+                            {% translate "فایل‌های موجود در کانال شما می‌مانند، ولی تا وصل نشدن دوباره قابل دانلود نیستند." %}
+                        </p>
+                    </div>
+
+                {% elif connection.status == 'broken' %}
+                    <div class="note note-error">
+                        <p>{% translate "دسترسی ربات به کانال قطع شده است." %}</p>
+                        {% if connection.last_error %}
+                            <p class="mt-1 text-xs" dir="ltr">{{ connection.last_error }}</p>
+                        {% endif %}
+                    </div>
+                    <p class="mt-3 text-sm muted">
+                        {% translate "ربات را دوباره ادمین کانال کن، بعد دکمه‌ی زیر را بزن. فایل‌ها سر جایشان هستند و لازم نیست دوباره آپلود شوند." %}
+                    </p>
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="recheck">
+                        <button type="submit" class="btn-primary w-full">
+                            {% translate "بررسی دوباره" %}
+                        </button>
+                    </form>
+
+                {% elif not has_bot %}
+                    {% comment %}
+                    Step one on its own. Asking for the channel at the same
+                    time would mean two things to get right before anything
+                    can be checked, and a single unhelpful error if either is
+                    wrong.
+                    {% endcomment %}
+                    <p class="label mb-3">{% translate "قدم ۱ از ۲ — ساختن ربات" %}</p>
+
+                    <ol class="space-y-3 text-sm">
+                        <li>
+                            <span class="font-medium">1.</span>
+                            {% translate "در تلگرام به" %}
+                            <a href="https://t.me/BotFather" target="_blank" rel="noopener"
+                               class="num hover:underline" style="color: rgb(var(--brand))" dir="ltr">@BotFather</a>
+                            {% translate "پیام بده و" %}
+                            <code class="num" dir="ltr">/newbot</code>
+                            {% translate "را بفرست." %}
+                        </li>
+                        <li>
+                            <span class="font-medium">2.</span>
+                            {% translate "یک نام و یک آیدی برایش انتخاب کن. در آخر توکنی می‌دهد شبیه" %}
+                            <code class="num text-xs" dir="ltr">123456789:AAE…</code>
+                        </li>
+                        <li>
+                            <span class="font-medium">3.</span>
+                            {% translate "همان توکن را اینجا بگذار:" %}
+                        </li>
+                    </ol>
+
+                    <form method="post" class="mt-4 space-y-3">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="register_bot">
+                        <input type="password" name="bot_token" required
+                               dir="ltr" autocomplete="off" spellcheck="false"
+                               placeholder="123456789:AAE…" class="field">
+                        <button type="submit" class="btn-primary w-full">
+                            {% translate "ثبت ربات" %}
+                        </button>
+                    </form>
+
+                    <p class="mt-3 text-xs muted">
+                        {% translate "توکن رمزنگاری‌شده ذخیره می‌شود و هرگز دوباره نمایش داده نمی‌شود. هر وقت خواستی، با /revoke در BotFather باطلش کن." %}
+                    </p>
+
+                {% else %}
+                    <p class="label mb-3">{% translate "قدم ۲ از ۲ — اتصال کانال" %}</p>
+                    <p class="mb-4 text-sm muted">
+                        {% translate "ربات" %}
+                        <span class="num font-medium" dir="ltr">@{{ connection.bot_username }}</span>
+                        {% translate "ثبت شد." %}
+                    </p>
+
+                    <ol class="space-y-3 text-sm">
+                        <li>
+                            <span class="font-medium">1.</span>
+                            {% translate "در تلگرام یک کانال خصوصی بساز." %}
+                        </li>
+                        <li>
+                            <span class="font-medium">2.</span>
+                            {% blocktranslate %}ربات خودت را ادمین کانال کن، با اجازه‌ی ارسال پیام.{% endblocktranslate %}
+                        </li>
+                        <li>
+                            <span class="font-medium">3.</span>
+                            {% translate "این کد را در همان کانال بفرست:" %}
+                            <div class="mt-2 flex items-center gap-2">
+                                <code id="telegram-link-code" class="num select-all text-base" dir="ltr">{{ connection.link_code }}</code>
+                                <button type="button" class="btn-ghost js-copy px-2 py-1 text-xs"
+                                        data-copy-target="#telegram-link-code">{% translate "کپی" %}</button>
+                            </div>
+                            <p class="mt-2 text-xs muted">
+                                {% translate "کد تا سی دقیقه معتبر است و بعد از استفاده عوض می‌شود." %}
+                            </p>
+                        </li>
+                        <li>
+                            <span class="font-medium">4.</span>
+                            {% translate "بعد دکمه‌ی زیر را بزن." %}
+                        </li>
+                    </ol>
+
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="find_channel">
+                        <button type="submit" class="btn-primary w-full">
+                            {% translate "پیدا کردن کانال" %}
+                        </button>
+                    </form>
+
+                    <div class="mt-4 grid gap-2 border-t hairline pt-4">
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="new_code">
+                            <button type="submit" class="btn-ghost w-full text-xs">
+                                {% translate "کد تازه بگیر" %}
+                            </button>
+                        </form>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="forget_bot">
+                            <button type="submit" class="btn-ghost w-full text-xs">
+                                {% translate "ربات دیگری ثبت کن" %}
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% comment %}
+        The risks are on the page itself, not behind a link nobody opens.
+
+        Someone about to hand over storage of their own files should read what
+        can go wrong before it does, not afterwards in a support ticket. The
+        reassuring part comes first because it is the question everyone
+        actually has, and burying it would make the honest parts read as
+        evasion.
+        {% endcomment %}
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "چه چیزی را باید بدانی" %}</h2>
+            </div>
+            <div class="panel-body space-y-4 text-sm">
+
+                <div class="note note-money">
+                    <p class="font-medium">{% translate "ربات مال خودت است، نه ما" %}</p>
+                    <p class="mt-1">
+                        {% translate "خودت می‌سازی‌اش و هر لحظه با /revoke در BotFather باطل می‌شود. ما نه شماره می‌خواهیم، نه کد ورود، نه رمز دو مرحله‌ای. توکن ربات یک حساب کاربری نیست: نمی‌تواند چت‌های خصوصی، مخاطبین یا Saved Messages تو را بخواند." %}
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <p>
+                        <span class="font-medium">{% translate "توکن را رمزنگاری‌شده نگه می‌داریم." %}</span>
+                        {% translate "ولی سرور برای استفاده ناچار است رمزگشایی کند. اگر ترجیح می‌دهی هیچ توکنی جایی جز دست خودت نباشد، این قابلیت را روشن نکن." %}
+                    </p>
+                    <p>
+                        <span class="font-medium">{% translate "فایل‌ها مال توست، و مسئولیتش هم." %}</span>
+                        {% translate "اگر پیام‌های کانال یا خود کانال را حذف کنی، فایل از بین می‌رود. ما نسخه‌ی دیگری نگه نمی‌داریم و نمی‌توانیم برگردانیم." %}
+                    </p>
+                    <p>
+                        <span class="font-medium">{% translate "اکانت تلگرامت را از دست بدهی، فایل‌ها هم می‌روند." %}</span>
+                        {% translate "اگر اکانتت حذف، مسدود یا دزدیده شود، فایل‌های ذخیره‌شده در کانالش هم از دسترس خارج می‌شوند." %}
+                    </p>
+                    <p>
+                        <span class="font-medium">{% translate "تلگرام قوانین خودش را دارد." %}</span>
+                        {% translate "اگر تلگرام محتوایی را ناقض قوانینش بداند، ممکن است کانال، ربات یا محتوا را محدود کند. این تصمیم دست ما نیست." %}
+                    </p>
+                    <p>
+                        <span class="font-medium">{% translate "دانلود کندتر است." %}</span>
+                        {% translate "فایل تکه‌تکه در کانال ذخیره می‌شود و موقع دانلود از تلگرام گرفته و پشت سر هم فرستاده می‌شود. از فایلی که روی سرور خودمان است کندتر شروع می‌شود." %}
+                    </p>
+                    <p>
+                        <span class="font-medium">{% translate "ما محتوای فایل را می‌بینیم." %}</span>
+                        {% translate "چون خودمان آن را در کانال آپلود می‌کنیم، دقیقا مثل حالت عادی. این قابلیت رمزنگاری سرتاسری نیست." %}
+                    </p>
+                    <p>
+                        <span class="font-medium">{% translate "تلگرام تضمین نگهداری ابدی نمی‌دهد." %}</span>
+                        {% translate "برای فایلی که واقعا مهم است، به یک نسخه اکتفا نکن." %}
+                    </p>
+                </div>
+
+                <div class="border-t hairline pt-4 text-xs muted">
+                    <p>
+                        {% blocktranslate %}فضای مصرف‌شده در تلگرام از سهمیه‌ی شما در دلتا آپلود کم نمی‌شود. فقط تا وقتی فایل در صف انتقال است روی سرور ما جا می‌گیرد، و آن صف سقف جداگانه دارد.{% endblocktranslate %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if is_linked %}
+        {% comment %}
+        Registering a post the user already sent themselves.
+
+        Someone who keeps files in that channel anyway should not have to
+        download and re-upload them through us just to get a link. Pasting the
+        post link records what is already there.
+        {% endcomment %}
+        <div class="panel mt-5">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "افزودن فایلی که خودت فرستادی" %}</h2>
+            </div>
+            <div class="panel-body">
+                {% if import_error %}
+                    <div class="note note-error mb-4">{{ import_error }}</div>
+                {% endif %}
+
+                <p class="mb-4 text-sm muted">
+                    {% translate "اگر فایلی را خودت در کانال فرستاده‌ای، لازم نیست دوباره آپلود کنی. روی پست در تلگرام «Copy Post Link» بزن و لینک را اینجا بگذار." %}
+                </p>
+
+                <form method="post" class="space-y-4">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="import">
+
+                    <div>
+                        <label for="post_link" class="form-label">
+                            {% translate "لینک پست" %}
+                        </label>
+                        <input type="text" id="post_link" name="post_link" required
+                               dir="ltr" placeholder="https://t.me/c/1234567890/42"
+                               value="{{ post_link|default:'' }}" class="field">
+                    </div>
+
+                    <div>
+                        <label for="import_description" class="form-label">
+                            {% translate "توضیحات" %}
+                        </label>
+                        <textarea id="import_description" name="description" rows="2"
+                                  class="field"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-full">
+                        {% translate "افزودن به فایل‌های من" %}
+                    </button>
+                </form>
+
+                <div class="mt-5 space-y-2 border-t hairline pt-4 text-xs muted">
+                    <p>
+                        {% translate "نام فایل از خود پست برداشته می‌شود و بعدا در «فایل های من» قابل تغییر است. فایل تازه‌اضافه‌شده خصوصی است تا خودت عمومی‌اش کنی." %}
+                    </p>
+                    <p>
+                        {% blocktranslate %}سقف {{ import_limit }}: تلگرام اجازه نمی‌دهد ربات فایل بزرگ‌تر از این را برای دانلود بردارد. فایل بزرگ‌تر را از همین سایت آپلود کن تا تکه‌تکه ذخیره شود و این محدودیت نداشته باشد.{% endblocktranslate %}
+                    </p>
+                    <p>
+                        {% translate "موقع افزودن، یک کپی کوتاه‌مدت از پست در کانال ساخته و بلافاصله پاک می‌شود. این تنها راهی است که تلگرام برای خواندن یک پست قدیمی به ربات می‌دهد." %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if files %}
+        <div class="panel mt-5">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "فایل‌های تلگرامی" %}</h2>
+                {% if pending_count %}
+                    <span class="chip chip-muted">{% blocktranslate count n=pending_count %}{{ n }} در صف{% plural %}{{ n }} در صف{% endblocktranslate %}</span>
+                {% endif %}
+            </div>
+            <div class="panel-body">
+                {% comment %}
+                data-telegram-files marks the table for the progress script.
+                Every number is already rendered here, so the page is correct
+                without JavaScript; the script only keeps a moving one moving.
+                {% endcomment %}
+                <div class="overflow-x-auto" data-telegram-files>
+                    <table class="rtable">
+                        <thead class="table-head">
+                            <tr>
+                                <th class="px-3 py-2 text-start">{% translate "نام" %}</th>
+                                <th class="px-3 py-2 text-start">{% translate "حجم" %}</th>
+                                <th class="px-3 py-2 text-start">{% translate "وضعیت" %}</th>
+                                <th class="px-3 py-2 text-start">{% translate "تاریخ" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            {% for row in files %}
+                                <tr>
+                                    <td class="px-3 py-2" data-label="{% translate 'نام' %}">{{ row.upload_file.name|default:"—" }}</td>
+                                    <td class="num px-3 py-2" data-label="{% translate 'حجم' %}">{{ row.total_bytes|filesizeformat }}</td>
+                                    <td class="px-3 py-2" data-label="{% translate 'وضعیت' %}"
+                                        data-telegram-row="{{ row.pk }}">
+                                        {% if row.status == 'stored' %}
+                                            <span class="dot" style="background-color: rgb(var(--money))"></span>
+                                            <span data-telegram-label>{{ row.get_status_display }}</span>
+                                        {% elif row.status == 'failed' %}
+                                            <span class="dot" style="background-color: rgb(var(--danger))"></span>
+                                            <span data-telegram-label>{{ row.get_status_display }}</span>
+                                            {% if row.last_error %}
+                                                <span class="block text-xs muted" dir="ltr">{{ row.last_error|truncatechars:90 }}</span>
+                                            {% endif %}
+                                        {% else %}
+                                            <span class="dot" style="background-color: rgb(var(--pending))"></span>
+                                            <span data-telegram-label>{{ row.get_status_display }}</span>
+
+                                            {# A percentage, because a file this size takes minutes and a spinner says nothing about how long is left. #}
+                                            <span class="num ms-1 text-xs muted" data-telegram-percent
+                                                  data-sign="{% translate "٪" %}">{{ row.progress_percent }}{% translate "٪" %}</span>
+                                            <span class="mt-1.5 block max-w-[10rem]">
+                                                <span class="progress-track block">
+                                                    <span class="progress-fill block" style="width: {{ row.progress_percent }}%"
+                                                          data-telegram-fill></span>
+                                                </span>
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="num px-3 py-2" data-label="{% translate 'تاریخ' %}">{{ row.created_at|date:"Y/m/d H:i" }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {# Only where a transfer can be in flight; every other page needs nothing. #}
+    <script src="{% static 'src/telegram-progress.js' %}" defer></script>
+{% endblock %}

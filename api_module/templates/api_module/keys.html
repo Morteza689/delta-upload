@@ -1,0 +1,117 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "کلیدهای API" %}{% endblock %}
+{% block page_title %}{% translate "کلیدهای API" %}{% endblock %}
+
+{% block content %}
+    {% if new_key %}
+        {# The raw key is shown this once; only its hash is stored. #}
+        <div class="note note-money mb-6 !p-5">
+            <h2 class="mb-2 font-bold money">
+                {% translate "کلید ساخته شد — همین حالا کپی کن" %}
+            </h2>
+            <p class="mb-3 text-sm money">
+                {% translate "این کلید فقط همین یک بار نمایش داده می‌شود. ما فقط هش آن را ذخیره می‌کنیم، پس اگر گمش کنی راهی برای بازیابی نیست و باید کلید جدید بسازی." %}
+            </p>
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+                <code id="new-api-key"
+                      class="flex-1 overflow-x-auto rounded-lg bg-[rgb(var(--ink))] px-4 py-3
+                             font-mono text-sm" style="color: rgb(var(--paper))">{{ new_key }}</code>
+                <button type="button" class="btn-secondary shrink-0 js-copy"
+                        data-copy-target="#new-api-key">
+                    {% translate "کپی" %}
+                </button>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="note note-error mb-6">{{ error }}</div>
+    {% endif %}
+
+    <div class="panel mb-6">
+        <div class="panel-body">
+            <h2 class="panel-title mb-4">{% translate "ساخت کلید جدید" %}</h2>
+            <form method="post" class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end">
+                {% csrf_token %}
+                <div class="w-full sm:min-w-[16rem] sm:flex-1">
+                    <label class="form-label" for="key-name">{% translate "نام کلید" %}</label>
+                    <input type="text" id="key-name" name="name" required maxlength="100"
+                           placeholder="{% translate 'مثلاً example.com' %}"
+                           class="field">
+                </div>
+                <button type="submit" class="btn-primary">{% translate "ساخت کلید" %}</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-body">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+                <h2 class="panel-title">{% translate "کلیدهای شما" %}</h2>
+                <a class="text-sm hover:underline" style="color: rgb(var(--brand))"
+                   href="{% url 'api_docs_page' %}">{% translate "راهنمای API" %}</a>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="rtable">
+                    <thead class="table-head">
+                    <tr>
+                        <th class="px-3 py-2 text-start">{% translate "نام" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "پیشوند" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "ساخته شده" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "آخرین استفاده" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "وضعیت" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "عملیات" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-body">
+                    {% for key in keys %}
+                        <tr>
+                            <td class="px-3 py-2 font-medium" data-label='{% translate "نام" %}'>{{ key.name }}</td>
+                            <td class="px-3 py-2 font-mono text-xs" data-label='{% translate "پیشوند" %}'>{{ key.prefix }}…</td>
+                            <td class="px-3 py-2" data-label='{% translate "ساخته شده" %}'>{{ key.created_at|date:"Y/m/d" }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "آخرین استفاده" %}'>
+                                {% if key.last_used_at %}
+                                    {{ key.last_used_at|date:"Y/m/d H:i" }}
+                                {% else %}
+                                    <span class="faint">{% translate "هرگز" %}</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-3 py-2" data-label='{% translate "وضعیت" %}'>
+                                {% if key.is_active %}
+                                    <span class="chip chip-money">{% translate "فعال" %}</span>
+                                {% else %}
+                                    <span class="chip chip-muted">{% translate "باطل شده" %}</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-3 py-2" data-label='{% translate "عملیات" %}'>
+                                {% if key.is_active %}
+                                    <form method="post"
+                                          onsubmit="return confirm('{% translate "این کلید باطل شود؟ سایتی که از آن استفاده می‌کند بلافاصله قطع می‌شود." %}')">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="revoke">
+                                        <input type="hidden" name="key_id" value="{{ key.id }}">
+                                        <button type="submit" class="btn-danger btn-sm">
+                                            {% translate "ابطال" %}
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <span class="faint">—</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="px-3 py-8 text-center faint">
+                                {% translate "هنوز کلیدی نساخته‌اید" %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

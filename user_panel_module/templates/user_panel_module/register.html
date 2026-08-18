@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "ثبت نام" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-md">
+        <div class="panel">
+            <div class="panel-body">
+                <h1 class="mb-5 text-center text-lg font-bold sm:mb-6 sm:text-xl">{% translate "ساخت حساب کاربری" %}</h1>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% include 'shared/form_fields.html' %}
+
+                    <button type="submit" class="btn-primary w-full">{% translate "ثبت نام" %}</button>
+                </form>
+
+                <p class="mt-5 text-center text-sm faint">
+                    {% translate "قبلاً ثبت نام کرده‌اید؟" %}
+                    <a class="hover:underline" style="color: rgb(var(--brand))" href="{% url 'login_page' %}">
+                        {% translate "ورود" %}
+                    </a>
+                </p>
+
+                {% comment %}
+                Someone who only wants to send one file should not get stuck
+                here. The no-account route is offered right on this page: losing
+                them is worse than sending them to the guest upload.
+                {% endcomment %}
+                <div class="mt-5 border-t hairline pt-5 text-center text-sm">
+                    <p class="mb-3 muted">{% translate "فقط می‌خواهی یک فایل بفرستی؟" %}</p>
+                    <a class="btn-secondary btn-sm" href="{% url 'guest_upload_page' %}">
+                        {% translate "آپلود بدون حساب کاربری" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

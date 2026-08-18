@@ -1,0 +1,109 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "درآمد تبلیغات" %}{% endblock %}
+{% block page_title %}{% translate "درآمد تبلیغات" %}{% endblock %}
+
+{% block content %}
+    <div class="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+        <div class="panel">
+            <div class="panel-body">
+                <p class="metric-sm money">
+                    {{ confirmed_micro|micro_money }}
+                </p>
+                <p class="mt-1 text-sm muted">
+                    {% translate "تأیید شده و واریز شده" %}
+                </p>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-body">
+                <p class="metric-sm pending">
+                    {{ pending_micro|micro_money }}
+                </p>
+                <p class="mt-1 text-sm muted">
+                    {% translate "در انتظار تأیید" %}
+                </p>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-body">
+                <p class="metric-sm">{{ total_views }}</p>
+                <p class="mt-1 text-sm muted">
+                    {% translate "نمایش معتبر" %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="note note-warn mb-6 text-xs">
+        {% translate "درآمد تبلیغات بلافاصله قابل برداشت نیست: چند روز در انتظار تأیید می‌ماند، چون شبکه تبلیغاتی هم ممکن است نمایش‌ها را نامعتبر اعلام کند." %}
+        {% if carry_micro %}
+            <span class="mt-1 block">
+                {% blocktranslate with c=carry_micro|micro_money %}{{ c }} کسری از یک سنت است و با درآمد بعدی جمع می‌شود.{% endblocktranslate %}
+            </span>
+        {% endif %}
+    </div>
+
+    <div class="panel">
+        <div class="panel-body">
+            <div class="overflow-x-auto">
+                <table class="rtable">
+                    <thead class="table-head">
+                    <tr>
+                        <th class="px-3 py-2 text-start">{% translate "فایل" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "نمایش" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "درآمد" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "تاریخ" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "وضعیت" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-body">
+                    {% for earning in earnings %}
+                        <tr>
+                            <td class="max-w-xs truncate px-3 py-2" data-label='{% translate "فایل" %}'>
+                                {% comment %}
+                                The uploaded filename, not the slug: a slug is
+                                twelve random characters and tells the owner
+                                nothing about which file earned this.
+
+                                Linked to the file's own report, which breaks
+                                the number down. Not to the public page, which
+                                404s the moment a file goes private.
+                                {% endcomment %}
+                                {% if earning.source_url %}
+                                    <a class="hover:underline" style="color: rgb(var(--brand))"
+                                       href="{{ earning.source_url }}">{{ earning.source_label }}</a>
+                                {% else %}
+                                    {{ earning.source_label|default:"—" }}
+                                {% endif %}
+                                {% if earning.source_kind == 'link' %}
+                                    <span class="chip chip-muted ms-1">{% translate "لینک کوتاه" %}</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-3 py-2" data-label='{% translate "نمایش" %}'>{{ earning.impressions }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "درآمد" %}'>{{ earning.micro_cents|micro_money }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "تاریخ" %}'>{{ earning.created_at|date:"Y/m/d H:i" }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "وضعیت" %}'>
+                                {% if earning.status == 'confirmed' %}
+                                    <span class="chip chip-money">{{ earning.get_status_display }}</span>
+                                {% elif earning.status == 'pending' %}
+                                    <span class="chip chip-pending">{{ earning.get_status_display }}</span>
+                                {% else %}
+                                    <span class="chip chip-muted">{{ earning.get_status_display }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="px-3 py-8 text-center faint">
+                                {% translate "هنوز درآمدی ثبت نشده است" %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

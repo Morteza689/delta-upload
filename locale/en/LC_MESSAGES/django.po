@@ -1,0 +1,4298 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: D-UP\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: payment_module/templates/payment_module/result.html
+msgid "%(a)s به کیف پول شما اضافه شد."
+msgstr "%(a)s has been added to your wallet."
+
+#: ads_module/templates/ads_module/earnings.html
+msgid "%(c)s کسری از یک سنت است و با درآمد بعدی جمع می‌شود."
+msgstr ""
+"%(c)s is a fraction of a cent and will be added to your next earnings."
+
+#: link_module/templates/link_module/interstitial.html
+msgid "%(n)s بار استفاده باقی مانده"
+msgstr "%(n)s uses remaining"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "%(n)s در ۲۴ ساعت"
+msgstr "%(n)s in 24 hours"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "%(n)s عمومی"
+msgstr "%(n)s public"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "%(n)s فروش"
+msgstr "%(n)s sales"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "%(n)s نمایش"
+msgstr "%(n)s impressions"
+
+#: staff_module/templates/staff_module/payments.html
+msgid "%(n)s پرداخت موفق · %(a)s"
+msgstr "%(n)s successful payments · %(a)s"
+
+#: contact_module/templates/contact_module/ticket_list.html
+msgid "%(n)s پیام"
+msgstr "%(n)s messages"
+
+#: templates/shared/chart_ring.html
+msgid "%(p)s درصد"
+msgstr "%(p)s percent"
+
+#: templates/base.html
+msgid "API"
+msgstr "API"
+
+#: home_module/templates/home_module/about.html
+msgid "API برای سایت‌هایی که می‌خواهند آپلود را خودکار کنند."
+msgstr "An API for sites that want to automate uploads."
+
+#: api_module/views.py link_module/views.py
+msgid "limit و offset باید عدد صحیح باشند."
+msgstr "limit and offset must be integers."
+
+#: api_module/models.py api_module/templates/api_module/keys.html
+msgid "آخرین استفاده"
+msgstr "Last used"
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "آخرین برداشت‌ها"
+msgstr "Latest withdrawals"
+
+#: ads_module/models.py
+msgid "آخرین تغییر"
+msgstr "Last updated"
+
+#: contact_module/models.py
+msgid "آخرین پیام"
+msgstr "Last message"
+
+#: link_module/models.py
+msgid "آخرین کلیک"
+msgstr "Last click"
+
+#: link_module/forms.py
+msgid "آدرس بلند"
+msgstr "Long URL"
+
+#: link_module/templates/link_module/shorten.html
+msgid "آدرس بلندت را کوتاه کن. نیازی به ساخت حساب نیست."
+msgstr "Shorten your long URL. No account needed."
+
+#: link_module/forms.py
+msgid "آدرس معتبر نیست."
+msgstr "The URL is not valid."
+
+#: link_module/models.py
+msgid "آدرس مقصد"
+msgstr "Target URL"
+
+#: home_module/templates/home_module/privacy.html
+msgid "آمار بازدید صفحات دانلود، برای محاسبه‌ی درآمد و تشخیص تقلب."
+msgstr ""
+"Download page visit stats, used to calculate earnings and detect fraud."
+
+#: upload_module/templates/upload_module/guest_upload.html
+#: upload_module/templates/upload_module/upload_file.html
+#: user_panel_module/templates/user_panel_module/upload_file.html
+msgid "آپلود"
+msgstr "Upload"
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "آپلود اولین فایل"
+msgstr "Upload your first file"
+
+#: home_module/templates/home_module/terms.html
+msgid "آپلود این موارد ممنوع است و منجر به حذف فایل و مسدود شدن حساب می‌شود:"
+msgstr ""
+"Uploading the following is prohibited and leads to file removal and account "
+"suspension:"
+
+#: upload_module/templates/upload_module/guest_upload.html
+msgid "آپلود سریع"
+msgstr "Quick upload"
+
+#: home_module/templates/home_module/home_page.html
+msgid "آپلود شد"
+msgstr "Uploaded"
+
+#: api_module/templates/api_module/docs.html
+#: home_module/templates/home_module/home_page.html
+#: templates/shared/site_footer.html
+#: upload_module/templates/upload_module/upload_file.html
+#: user_panel_module/templates/user_panel_module/upload_file.html
+msgid "آپلود فایل"
+msgstr "Upload file"
+
+#: upload_module/templates/upload_module/guest_upload.html
+#: user_panel_module/templates/user_panel_module/upload_file.html
+msgid "آپلود ناموفق بود"
+msgstr "Upload failed"
+
+#: home_module/views.py
+msgid "آپلود کن"
+msgstr "Upload it"
+
+#: api_module/templates/api_module/docs.html
+msgid "آپلود: ۶۰ درخواست در ساعت به ازای هر کلید"
+msgstr "Upload: 60 requests per hour per key"
+
+#: download_module/templates/download_module/download_page.html
+#: download_module/templates/download_module/download_page2.html
+#: download_module/templates/download_module/purchase.html
+#: staff_module/templates/staff_module/files.html
+msgid "آپلودکننده"
+msgstr "Uploader"
+
+#: api_module/templates/api_module/keys.html
+msgid "ابطال"
+msgstr "Revoke"
+
+#: api_module/templates/api_module/docs.html
+msgid "احراز هویت"
+msgstr "Authentication"
+
+#: upload_module/guest.py
+msgid "اختیاری — اگر خالی بگذاری نام خود فایل استفاده می‌شود"
+msgstr "Optional — the filename is used if you leave this empty"
+
+#: contact_module/forms.py
+msgid "اختیاری — تصویر خطا یا فایل مرتبط"
+msgstr "Optional — a screenshot or related file"
+
+#: link_module/templates/link_module/interstitial.html
+msgid "ادامه"
+msgstr "Continue"
+
+#: link_module/templates/link_module/preview.html
+msgid "ادامه به مقصد"
+msgstr "Continue to destination"
+
+#: payment_module/templates/payment_module/topup.html
+msgid "ادامه و پرداخت"
+msgstr "Continue to payment"
+
+#: account_module/models.py
+msgid "ادرس کیف پول"
+msgstr "Wallet address"
+
+#: upload_module/templates/upload_module/guest_upload.html
+#: user_panel_module/templates/user_panel_module/upload_file.html
+msgid "ارتباط قطع شد"
+msgstr "Connection lost"
+
+#: account_module/templates/account_module/forgat_password.html
+#: contact_module/templates/contact_module/contact_us_page.html
+msgid "ارسال"
+msgstr "Send"
+
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "ارسال پاسخ"
+msgstr "Send reply"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "از %(total)s بازدید، %(counted)s مورد برای درآمد شمرده شد."
+msgstr "Of %(total)s visits, %(counted)s counted toward earnings."
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "از تبلیغات"
+msgstr "From ads"
+
+#: home_module/views.py
+msgid ""
+"از صفحه‌ی شارژ کیف پول، با درگاه بانکی یا ارز دیجیتال. شارژ برای خرید "
+"فایل‌های پولی دیگران لازم است."
+msgstr ""
+"From the top-up page, with a bank gateway or cryptocurrency. Topping up is "
+"needed to buy other people paid files."
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "از فروش"
+msgstr "From sales"
+
+#: home_module/templates/home_module/home_page.html
+msgid "از هر دانلود درآمد بگیر"
+msgstr "earn from every download"
+
+#: home_module/views.py
+msgid ""
+"از هر دانلود سهم می‌گیری و هر وقت خواستی به کیف پول کریپتو برداشت می‌کنی."
+msgstr ""
+"You get a share of every download and can withdraw to a crypto wallet "
+"whenever you like."
+
+#: api_module/templates/api_module/docs.html
+msgid "اطلاعات حساب"
+msgstr "Account info"
+
+#: home_module/templates/home_module/privacy.html
+msgid "اطلاعات حساب: نام کاربری و ایمیل."
+msgstr "Account details: username and email."
+
+#: home_module/templates/home_module/privacy.html
+msgid ""
+"اطلاعات شخصی تو را نمی‌فروشیم. داده فقط با سرویس‌هایی که برای کار سایت "
+"لازم‌اند در میان گذاشته می‌شود: درگاه پرداخت (فقط مبلغ و شناسه‌ی تراکنش) و "
+"شبکه‌ی تبلیغاتی (فقط بازدید صفحه)."
+msgstr ""
+"We do not sell your personal data. It is shared only with services required "
+"to run the site: the payment gateway (amount and transaction reference only)"
+" and the ad network (page views only)."
+
+#: home_module/templates/home_module/terms.html
+msgid "اطلاعات شخصی دیگران بدون رضایتشان."
+msgstr "Other people personal data without their consent."
+
+#: home_module/templates/home_module/privacy.html
+msgid "امنیت"
+msgstr "Security"
+
+#: staff_module/templates/staff_module/files.html
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "انتشار"
+msgstr "Visibility"
+
+#: home_module/views.py
+msgid "انتشار زمان‌دار"
+msgstr "Timed publishing"
+
+#: link_module/forms.py link_module/models.py
+msgid "انقضا"
+msgstr "Expiry"
+
+#: contact_module/models.py
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "اولویت"
+msgstr "Priority"
+
+#: upload_module/models.py
+msgid "اپلودر"
+msgstr "Uploader"
+
+#: user_panel_module/views.py
+msgid "اکانت فعال نیست"
+msgstr "Account is not active"
+
+#: account_module/templates/account_module/forgat_password.html
+msgid "اگر این ایمیل در سایت ثبت شده باشد، لینک بازیابی برایش ارسال می‌شود."
+msgstr "If this email is registered, a reset link has been sent to it."
+
+#: templates/403.html
+msgid "اگر فکر می‌کنی اشتباهی رخ داده، وارد حسابت شو یا تیکت بزن."
+msgstr "If you think this is a mistake, log in or open a ticket."
+
+#: link_module/templates/link_module/shorten.html
+msgid ""
+"اگر وارد حسابت شوی، لینک‌هایت ذخیره می‌شوند، آمار کلیک می‌بینی و کپچا هم "
+"نمی‌خواهد."
+msgstr ""
+"Log in and your links are saved, you get click stats, and no CAPTCHA is "
+"needed."
+
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "ایجاد"
+msgstr "Created"
+
+#: upload_module/models.py
+msgid "ایدی پوشه"
+msgstr "Folder ID"
+
+#: account_module/forms.py contact_module/forms.py contact_module/models.py
+#: staff_module/templates/staff_module/users.html
+msgid "ایمیل"
+msgstr "Email"
+
+#: user_panel_module/views.py
+msgid "ایمیل تکراری میباشد"
+msgstr "This email is already registered"
+
+#: account_module/templates/account_module/forgat_password.html
+msgid "ایمیل حسابتان را وارد کنید تا لینک بازیابی برایتان ارسال شود."
+msgstr "Enter your account email and we'll send you a reset link."
+
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "این تیکت بسته شده است."
+msgstr "This ticket is closed."
+
+#: payment_module/views.py
+msgid "این روش پرداخت در دسترس نیست"
+msgstr "This payment method is not available"
+
+#: home_module/templates/home_module/terms.html
+msgid ""
+"این شرایط ممکن است تغییر کند. تغییرات مهم از طریق سایت اطلاع‌رسانی می‌شود."
+msgstr ""
+"These terms may change. Significant changes will be announced on the site."
+
+#: templates/404.html
+msgid "این صفحه وجود ندارد"
+msgstr "This page does not exist"
+
+#: upload_module/templates/upload_module/guest_upload.html
+msgid "این فایل تا %(until)s در دسترس است و بعد پاک می‌شود."
+msgstr "This file is available until %(until)s and will then be deleted."
+
+#: upload_module/purchases.py
+msgid "این فایل رایگان است"
+msgstr "This file is free"
+
+#: upload_module/purchases.py
+msgid "این فایل قبلاً خریداری شده است"
+msgstr "This file has already been purchased"
+
+#: link_module/templates/link_module/unavailable.html
+msgid "این لینک به سقف تعداد استفاده رسیده است."
+msgstr "This link has reached its usage limit."
+
+#: download_module/templates/download_module/download_page.html
+msgid "این لینک تا %(until)s در دسترس است"
+msgstr "This link is available until %(until)s"
+
+#: link_module/templates/link_module/preview.html
+msgid "این لینک دیگر فعال نیست."
+msgstr "This link is no longer active."
+
+#: link_module/templates/link_module/unavailable.html
+msgid "این لینک دیگر کار نمی‌کند"
+msgstr "This link no longer works"
+
+#: link_module/templates/link_module/unavailable.html
+msgid "این لینک غیرفعال شده است."
+msgstr "This link has been deactivated."
+
+#: link_module/templates/link_module/preview.html
+msgid "این لینک کجا می‌رود؟"
+msgstr "Where does this link go?"
+
+#: download_module/templates/download_module/download_page2.html
+msgid "این لینک یک‌بارمصرف است و تا ۱۵ دقیقه اعتبار دارد."
+msgstr "This link is single-use and valid for 15 minutes."
+
+#: api_module/templates/api_module/keys.html
+msgid "این کلید باطل شود؟ سایتی که از آن استفاده می‌کند بلافاصله قطع می‌شود."
+msgstr "Revoke this key? Any site using it stops working immediately."
+
+#: api_module/templates/api_module/keys.html
+msgid ""
+"این کلید فقط همین یک بار نمایش داده می‌شود. ما فقط هش آن را ذخیره می‌کنیم، "
+"پس اگر گمش کنی راهی برای بازیابی نیست و باید کلید جدید بسازی."
+msgstr ""
+"This key is shown only once. We store only its hash, so if you lose it there"
+" is no way to recover it and you will need to create a new one."
+
+#: upload_module/templates/upload_module/guest_upload.html
+msgid "با حساب کاربری: فایل بزرگ‌تر، بدون حذف خودکار، و درآمد از هر دانلود."
+msgstr ""
+"With an account: larger files, no auto-delete, and earnings from every "
+"download."
+
+#: home_module/templates/home_module/terms.html
+msgid "با ساخت حساب کاربری، این شرایط را می‌پذیری."
+msgstr "By creating an account you accept these terms."
+
+#: home_module/templates/home_module/privacy.html
+msgid "با چه کسانی به اشتراک می‌گذاریم"
+msgstr "Who we share with"
+
+#: home_module/templates/home_module/home_page.html
+msgid "بازدید"
+msgstr "Views"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "بازدید تکراری همان کاربر"
+msgstr "Repeat visit from the same person"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "بازدید خودتان"
+msgstr "Your own visit"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "بازدیدهای ردشده"
+msgstr "Rejected visits"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "بازدیدهای ردشده (۳۰ روز)"
+msgstr "Rejected visits (30 days)"
+
+#: home_module/templates/home_module/terms.html
+msgid ""
+"بازدیدهایی که با ابزار خودکار، تکرار، یا هر روش مصنوعی ساخته شوند شمرده "
+"نمی‌شوند."
+msgstr ""
+"Visits generated by automated tools, repetition, or any artificial means are"
+" not counted."
+
+#: link_module/forms.py
+msgid "بازدیدکننده اول یک صفحه‌ی کوتاه می‌بیند و بعد به مقصد می‌رود."
+msgstr "Visitors see a brief page first, then continue to the destination."
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "بازدیدکننده یکتا"
+msgstr "Unique visitors"
+
+#: home_module/views.py
+msgid ""
+"بازدیدی که از ابزار خودکار بیاید، خیلی سریع رد شود، تکراری باشد، یا خودت "
+"باشی، درآمد نمی‌سازد. در گزارش هر فایل می‌توانی دلیل رد شدن هر مورد را "
+"ببینی."
+msgstr ""
+"A visit from an automated tool, one that passes through too quickly, a "
+"repeat, or your own, earns nothing. Each file report shows why every "
+"rejected visit was rejected."
+
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "بازکردن دوباره"
+msgstr "Reopen"
+
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "بازگشت به تیکت ها"
+msgstr "Back to tickets"
+
+#: templates/429.html
+msgid "بازگشت به صفحه اصلی"
+msgstr "Back to home"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "بازگشت به فایل ها"
+msgstr "Back to files"
+
+#: staff_module/views.py
+msgid "بازگشت وجه برداشت رد شده #%(id)s"
+msgstr "Refund for rejected withdrawal #%(id)s"
+
+#: account_module/templates/account_module/forgat_password.html
+msgid "بازیابی رمز عبور"
+msgstr "Reset password"
+
+#: api_module/templates/api_module/keys.html
+msgid "باطل شده"
+msgstr "Revoked"
+
+#: ads_module/models.py
+msgid "باقیمانده درآمد"
+msgstr "Earning carry"
+
+#: ads_module/models.py
+msgid "باقیمانده های درآمد"
+msgstr "Earning carries"
+
+#: upload_module/templates/upload_module/guest_upload.html
+#: user_panel_module/templates/user_panel_module/upload_file.html
+msgid "باقی‌مانده"
+msgstr "remaining"
+
+#: api_module/views.py
+msgid "باید حداقل ۱ ساعت باشد."
+msgstr "Must be at least 1 hour."
+
+#: api_module/views.py
+msgid "باید عدد صحیح باشد (ساعت)."
+msgstr "Must be an integer (hours)."
+
+#: contact_module/models.py
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "بخش"
+msgstr "Department"
+
+#: home_module/templates/home_module/terms.html
+msgid "بدافزار، ویروس، یا هر کد مخربی."
+msgstr "Malware, viruses, or any malicious code."
+
+#: api_module/views.py link_module/views.py
+msgid "بدنه‌ی درخواست JSON معتبر نیست."
+msgstr "The request body is not valid JSON."
+
+#: link_module/forms.py
+msgid "بدون انقضا"
+msgstr "No expiry"
+
+#: upload_module/templates/upload_module/guest_upload.html
+msgid ""
+"بدون ساخت حساب، تا %(mb)s مگابایت. فایل بعد از مهلتی که انتخاب می‌کنی خودکار"
+" پاک می‌شود."
+msgstr ""
+"No account needed, up to %(mb)s MB. The file is deleted automatically after "
+"the period you choose."
+
+#: api_module/models.py
+msgid "برای اینکه بعداً بدانی این کلید کجا استفاده می‌شود"
+msgstr "So you can tell later where this key is used"
+
+#: home_module/templates/home_module/privacy.html
+msgid ""
+"برای تشخیص بازدید تکراری و جلوگیری از تقلب، به شناسه‌ای یکتا از هر "
+"بازدیدکننده نیاز داریم. آدرس IP خام ذخیره نمی‌شود؛ به‌جایش یک هش "
+"رمزنگاری‌شده از ترکیب آدرس و مرورگر نگه داشته می‌شود که قابل برگرداندن به "
+"آدرس اصلی نیست."
+msgstr ""
+"To detect repeat visits and prevent fraud we need a unique identifier per "
+"visitor. The raw IP address is not stored; instead a salted cryptographic "
+"hash of the address and browser is kept, which cannot be reversed to the "
+"original address."
+
+#: home_module/views.py
+msgid ""
+"برای فایلت قیمت بگذار. خریدار از کیف پولش پرداخت می‌کند و ۹۰٪ سهم تو است."
+msgstr ""
+"Set a price on your file. The buyer pays from their wallet and 90% is yours."
+
+#: home_module/templates/home_module/about.html
+msgid ""
+"برای هر سوال یا مشکلی می‌توانی تیکت بزنی. تیم پشتیبانی در بخش‌های فنی، مالی "
+"و حساب کاربری پاسخ می‌دهد."
+msgstr ""
+"You can open a ticket for any question or problem. Support covers technical,"
+" financial, and account matters."
+
+#: home_module/views.py
+msgid ""
+"برای هر فایل ببین چند دانلود رایگان و چند دانلود پولی داشته و چقدر درآمد "
+"ساخته."
+msgstr ""
+"For each file, see how many free and paid downloads it had and how much it "
+"earned."
+
+#: home_module/templates/home_module/about.html
+msgid "برای چه کسانی"
+msgstr "Who it is for"
+
+#: api_module/panel_views.py
+msgid "برای کلید یک نام بگذار تا بعداً بدانی کجا استفاده می‌شود."
+msgstr "Give the key a name so you know where it is used."
+
+#: account_module/models.py staff_module/templates/staff_module/overview.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+#: user_panel_module/templates/user_panel_module/withdrawal.html
+msgid "برداشت"
+msgstr "Withdrawal"
+
+#: home_module/views.py
+msgid ""
+"برداشت از کیف پول به آدرس TRON یا Payeer انجام می‌شود. مبلغ درخواستی "
+"نمی‌تواند از موجودی قابل برداشت بیشتر باشد."
+msgstr ""
+"Withdrawals go to a TRON or Payeer address. The requested amount cannot "
+"exceed your available balance."
+
+#: staff_module/templates/staff_module/withdrawals.html
+msgid "برداشت در انتظاری نیست"
+msgstr "No pending withdrawals"
+
+#: staff_module/templates/staff_module/withdrawals.html
+msgid "برداشت رد شود و مبلغ به کیف پول کاربر برگردد؟"
+msgstr "Reject the withdrawal and return the amount to the user wallet?"
+
+#: staff_module/templates/staff_module/withdrawals.html
+msgid "برداشت ها"
+msgstr "Withdrawals"
+
+#: account_module/models.py
+msgid "برداشتی ها"
+msgstr "Withdrawals"
+
+#: staff_module/templates/staff_module/overview.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "برداشت‌شده"
+msgstr "Withdrawn"
+
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "بستن تیکت"
+msgstr "Close ticket"
+
+#: contact_module/models.py
+#: contact_module/templates/contact_module/component/ticket_status.html
+#: contact_module/templates/contact_module/ticket_list.html
+#: staff_module/templates/staff_module/tickets.html
+msgid "بسته شده"
+msgstr "Closed"
+
+#: api_module/templates/api_module/docs.html
+msgid "بعد از این مدت لینک عمومی می‌بندد. خالی یعنی بدون انقضا."
+msgstr "After this the public link closes. Empty means no expiry."
+
+#: upload_module/guest.py
+msgid "بعد از چه مدتی پاک شود؟"
+msgstr "Delete after"
+
+#: templates/shared/pagination.html
+msgid "بعدی"
+msgstr "Next"
+
+#: api_module/templates/api_module/docs.html
+msgid "بقیه‌ی اندپوینت‌ها"
+msgstr "Other endpoints"
+
+#: home_module/views.py
+msgid ""
+"بله. موقع آپلود می‌توانی بگویی فایل چند ساعت عمومی بماند؛ بعد از آن لینک "
+"خودکار بسته می‌شود و فایل در پنل خودت باقی می‌ماند."
+msgstr ""
+"Yes. When uploading you can say how many hours the file stays public; after "
+"that the link closes automatically and the file remains in your own panel."
+
+#: templates/403.html
+msgid "به این بخش دسترسی نداری"
+msgstr "You do not have access to this section"
+
+#: ads_module/models.py
+msgid "تأیید درآمد پس از (روز)"
+msgstr "Confirm earnings after (days)"
+
+#: ads_module/models.py
+msgid "تأیید شده"
+msgstr "Confirmed"
+
+#: ads_module/templates/ads_module/earnings.html
+msgid "تأیید شده و واریز شده"
+msgstr "Confirmed and paid out"
+
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "تا %(until)s"
+msgstr "until %(until)s"
+
+#: home_module/views.py
+msgid "تا ۲ گیگابایت برای هر فایل. اگر به سقف بیشتری نیاز داری، تیکت بزن."
+msgstr "Up to 2 GB per file. If you need a higher limit, open a ticket."
+
+#: account_module/models.py ads_module/models.py
+#: ads_module/templates/ads_module/earnings.html contact_module/models.py
+#: link_module/templates/link_module/shorten.html
+#: payment_module/templates/payment_module/topup.html
+#: staff_module/templates/staff_module/payments.html
+#: staff_module/templates/staff_module/withdrawals.html
+#: upload_module/models.py
+#: user_panel_module/templates/user_panel_module/my_files.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "تاریخ"
+msgstr "Date"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "تاریخ آپلود"
+msgstr "Uploaded on"
+
+#: api_module/models.py
+msgid "تاریخ ابطال"
+msgstr "Revoked at"
+
+#: contact_module/models.py payment_module/models.py upload_module/models.py
+msgid "تاریخ ایجاد"
+msgstr "Created at"
+
+#: account_module/models.py
+msgid "تاریخ برداشت"
+msgstr "Withdrawal date"
+
+#: contact_module/models.py
+msgid "تاریخ بسته شدن"
+msgstr "Closed at"
+
+#: payment_module/models.py
+msgid "تاریخ ثبت"
+msgstr "Created at"
+
+#: upload_module/models.py
+msgid "تاریخ خرید"
+msgstr "Purchase date"
+
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "تاریخ درخواست"
+msgstr "Requested at"
+
+#: api_module/models.py link_module/models.py
+#: link_module/templates/link_module/preview.html
+msgid "تاریخ ساخت"
+msgstr "Created at"
+
+#: account_module/models.py
+#: staff_module/templates/staff_module/withdrawals.html
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "تاریخ واریز"
+msgstr "Paid at"
+
+#: payment_module/models.py
+msgid "تاریخ پرداخت"
+msgstr "Paid at"
+
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "تاریخچه برداشت"
+msgstr "Withdrawal history"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "تبلیغات (تأییدشده)"
+msgstr "Ads (confirmed)"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "تبلیغات (در انتظار)"
+msgstr "Ads (pending)"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "تبلیغات فعال نبود"
+msgstr "Ads were not active"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "ترافیک"
+msgstr "Bandwidth"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "ترافیک مصرفی"
+msgstr "Bandwidth used"
+
+#: account_module/models.py
+msgid "تراکنش"
+msgstr "Transaction"
+
+#: payment_module/templates/payment_module/result.html
+msgid ""
+"تراکنش شما ثبت شد. به محض تأیید روی شبکه، موجودی به‌طور خودکار شارژ می‌شود. "
+"این کار معمولاً چند دقیقه طول می‌کشد."
+msgstr ""
+"Your transaction was recorded. Your balance will be topped up automatically "
+"as soon as the network confirms it. This usually takes a few minutes."
+
+#: account_module/models.py
+msgid "تراکنش ها"
+msgstr "Transactions"
+
+#: payment_module/models.py
+msgid "تراکنش کیف پول"
+msgstr "Wallet transaction"
+
+#: account_module/templates/captcha/styled_widget.html
+msgid "تصویر جدید"
+msgstr "New image"
+
+#: account_module/templates/captcha/styled_widget.html
+msgid "تصویر کپچا"
+msgstr "CAPTCHA image"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "تعداد"
+msgstr "Count"
+
+#: download_module/templates/download_module/download_page.html
+#: upload_module/models.py
+msgid "تعداد دانلود"
+msgstr "Downloads"
+
+#: upload_module/templates/upload_module/my_files.html
+msgid "تعداد دانلود: %(count)s"
+msgstr "Downloads: %(count)s"
+
+#: ads_module/models.py
+msgid "تعداد نمایش"
+msgstr "Impressions"
+
+#: link_module/models.py link_module/templates/link_module/preview.html
+msgid "تعداد کلیک"
+msgstr "Clicks"
+
+#: account_module/templates/account_module/reset_password.html
+msgid "تعیین رمز عبور جدید"
+msgstr "Set a new password"
+
+#: api_module/templates/api_module/docs.html
+msgid "تغییر انتشار یا قیمت"
+msgstr "Change visibility or price"
+
+#: templates/shared/theme_toggle.html
+msgid "تغییر تم"
+msgstr "Change theme"
+
+#: home_module/views.py
+msgid "تفاوت فایل عمومی و خصوصی چیست؟"
+msgstr "What is the difference between a public and a private file?"
+
+#: home_module/templates/home_module/terms.html
+msgid ""
+"تلاش برای دستکاری آمار بازدید، منجر به ابطال درآمد و مسدود شدن حساب می‌شود."
+msgstr ""
+"Attempting to manipulate visit statistics voids the earnings and suspends "
+"the account."
+
+#: home_module/templates/home_module/terms.html
+msgid ""
+"تلاش می‌کنیم سرویس همیشه در دسترس باشد، ولی تضمینی برای در دسترس بودن دائمی "
+"یا حفظ ابدی فایل‌ها نمی‌دهیم. از فایل‌های مهمت نسخه‌ی پشتیبان داشته باش."
+msgstr ""
+"We aim to keep the service always available, but we do not guarantee "
+"permanent availability or indefinite file retention. Keep a backup of "
+"anything important."
+
+#: home_module/templates/home_module/about.html
+msgid "تماس"
+msgstr "Contact"
+
+#: contact_module/models.py
+#: contact_module/templates/contact_module/contact_us_page.html
+#: templates/shared/site_footer.html
+msgid "تماس با ما"
+msgstr "Contact us"
+
+#: ads_module/models.py
+msgid "تنظیمات تبلیغات"
+msgstr "Ad settings"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "تنظیمات تبلیغات ثبت نشده"
+msgstr "Ad settings not configured"
+
+#: upload_module/models.py
+msgid "توسط صاحب فایل"
+msgstr "By the file owner"
+
+#: account_module/models.py api_module/templates/api_module/docs.html
+msgid "توضیح"
+msgstr "Note"
+
+#: upload_module/models.py
+msgid "توضیحات"
+msgstr "Description"
+
+#: templates/shared/currency_switcher.html
+msgid "تومان"
+msgstr "Toman"
+
+#: account_module/forms.py
+msgid "تکرار کلمه عبور"
+msgstr "Confirm password"
+
+#: contact_module/models.py
+msgid "تیکت"
+msgstr "Ticket"
+
+#: home_module/templates/home_module/faq.html templates/shared/legal_page.html
+msgid "تیکت بزن"
+msgstr "open a ticket"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "تیکت بی‌پاسخ"
+msgstr "Unanswered tickets"
+
+#: contact_module/templates/contact_module/ticket_list.html
+#: contact_module/templates/contact_module/ticket_new.html
+#: templates/shared/site_footer.html
+msgid "تیکت جدید"
+msgstr "New ticket"
+
+#: contact_module/models.py staff_module/templates/staff_module/tickets.html
+msgid "تیکت ها"
+msgstr "Tickets"
+
+#: templates/shared/site_footer.html
+msgid "تیکت های من"
+msgstr "My tickets"
+
+#: contact_module/templates/contact_module/ticket_list.html
+msgid "تیکت های پشتیبانی"
+msgstr "Support tickets"
+
+#: staff_module/templates/staff_module/tickets.html
+msgid "تیکتی در این وضعیت نیست"
+msgstr "No tickets in this state"
+
+#: contact_module/templates/contact_module/ticket_list.html
+msgid "ثبت اولین تیکت"
+msgstr "Open your first ticket"
+
+#: contact_module/templates/contact_module/ticket_new.html
+msgid "ثبت تیکت"
+msgstr "Submit ticket"
+
+#: user_panel_module/templates/user_panel_module/withdrawal.html
+msgid "ثبت درخواست"
+msgstr "Submit request"
+
+#: templates/shared/nav_links.html templates/shared/site_footer.html
+#: upload_module/templates/upload_module/guest_upload.html
+#: user_panel_module/templates/user_panel_module/login.html
+#: user_panel_module/templates/user_panel_module/register.html
+msgid "ثبت نام"
+msgstr "Sign up"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "ثبت‌نام %(d)s روز اخیر"
+msgstr "Signups, last %(d)s days"
+
+#: ads_module/models.py
+msgid "جایگاه"
+msgstr "Position"
+
+#: ads_module/models.py
+#: download_module/templates/download_module/component/ad_slot.html
+msgid "جایگاه تبلیغ"
+msgstr "Ad slot"
+
+#: ads_module/models.py
+msgid "جایگاه های تبلیغ"
+msgstr "Ad slots"
+
+#: api_module/templates/api_module/docs.html
+msgid "جزئیات"
+msgstr "Details"
+
+#: staff_module/templates/staff_module/files.html
+#: staff_module/templates/staff_module/users.html
+msgid "جستجو"
+msgstr "Search"
+
+#: staff_module/templates/staff_module/users.html
+msgid "جستجو با ایمیل یا نام کاربری"
+msgstr "Search by email or username"
+
+#: staff_module/templates/staff_module/files.html
+msgid "جستجو با نام، اسلاگ یا ایمیل آپلودکننده"
+msgstr "Search by name, slug, or uploader email"
+
+#: home_module/templates/home_module/faq.html
+msgid "جوابت را پیدا نکردی؟"
+msgstr "Did not find your answer?"
+
+#: ads_module/models.py
+msgid ""
+"حتی اگر همه‌ی قواعد دیگر رد شوند، یک فایل بیش از این در روز درآمد نمی‌سازد."
+msgstr ""
+"Even if every other rule passes, a file will not earn more than this per "
+"day."
+
+#: download_module/templates/download_module/download_page.html
+#: download_module/templates/download_module/download_page2.html
+#: staff_module/templates/staff_module/files.html
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "حجم"
+msgstr "Size"
+
+#: upload_module/guest.py
+msgid ""
+"حجم فایل برای آپلود مهمان بیشتر از حد مجاز است (حداکثر %(mb)s مگابایت). برای"
+" فایل بزرگ‌تر وارد حسابت شو."
+msgstr ""
+"The file exceeds the guest upload limit (max %(mb)s MB). Log in for larger "
+"files."
+
+#: user_panel_module/forms.py
+msgid "حجم فایل بیشتر از حد مجاز است (حداکثر %(limit)s گیگابایت)."
+msgstr "The file is larger than allowed (max %(limit)s GB)."
+
+#: api_module/views.py
+msgid "حجم فایل بیشتر از حد مجاز است."
+msgstr "The file is larger than allowed."
+
+#: home_module/views.py
+msgid "حجم فایل تا چقدر می‌تواند باشد؟"
+msgstr "How large can a file be?"
+
+#: upload_module/models.py
+msgid "حجم منتقل‌شده"
+msgstr "Bytes transferred"
+
+#: contact_module/forms.py
+msgid "حجم پیوست بیشتر از حد مجاز است (حداکثر %(mb)s مگابایت)."
+msgstr "The attachment is larger than allowed (max %(mb)s MB)."
+
+#: user_panel_module/forms.py
+msgid "حداقل برداشت ۰٫۵۰ دلار است."
+msgstr "The minimum withdrawal is $0.50."
+
+#: ads_module/models.py
+msgid "حداقل فاصله بین دو صفحه (ثانیه)"
+msgstr "Minimum time between the two pages (seconds)"
+
+#: home_module/views.py
+msgid "حداقل مبلغ برداشت چقدر است؟"
+msgstr "What is the minimum withdrawal?"
+
+#: payment_module/forms.py
+msgid "حداقل مبلغ شارژ %(min)s دلار است"
+msgstr "The minimum top-up is $%(min)s"
+
+#: api_module/views.py
+msgid "حداکثر %(limit)s بایت"
+msgstr "At most %(limit)s bytes"
+
+#: link_module/forms.py link_module/models.py
+msgid "حداکثر تعداد استفاده"
+msgstr "Maximum uses"
+
+#: ads_module/models.py
+msgid "حداکثر فاصله بین دو صفحه (ثانیه)"
+msgstr "Maximum time between the two pages (seconds)"
+
+#: payment_module/forms.py
+msgid "حداکثر مبلغ شارژ %(max)s دلار است"
+msgstr "The maximum top-up is $%(max)s"
+
+#: api_module/templates/api_module/docs.html
+msgid "حذف"
+msgstr "Delete"
+
+#: upload_module/models.py
+msgid "حذف خودکار در"
+msgstr "Auto-delete at"
+
+#: home_module/templates/home_module/privacy.html
+#: templates/shared/site_footer.html
+msgid "حریم خصوصی"
+msgstr "Privacy"
+
+#: user_panel_module/templates/user_panel_module/login.html
+msgid "حساب ندارید؟"
+msgstr "Don't have an account?"
+
+#: account_module/templates/account_module/account.html
+#: contact_module/models.py
+msgid "حساب کاربری"
+msgstr "Account"
+
+#: home_module/templates/home_module/privacy.html
+msgid "حق تو"
+msgstr "Your rights"
+
+#: user_panel_module/forms.py
+msgid "خالی بگذار تا بدون محدودیت زمانی عمومی بماند"
+msgstr "Leave empty to stay public with no time limit"
+
+#: user_panel_module/forms.py
+msgid "خالی یا صفر یعنی رایگان"
+msgstr "Empty or zero means free"
+
+#: link_module/forms.py
+msgid "خالی یعنی بدون سقف. مثلاً ۱۰ یعنی بعد از ۱۰ بار باز شدن، لینک می‌بندد."
+msgstr "Empty means unlimited. For example 10 closes the link after 10 opens."
+
+#: templates/shared/nav_links.html
+msgid "خروج"
+msgstr "Log out"
+
+#: upload_module/models.py
+msgid "خرید"
+msgstr "Purchase"
+
+#: account_module/models.py
+#: download_module/templates/download_module/purchase.html
+msgid "خرید فایل"
+msgstr "Buy file"
+
+#: download_module/templates/download_module/download_page.html
+msgid "خرید و دریافت لینک دانلود"
+msgstr "Buy and get download link"
+
+#: upload_module/models.py
+msgid "خریدار"
+msgstr "Buyer"
+
+#: upload_module/models.py
+msgid "خریدها"
+msgstr "Purchases"
+
+#: staff_module/templates/staff_module/files.html upload_module/models.py
+#: upload_module/templates/upload_module/my_files.html
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "خصوصی"
+msgstr "Private"
+
+#: payment_module/models.py
+msgid "خطا"
+msgstr "Error"
+
+#: api_module/templates/api_module/docs.html
+msgid "خطاها و محدودیت‌ها"
+msgstr "Errors and limits"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "خلاصه مالی"
+msgstr "Financial summary"
+
+#: api_module/templates/api_module/docs.html
+msgid "خواندن: ۶۰۰ درخواست در ساعت به ازای هر کلید"
+msgstr "Reads: 600 requests per hour per key"
+
+#: contact_module/models.py
+msgid "خوانده شده"
+msgstr "Read"
+
+#: api_module/templates/api_module/docs.html
+msgid "خود فایل. اجباری."
+msgstr "The file itself. Required."
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "خیلی سریع رد شد (احتمالاً ربات)"
+msgstr "Passed through too fast (likely a bot)"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "داده‌ای نیست"
+msgstr "No data"
+
+#: payment_module/templates/payment_module/result.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "داشبورد"
+msgstr "Dashboard"
+
+#: staff_module/templates/staff_module/files.html upload_module/models.py
+#: user_panel_module/templates/user_panel_module/my_files.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "دانلود"
+msgstr "Download"
+
+#: staff_module/templates/staff_module/overview.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "دانلود %(d)s روز اخیر"
+msgstr "Downloads, last %(d)s days"
+
+#: download_module/templates/download_module/download_page.html
+#: download_module/templates/download_module/download_page2.html
+msgid "دانلود %(n)s"
+msgstr "Download %(n)s"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "دانلود خودتان"
+msgstr "Your own downloads"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "دانلود در %(d)s روز گذشته"
+msgstr "Downloads over the last %(d)s days"
+
+#: upload_module/models.py
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "دانلود رایگان"
+msgstr "Free downloads"
+
+#: download_module/templates/download_module/download_page2.html
+msgid "دانلود فایل"
+msgstr "Download file"
+
+#: upload_module/models.py
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "دانلود پولی"
+msgstr "Paid downloads"
+
+#: staff_module/templates/staff_module/overview.html upload_module/models.py
+msgid "دانلودها"
+msgstr "Downloads"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "در انتظار اقدام"
+msgstr "Needs attention"
+
+#: ads_module/models.py ads_module/templates/ads_module/earnings.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "در انتظار تأیید"
+msgstr "Awaiting confirmation"
+
+#: payment_module/models.py
+#: payment_module/templates/payment_module/result.html
+msgid "در انتظار تأیید شبکه"
+msgstr "Awaiting network confirmation"
+
+#: contact_module/models.py
+#: contact_module/templates/contact_module/component/ticket_status.html
+#: contact_module/templates/contact_module/ticket_list.html
+#: staff_module/templates/staff_module/tickets.html
+msgid "در انتظار پاسخ"
+msgstr "Awaiting reply"
+
+#: payment_module/models.py
+#: staff_module/templates/staff_module/withdrawals.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "در انتظار پرداخت"
+msgstr "Awaiting payment"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "در این بازه دانلودی ثبت نشده است"
+msgstr "No downloads recorded in this period"
+
+#: link_module/templates/link_module/interstitial.html
+msgid "در حال انتقال به"
+msgstr "Taking you to"
+
+#: link_module/templates/link_module/interstitial.html
+msgid "در حال انتقال…"
+msgstr "Redirecting…"
+
+#: upload_module/templates/upload_module/guest_upload.html
+#: user_panel_module/templates/user_panel_module/upload_file.html
+msgid "در حال ذخیره…"
+msgstr "Saving…"
+
+#: home_module/templates/home_module/home_page.html
+msgid "در سه قدم"
+msgstr "In three steps"
+
+#: ads_module/templates/ads_module/earnings.html
+msgid "درآمد"
+msgstr "Earnings"
+
+#: ads_module/models.py
+msgid "درآمد (میکروسنت)"
+msgstr "Earnings (micro-cents)"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "درآمد آماده تأیید"
+msgstr "Earnings ready to confirm"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "درآمد این فایل"
+msgstr "Earnings from this file"
+
+#: home_module/views.py
+msgid "درآمد بگیر"
+msgstr "Get paid"
+
+#: account_module/models.py ads_module/models.py
+#: ads_module/templates/ads_module/earnings.html
+msgid "درآمد تبلیغات"
+msgstr "Ad revenue"
+
+#: ads_module/services.py
+msgid "درآمد تبلیغات %(count)s بازدید"
+msgstr "Ad revenue from %(count)s views"
+
+#: ads_module/templates/ads_module/earnings.html
+msgid ""
+"درآمد تبلیغات بلافاصله قابل برداشت نیست: چند روز در انتظار تأیید می‌ماند، "
+"چون شبکه تبلیغاتی هم ممکن است نمایش‌ها را نامعتبر اعلام کند."
+msgstr ""
+"Ad revenue is not immediately withdrawable: it stays pending for a few days,"
+" because the ad network may also reject impressions."
+
+#: staff_module/templates/staff_module/overview.html
+msgid "درآمد تبلیغات پرداختی"
+msgstr "Ad revenue paid out"
+
+#: home_module/templates/home_module/terms.html
+msgid ""
+"درآمد تبلیغات پس از یک دوره‌ی تأیید به موجودی قابل برداشت اضافه می‌شود."
+msgstr ""
+"Ad revenue is added to your withdrawable balance after a confirmation "
+"period."
+
+#: home_module/views.py
+msgid ""
+"درآمد سایت و سهم تو از تبلیغات همین دو صفحه می‌آید. بدون آن، دانلود برای همه"
+" رایگان می‌شد ولی هیچ درآمدی هم ساخته نمی‌شد."
+msgstr ""
+"The site revenue and your share come from the ads on those two pages. "
+"Without them downloads would be free for everyone but would earn nothing."
+
+#: home_module/templates/home_module/home_page.html
+msgid "درآمد شما"
+msgstr "Your earnings"
+
+#: ads_module/models.py
+msgid ""
+"درآمد ناخالص سایت به ازای هزار نمایش معتبر. با گزارش واقعی شبکه تطبیق بده."
+msgstr ""
+"The site's gross revenue per thousand valid impressions. Reconcile it with "
+"the network's actual report."
+
+#: home_module/views.py
+msgid "درآمد و پرداخت"
+msgstr "Earnings and payments"
+
+#: home_module/views.py
+msgid ""
+"درآمد چند روز در وضعیت «در انتظار تأیید» می‌ماند، چون خود شبکه‌ی تبلیغاتی هم"
+" ممکن است بعضی نمایش‌ها را نامعتبر اعلام کند. بعد از این مهلت، به موجودی "
+"قابل برداشت اضافه می‌شود."
+msgstr ""
+"Earnings stay pending for a few days because the ad network itself may "
+"declare some impressions invalid. After that period they move to your "
+"withdrawable balance."
+
+#: ads_module/models.py
+msgid "درآمدهای تبلیغات"
+msgstr "Ad earnings"
+
+#: home_module/templates/home_module/about.html
+msgid "درباره دلتا آپلود"
+msgstr "About Delta Upload"
+
+#: home_module/templates/home_module/about.html templates/base.html
+#: templates/shared/site_footer.html
+msgid "درباره ما"
+msgstr "About"
+
+#: home_module/templates/home_module/privacy.html
+msgid "درباره‌ی آدرس IP"
+msgstr "About IP addresses"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "درخواست از ابزار خودکار، نه مرورگر"
+msgstr "Request from an automated tool, not a browser"
+
+#: api_module/templates/api_module/docs.html
+msgid ""
+"درخواست باید multipart/form-data باشد. پاسخ شامل download_page_url است — "
+"همان صفحه‌ی دانلودی که به کاربرت می‌دهی."
+msgstr ""
+"The request must be multipart/form-data. The response includes "
+"download_page_url — the download page you hand to your user."
+
+#: user_panel_module/templates/user_panel_module/withdrawal.html
+#: user_panel_module/views.py
+msgid "درخواست برداشت"
+msgstr "Withdrawal request"
+
+#: templates/429.html
+msgid "درخواست بیش از حد"
+msgstr "Too many requests"
+
+#: utils/middleware.py
+msgid "درخواست‌های شما بیش از حد مجاز است. کمی بعد دوباره تلاش کنید."
+msgstr "You have made too many requests. Please try again shortly."
+
+#: payment_module/models.py
+msgid "درگاه"
+msgstr "Gateway"
+
+#: payment_module/gateways/crypto.py
+msgid "درگاه فاکتور را ایجاد نکرد"
+msgstr "The gateway did not create an invoice"
+
+#: payment_module/gateways/zarinpal.py
+msgid "درگاه پرداخت را ایجاد نکرد"
+msgstr "The gateway did not create the payment"
+
+#: download_module/templates/download_module/download_page.html
+msgid "دریافت لینک دانلود"
+msgstr "Get download link"
+
+#: contact_module/templates/contact_module/ticket_detail.html
+msgid "دریافت پیوست"
+msgstr "Download attachment"
+
+#: templates/403.html
+msgid "دسترسی ندارید"
+msgstr "Access denied"
+
+#: templates/base.html templates/shared/site_footer.html
+msgid "دلتا آپلود"
+msgstr "Delta Upload"
+
+#: home_module/templates/home_module/about.html
+msgid ""
+"دلتا آپلود جایی است که فایلت را می‌گذاری و یک لینک می‌گیری. هر بار که کسی از"
+" آن لینک فایل را بگیرد، سهمی از درآمد تبلیغات به حسابت می‌نشیند. اگر بخواهی "
+"می‌توانی برای فایل قیمت بگذاری و مستقیم بفروشی."
+msgstr ""
+"Delta Upload is where you put your file and get a link. Every time someone "
+"gets the file through that link, a share of the ad revenue lands in your "
+"account. If you want, you can set a price and sell it directly."
+
+#: link_module/templates/link_module/interstitial.html
+#: link_module/templates/link_module/preview.html
+msgid "دلتا آپلود مسئول محتوای سایت مقصد نیست."
+msgstr ""
+"Delta Upload is not responsible for the content of the destination site."
+
+#: home_module/templates/home_module/home_page.html
+msgid "دلتا آپلود — آپلود کن، درآمد بساز"
+msgstr "Delta Upload — upload and earn"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "دلیل"
+msgstr "Reason"
+
+#: account_module/templates/account_module/reset_password.html
+msgid "ذخیره"
+msgstr "Save"
+
+#: api_module/templates/api_module/docs.html
+#: api_module/templates/api_module/keys.html
+#: home_module/templates/home_module/home_page.html
+#: templates/shared/site_footer.html
+msgid "راهنمای API"
+msgstr "API guide"
+
+#: upload_module/models.py
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "رایگان"
+msgstr "Free"
+
+#: staff_module/templates/staff_module/withdrawals.html
+msgid "رد"
+msgstr "Reject"
+
+#: ads_module/models.py
+msgid "رد شده"
+msgstr "Rejected"
+
+#: templates/base.html
+msgid "رفتن به محتوا"
+msgstr "Skip to content"
+
+#: home_module/templates/home_module/privacy.html
+msgid "رمز عبور به‌صورت هش‌شده ذخیره می‌شود، نه متن ساده."
+msgstr "Passwords are stored hashed, never in plain text."
+
+#: user_panel_module/templates/user_panel_module/login.html
+msgid "رمز عبور را فراموش کرده‌ام"
+msgstr "I forgot my password"
+
+#: payment_module/templates/payment_module/result.html
+#: payment_module/templates/payment_module/topup.html
+#: staff_module/templates/staff_module/payments.html
+msgid "روش"
+msgstr "Method"
+
+#: payment_module/forms.py
+msgid "روش پرداخت"
+msgstr "Payment method"
+
+#: contact_module/models.py
+msgid "زیاد"
+msgstr "High"
+
+#: home_module/templates/home_module/privacy.html
+msgid "سابقه‌ی مالی: شارژ، خرید، فروش و برداشت."
+msgstr "Financial history: top-ups, purchases, sales, and withdrawals."
+
+#: home_module/templates/home_module/home_page.html
+msgid "ساخت حساب"
+msgstr "Create an account"
+
+#: home_module/templates/home_module/home_page.html
+msgid "ساخت حساب رایگان است و برای شروع نیازی به پرداخت نداری."
+msgstr "Creating an account is free and you need no payment to start."
+
+#: user_panel_module/templates/user_panel_module/register.html
+msgid "ساخت حساب کاربری"
+msgstr "Create an account"
+
+#: link_module/templates/link_module/preview.html
+#: link_module/templates/link_module/unavailable.html
+msgid "ساخت لینک کوتاه"
+msgstr "Create a short link"
+
+#: api_module/templates/api_module/keys.html
+msgid "ساخت کلید"
+msgstr "Create key"
+
+#: api_module/templates/api_module/keys.html
+msgid "ساخت کلید جدید"
+msgstr "Create a new key"
+
+#: api_module/templates/api_module/keys.html
+msgid "ساخته شده"
+msgstr "Created"
+
+#: templates/shared/site_footer.html
+msgid "ساخته شده توسط"
+msgstr "Built by"
+
+#: link_module/models.py
+msgid "سازنده"
+msgstr "Creator"
+
+#: home_module/templates/home_module/about.html
+msgid "سازندگان محتوا که فایل آموزشی، نرم‌افزار یا رسانه منتشر می‌کنند."
+msgstr "Creators who publish tutorials, software, or media."
+
+#: home_module/templates/home_module/home_page.html
+msgid "سایت داری؟ از API استفاده کن"
+msgstr "Got a site? Use the API"
+
+#: contact_module/models.py
+msgid "سایر"
+msgstr "Other"
+
+#: home_module/templates/home_module/about.html
+msgid "سرویس اشتراک‌گذاری فایل با امکان کسب درآمد از هر دانلود."
+msgstr "A file sharing service where every download earns you money."
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "سقف درآمد روزانه این فایل"
+msgstr "This file daily earning cap"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "سقف درآمد روزانه حساب شما"
+msgstr "Your account daily earning cap"
+
+#: ads_module/models.py
+msgid "سقف درآمد روزانه هر فایل (تعداد)"
+msgstr "Daily earning cap per file (count)"
+
+#: ads_module/models.py
+msgid "سقف درآمد روزانه هر کاربر (تعداد)"
+msgstr "Daily earning cap per user (count)"
+
+#: ads_module/models.py
+msgid "سهم آپلودکننده (درصد)"
+msgstr "Uploader share (percent)"
+
+#: home_module/templates/home_module/terms.html
+msgid "سهم آپلودکننده از درآمد تبلیغات و از فروش فایل، ۶۰ درصد است."
+msgstr "The uploader share of both ad revenue and file sales is 60 percent."
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "سهم دانلود پولی"
+msgstr "Share of paid downloads"
+
+#: home_module/templates/home_module/home_page.html
+msgid "سهم شما از هر دانلود: ۶۰٪"
+msgstr "Your share of every download: 60%"
+
+#: upload_module/models.py
+msgid "سهم فروشنده"
+msgstr "Seller share"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "سهم فروشندگان"
+msgstr "Seller share"
+
+#: contact_module/templates/contact_module/ticket_new.html
+#: home_module/templates/home_module/faq.html templates/404.html
+#: templates/base.html templates/shared/site_footer.html
+msgid "سوالات متداول"
+msgstr "FAQ"
+
+#: templates/shared/legal_page.html
+msgid "سوالی داری که اینجا جوابش نیست؟"
+msgstr "Have a question not answered here?"
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "شارژ"
+msgstr "Top up"
+
+#: account_module/models.py
+#: download_module/templates/download_module/purchase.html
+msgid "شارژ حساب"
+msgstr "Top up"
+
+#: payment_module/templates/payment_module/result.html
+#: payment_module/templates/payment_module/topup.html
+#: staff_module/templates/staff_module/overview.html
+#: templates/shared/panel_base.html
+msgid "شارژ کیف پول"
+msgstr "Top up wallet"
+
+#: payment_module/services.py
+msgid "شارژ کیف پول از %(gateway)s"
+msgstr "Wallet top-up via %(gateway)s"
+
+#: payment_module/gateways/crypto.py payment_module/gateways/zarinpal.py
+msgid "شارژ کیف پول دی‌آپ"
+msgstr "D-UP wallet top-up"
+
+#: templates/404.html
+msgid ""
+"شاید لینک اشتباه است، یا فایلی که دنبالش بودی حذف شده یا دیگر عمومی نیست."
+msgstr ""
+"Maybe the link is wrong, or the file you wanted was removed or is no longer "
+"public."
+
+#: ads_module/models.py
+msgid "شبکه تبلیغاتی"
+msgstr "Ad network"
+
+#: ads_module/models.py
+msgid ""
+"شبکه تبلیغاتی هم ممکن است نمایش‌ها را رد کند؛ این فاصله فرصت اصلاح می‌دهد."
+msgstr ""
+"The ad network may reject impressions too; this delay leaves room to correct"
+" that."
+
+#: home_module/templates/home_module/privacy.html
+msgid ""
+"شبکه‌های تبلیغاتی ممکن است کوکی‌های خودشان را روی صفحات دانلود قرار دهند؛ "
+"سیاست آنها جدا از ماست."
+msgstr ""
+"Ad networks may set their own cookies on download pages; their policies are "
+"separate from ours."
+
+#: contact_module/forms.py
+msgid "شرح مشکل"
+msgstr "Describe the problem"
+
+#: home_module/templates/home_module/home_page.html
+msgid "شروع رایگان"
+msgstr "Start free"
+
+#: home_module/views.py
+msgid "شروع کار"
+msgstr "Getting started"
+
+#: home_module/templates/home_module/about.html
+msgid "شفافیت در شمارش: در گزارش می‌بینی کدام بازدیدها شمرده نشده‌اند و چرا."
+msgstr ""
+"Transparent counting: the report shows which visits were not counted and "
+"why."
+
+#: staff_module/templates/staff_module/payments.html
+#: staff_module/templates/staff_module/withdrawals.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "شناسه"
+msgstr "ID"
+
+#: payment_module/models.py
+msgid "شناسه درگاه"
+msgstr "Gateway reference"
+
+#: payment_module/gateways/zarinpal.py
+msgid "شناسه پرداخت با رکورد ما مطابقت ندارد"
+msgstr "The payment reference does not match our record"
+
+#: home_module/templates/home_module/about.html
+msgid ""
+"صاحبان سایت که می‌خواهند فایل‌هایشان را جای دیگری میزبانی کنند و از API "
+"استفاده می‌کنند."
+msgstr "Site owners who want their files hosted elsewhere and use the API."
+
+#: templates/shared/pagination.html
+msgid "صفحه %(current)s از %(total)s"
+msgstr "Page %(current)s of %(total)s"
+
+#: link_module/templates/link_module/unavailable.html templates/403.html
+#: templates/404.html templates/shared/site_footer.html
+msgid "صفحه اصلی"
+msgstr "Home"
+
+#: ads_module/models.py
+msgid "صفحه اول دانلود"
+msgstr "Download page 1"
+
+#: ads_module/models.py
+msgid "صفحه دوم دانلود"
+msgstr "Download page 2"
+
+#: templates/404.html
+msgid "صفحه پیدا نشد"
+msgstr "Page not found"
+
+#: templates/shared/pagination.html
+msgid "صفحه‌بندی"
+msgstr "Pagination"
+
+#: contact_module/models.py
+msgid "عادی"
+msgstr "Normal"
+
+#: account_module/forms.py
+msgid "عبارت داخل تصویر"
+msgstr "The text in the image"
+
+#: account_module/forms.py
+msgid "عبارت واردشده با تصویر مطابقت ندارد"
+msgstr "The text does not match the image"
+
+#: api_module/templates/api_module/docs.html
+msgid "عبور از سقف: پاسخ ۴۲۹"
+msgstr "Over the limit: HTTP 429"
+
+#: ads_module/models.py
+msgid "عبور سریع‌تر از این یعنی ربات، نه بازدید واقعی."
+msgstr "Anything faster than this is a bot, not a real visit."
+
+#: staff_module/templates/staff_module/users.html
+msgid "عضویت"
+msgstr "Joined"
+
+#: api_module/templates/api_module/keys.html
+#: staff_module/templates/staff_module/files.html
+#: staff_module/templates/staff_module/withdrawals.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "عملیات"
+msgstr "Actions"
+
+#: staff_module/templates/staff_module/files.html upload_module/models.py
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "عمومی"
+msgstr "Public"
+
+#: upload_module/models.py
+msgid "عمومی تا تاریخ"
+msgstr "Public until"
+
+#: home_module/views.py
+msgid "عمومی یا خصوصی"
+msgstr "Public or private"
+
+#: contact_module/forms.py contact_module/models.py
+msgid "عنوان"
+msgstr "Title"
+
+#: staff_module/templates/staff_module/files.html
+#: staff_module/templates/staff_module/users.html
+msgid "غیرفعال"
+msgstr "Inactive"
+
+#: staff_module/templates/staff_module/files.html
+msgid "غیرفعال کن"
+msgstr "Deactivate"
+
+#: ads_module/models.py
+msgid "فاصله بین دو درآمد یک بازدیدکننده (ثانیه)"
+msgstr "Cooldown between earnings from one visitor (seconds)"
+
+#: ads_module/models.py
+msgid "فاصله شمارش مجدد یک بازدیدکننده (ساعت)"
+msgstr "Re-count window for the same visitor (hours)"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "فاصله‌ی زیاد بین دو صفحه"
+msgstr "Too long between the two pages"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "فاصله‌ی کم تا بازدید قبلی همان کاربر"
+msgstr "Too soon after the same visitor last visit"
+
+#: ads_module/models.py ads_module/templates/ads_module/earnings.html
+#: staff_module/templates/staff_module/users.html upload_module/guest.py
+#: upload_module/models.py
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "فایل"
+msgstr "File"
+
+#: upload_module/templates/upload_module/guest_upload.html
+msgid "فایل آپلود شد"
+msgstr "File uploaded"
+
+#: home_module/views.py
+msgid "فایل خصوصی فقط در پنل خودت در دسترس است و هیچ لینک عمومی ندارد."
+msgstr ""
+"A private file is only reachable in your own panel and has no public link."
+
+#: user_panel_module/templates/user_panel_module/upload_file.html
+msgid "فایل خصوصی فقط در پنل خودتان قابل دسترسی است و لینک عمومی ندارد."
+msgstr ""
+"A private file is only accessible in your own panel and has no public link."
+
+#: user_panel_module/forms.py
+msgid "فایل خصوصی قابل فروش نیست"
+msgstr "A private file cannot be sold"
+
+#: api_module/views.py
+msgid "فایل خصوصی قابل فروش نیست."
+msgstr "A private file cannot be sold."
+
+#: user_panel_module/forms.py
+msgid "فایل خصوصی پنجره‌ی انتشار ندارد"
+msgstr "A private file has no publication window"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "فایل صاحب مشخصی ندارد"
+msgstr "The file has no owner"
+
+#: home_module/views.py
+msgid ""
+"فایل عمومی صفحه‌ی دانلود دارد و هر کسی با داشتن لینک می‌تواند بگیردش. فایل "
+"خصوصی هیچ لینک عمومی ندارد و فقط از پنل خودت قابل دریافت است."
+msgstr ""
+"A public file has a download page and anyone with the link can get it. A "
+"private file has no public link and can only be downloaded from your own "
+"panel."
+
+#: account_module/models.py
+msgid "فایل مرتبط"
+msgstr "Related file"
+
+#: staff_module/templates/staff_module/files.html upload_module/models.py
+msgid "فایل ها"
+msgstr "Files"
+
+#: upload_module/templates/upload_module/my_files.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "فایل های من"
+msgstr "My files"
+
+#: home_module/views.py
+msgid "فایل و لینک"
+msgstr "Files and links"
+
+#: templates/base.html
+msgid ""
+"فایلت را آپلود کن و از هر دانلود درآمد بگیر. لینک عمومی یا خصوصی، انتشار "
+"زمان‌دار، و فروش مستقیم فایل."
+msgstr ""
+"Upload your file and earn from every download. Public or private links, "
+"timed publishing, and direct file sales."
+
+#: home_module/templates/home_module/home_page.html
+msgid "فایلت را آپلود کن،"
+msgstr "Upload your file,"
+
+#: templates/shared/site_footer.html
+msgid "فایلت را آپلود کن، لینک بگیر، و از هر دانلود درآمد بساز."
+msgstr "Upload your file, get a link, and earn from every download."
+
+#: home_module/views.py
+msgid ""
+"فایلت را از پنل یا با API بفرست. تعیین کن عمومی باشد یا خصوصی، و اگر خواستی "
+"برایش قیمت بگذار."
+msgstr ""
+"Send your file from the panel or via the API. Choose public or private, and "
+"set a price if you want."
+
+#: staff_module/templates/staff_module/files.html
+msgid "فایلی پیدا نشد"
+msgstr "No files found"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "فایل‌ها"
+msgstr "Files"
+
+#: home_module/templates/home_module/privacy.html
+msgid ""
+"فایل‌های خصوصی هیچ آدرس عمومی ندارند و فقط با بررسی مالکیت سرو می‌شوند."
+msgstr ""
+"Private files have no public address and are served only after an ownership "
+"check."
+
+#: home_module/templates/home_module/home_page.html
+msgid ""
+"فایل‌های سایتت را با یک درخواست آپلود کن و لینک صفحه‌ی دانلود بگیر. درآمدش "
+"به حساب خودت می‌نشیند."
+msgstr ""
+"Upload your site files with a single request and get a download page link. "
+"The earnings land in your account."
+
+#: home_module/templates/home_module/privacy.html
+msgid "فایل‌هایی که آپلود می‌کنی و اطلاعات مربوط به آنها."
+msgstr "The files you upload and their metadata."
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "فروش (سهم شما)"
+msgstr "Sales (your share)"
+
+#: account_module/models.py home_module/views.py
+#: staff_module/templates/staff_module/overview.html
+msgid "فروش فایل"
+msgstr "File sale"
+
+#: ads_module/models.py api_module/models.py
+#: api_module/templates/api_module/keys.html link_module/models.py
+#: payment_module/models.py staff_module/templates/staff_module/users.html
+msgid "فعال"
+msgstr "Active"
+
+#: upload_module/models.py
+msgid "فعال / غیر فعال"
+msgstr "Active / inactive"
+
+#: staff_module/templates/staff_module/files.html
+msgid "فعال کن"
+msgstr "Activate"
+
+#: link_module/forms.py
+msgid "فقط آدرس‌های http و https پذیرفته می‌شوند."
+msgstr "Only http and https URLs are accepted."
+
+#: contact_module/models.py
+msgid "فنی"
+msgstr "Technical"
+
+#: api_module/templates/api_module/docs.html
+msgid "فهرست فایل‌ها"
+msgstr "List files"
+
+#: api_module/views.py
+msgid "فیلد file ارسال نشده است. درخواست باید multipart/form-data باشد."
+msgstr "No file field was sent. The request must be multipart/form-data."
+
+#: link_module/views.py
+msgid "فیلد target ارسال نشده است."
+msgstr "The target field was not sent."
+
+#: ads_module/models.py
+msgid "قابل تأیید از"
+msgstr "Confirmable from"
+
+#: contact_module/templates/contact_module/ticket_new.html
+msgid "قبل از ثبت تیکت، سری هم به سوالات متداول بزن — شاید جوابت آنجا باشد."
+msgstr ""
+"Before opening a ticket, check the FAQ — your answer may already be there."
+
+#: user_panel_module/templates/user_panel_module/register.html
+msgid "قبلاً ثبت نام کرده‌اید؟"
+msgstr "Already have an account?"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "قبلاً شمرده شده بود"
+msgstr "Already counted"
+
+#: templates/shared/pagination.html
+msgid "قبلی"
+msgstr "Previous"
+
+#: templates/shared/site_footer.html
+msgid "قوانین"
+msgstr "Legal"
+
+#: home_module/templates/home_module/terms.html
+#: templates/shared/site_footer.html
+msgid "قوانین و مقررات"
+msgstr "Terms of service"
+
+#: download_module/templates/download_module/download_page.html
+#: download_module/templates/download_module/purchase.html
+#: upload_module/models.py
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "قیمت"
+msgstr "Price"
+
+#: user_panel_module/forms.py
+msgid "قیمت (دلار)"
+msgstr "Price (USD)"
+
+#: api_module/views.py
+msgid "قیمت باید عدد صحیح باشد (به سنت)."
+msgstr "Price must be an integer (in cents)."
+
+#: api_module/templates/api_module/docs.html
+msgid "قیمت به سنت. صفر یعنی رایگان. فایل خصوصی قابل فروش نیست."
+msgstr "Price in cents. Zero means free. A private file cannot be sold."
+
+#: api_module/views.py
+msgid "قیمت نمی‌تواند منفی باشد."
+msgstr "Price cannot be negative."
+
+#: upload_module/templates/upload_module/guest_upload.html
+#: user_panel_module/templates/user_panel_module/upload_file.html
+msgid "لغو"
+msgstr "Cancel"
+
+#: payment_module/models.py
+msgid "لغو شده"
+msgstr "Canceled"
+
+#: contact_module/models.py
+msgid "لیست تماس با ما"
+msgstr "Contact messages"
+
+#: home_module/templates/home_module/home_page.html
+msgid ""
+"لینک بساز، هر جا می‌خواهی بگذار. هر بار که کسی فایلت را می‌گیرد، سهم تو "
+"واریز می‌شود. می‌توانی فایل را رایگان بگذاری یا برایش قیمت تعیین کنی."
+msgstr ""
+"Create a link and put it anywhere. Every time someone gets your file, your "
+"share is credited. Leave the file free or set a price."
+
+#: home_module/templates/home_module/home_page.html upload_module/models.py
+msgid "لینک دانلود"
+msgstr "Download link"
+
+#: link_module/templates/link_module/unavailable.html
+msgid "لینک در دسترس نیست"
+msgstr "Link unavailable"
+
+#: home_module/views.py
+msgid "لینک را پخش کن"
+msgstr "Share the link"
+
+#: upload_module/templates/upload_module/my_files.html
+msgid "لینک عمومی"
+msgstr "Public link"
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "لینک فایل‌هایت را به اشتراک بگذار تا نمودار پر شود"
+msgstr "Share your file links and this chart will fill up"
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "لینک مرحله دوم از جای دیگری باز شد"
+msgstr "The step-two link was opened elsewhere"
+
+#: link_module/templates/link_module/shorten.html
+msgid "لینک های اخیر شما"
+msgstr "Your recent links"
+
+#: link_module/models.py
+msgid "لینک های کوتاه"
+msgstr "Short links"
+
+#: link_module/models.py
+msgid "لینک کوتاه"
+msgstr "Short link"
+
+#: link_module/templates/link_module/shorten.html
+msgid "لینک کوتاه آماده است"
+msgstr "Your short link is ready"
+
+#: home_module/templates/home_module/terms.html
+msgid ""
+"ما این حق را داریم که هر فایلی را که ناقض این قوانین باشد بدون اطلاع قبلی "
+"غیرفعال کنیم. اگر معتقدی فایلت اشتباهی حذف شده، از طریق تیکت اعتراض کن."
+msgstr ""
+"We reserve the right to deactivate any file that violates these terms "
+"without prior notice. If you believe your file was removed in error, appeal "
+"via a ticket."
+
+#: contact_module/models.py
+msgid "مالی و پرداخت"
+msgstr "Billing and payments"
+
+#: account_module/models.py
+#: payment_module/templates/payment_module/result.html
+#: payment_module/templates/payment_module/topup.html
+#: staff_module/templates/staff_module/payments.html
+#: staff_module/templates/staff_module/withdrawals.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "مبلغ"
+msgstr "Amount"
+
+#: payment_module/forms.py user_panel_module/forms.py
+msgid "مبلغ (دلار)"
+msgstr "Amount (USD)"
+
+#: payment_module/models.py
+msgid "مبلغ (سنت)"
+msgstr "Amount (cents)"
+
+#: account_module/wallet.py user_panel_module/views.py
+msgid "مبلغ برداشت باید مثبت باشد"
+msgstr "Withdrawal amount must be positive"
+
+#: account_module/forms.py
+msgid "مبلغ نمی‌تواند بیشتر از %(max)s دلار باشد."
+msgstr "The amount cannot be more than $%(max)s."
+
+#: account_module/forms.py
+msgid "مبلغ نمی‌تواند کمتر از %(min)s دلار باشد."
+msgstr "The amount cannot be less than $%(min)s."
+
+#: account_module/wallet.py
+msgid "مبلغ واریز باید مثبت باشد"
+msgstr "Credit amount must be positive"
+
+#: upload_module/models.py
+msgid "مبلغ پرداختی"
+msgstr "Amount paid"
+
+#: contact_module/models.py
+msgid "متن تماس با ما"
+msgstr "Message"
+
+#: contact_module/models.py
+msgid "متن پاسخ تماس با ما"
+msgstr "Reply"
+
+#: contact_module/forms.py contact_module/models.py
+msgid "متن پیام"
+msgstr "Message"
+
+#: api_module/templates/api_module/keys.html
+msgid "مثلاً example.com"
+msgstr "e.g. example.com"
+
+#: ads_module/models.py
+msgid "مثلاً یکتانت یا تپسل"
+msgstr "e.g. Yektanet or Tapsell"
+
+#: payment_module/models.py
+msgid "مثلاً ۹۵۰۰۰"
+msgstr "e.g. 95000"
+
+#: home_module/templates/home_module/terms.html
+msgid "محتوای غیرقانونی بر اساس قوانین جمهوری اسلامی ایران."
+msgstr ""
+"Content that is illegal under the laws of the Islamic Republic of Iran."
+
+#: home_module/templates/home_module/terms.html
+msgid "محتوایی که حق نشر دیگری را نقض کند."
+msgstr "Content that infringes someone else copyright."
+
+#: templates/shared/site_footer.html
+msgid "محصول"
+msgstr "Product"
+
+#: staff_module/templates/staff_module/base.html templates/base.html
+msgid "مدیریت"
+msgstr "Admin"
+
+#: ads_module/models.py
+msgid "مرورگر واقعی کوکی نگه می‌دارد؛ بیشتر اسکریپت‌های ساده نه."
+msgstr "A real browser keeps cookies; most simple scripts do not."
+
+#: user_panel_module/templates/user_panel_module/component/reject_reason.html
+msgid "مرورگر کوکی نگه نداشت"
+msgstr "The browser kept no cookies"
+
+#: home_module/templates/home_module/terms.html
+msgid ""
+"مسئولیت حفظ رمز عبور و هر فعالیتی که با حساب تو انجام شود بر عهده‌ی خودت "
+"است. اطلاعات ثبت‌نام باید درست باشد."
+msgstr ""
+"You are responsible for keeping your password safe and for any activity on "
+"your account. Registration details must be accurate."
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "مشاهده صفحه دانلود"
+msgstr "View download page"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "مشخصات"
+msgstr "Details"
+
+#: api_module/views.py
+msgid "مقدار باید یکی از این‌ها باشد: %(values)s"
+msgstr "Value must be one of: %(values)s"
+
+#: account_module/models.py
+msgid "مقدار برداشت"
+msgstr "Withdrawal amount"
+
+#: user_panel_module/views.py
+msgid "مقدار وارد شده بیشتر از موجودی است"
+msgstr "The amount entered exceeds your balance"
+
+#: link_module/templates/link_module/preview.html
+#: link_module/templates/link_module/shorten.html
+msgid "مقصد"
+msgstr "Destination"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "منقضی شده"
+msgstr "Expired"
+
+#: templates/base.html
+msgid "منو"
+msgstr "Menu"
+
+#: link_module/templates/link_module/unavailable.html
+msgid "مهلت این لینک تمام شده است."
+msgstr "This link has expired."
+
+#: account_module/models.py
+#: account_module/templates/account_module/account.html
+#: staff_module/templates/staff_module/users.html
+#: templates/shared/panel_base.html upload_module/test_i18n.py
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "موجودی"
+msgstr "Balance"
+
+#: payment_module/templates/payment_module/result.html
+msgid "موجودی فعلی"
+msgstr "Current balance"
+
+#: user_panel_module/templates/user_panel_module/withdrawal.html
+msgid "موجودی قابل برداشت"
+msgstr "Available balance"
+
+#: account_module/models.py
+msgid "موجودی پس از تراکنش"
+msgstr "Balance after"
+
+#: account_module/wallet.py
+msgid "موجودی کافی نیست: موجودی %(balance)s، مبلغ درخواستی %(amount)s"
+msgstr "Insufficient balance: balance %(balance)s, requested %(amount)s"
+
+#: download_module/templates/download_module/purchase.html
+msgid "موجودی کیف پول شما"
+msgstr "Your wallet balance"
+
+#: download_module/templates/download_module/purchase.html
+msgid "موجودی کیف پول شما برای این خرید کافی نیست."
+msgstr "Your wallet balance is not enough for this purchase."
+
+#: download_module/views.py
+msgid "موجودی کیف پول کافی نیست"
+msgstr "Insufficient wallet balance"
+
+#: staff_module/templates/staff_module/withdrawals.html
+msgid "موردی نیست"
+msgstr "Nothing here"
+
+#: contact_module/models.py
+msgid "موضوع"
+msgstr "Subject"
+
+#: home_module/views.py
+msgid "می‌توانم لینک را بعد از مدتی ببندم؟"
+msgstr "Can I close the link after a while?"
+
+#: home_module/views.py
+msgid ""
+"می‌توانی بگویی لینک فقط چند ساعت باز باشد؛ بعد از آن خودکار بسته می‌شود."
+msgstr ""
+"You can keep a link open for a few hours; after that it closes "
+"automatically."
+
+#: home_module/templates/home_module/privacy.html
+msgid ""
+"می‌توانی هر زمان فایل‌هایت را حذف کنی. برای حذف کامل حساب و داده‌هایت، تیکت "
+"بزن."
+msgstr ""
+"You can delete your files at any time. To delete your account and data "
+"entirely, open a ticket."
+
+#: api_module/models.py api_module/templates/api_module/docs.html
+#: api_module/templates/api_module/keys.html
+#: staff_module/templates/staff_module/files.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "نام"
+msgstr "Name"
+
+#: download_module/templates/download_module/download_page2.html
+#: download_module/templates/download_module/purchase.html
+#: upload_module/models.py
+msgid "نام فایل"
+msgstr "File name"
+
+#: upload_module/guest.py
+msgid "نام نمایشی"
+msgstr "Display name"
+
+#: api_module/templates/api_module/docs.html
+msgid "نام نمایشی. اگر ندهی، نام فایل استفاده می‌شود."
+msgstr "Display name. If omitted, the filename is used."
+
+#: contact_module/forms.py contact_module/models.py
+msgid "نام و نام خانوادگی"
+msgstr "Full name"
+
+#: account_module/forms.py
+msgid "نام کاربری"
+msgstr "Username"
+
+#: api_module/templates/api_module/keys.html
+msgid "نام کلید"
+msgstr "Key name"
+
+#: payment_module/models.py
+msgid "ناموفق"
+msgstr "Failed"
+
+#: payment_module/templates/payment_module/result.html
+msgid "نتیجه پرداخت"
+msgstr "Payment result"
+
+#: payment_module/models.py
+msgid "نرخ ارز"
+msgstr "Exchange rate"
+
+#: payment_module/gateways/zarinpal.py
+msgid "نرخ ارز ثبت نشده است. از پنل ادمین یک نرخ فعال ثبت کنید."
+msgstr "No exchange rate is set. Add an active rate in the admin panel."
+
+#: payment_module/templates/payment_module/topup.html
+msgid "نرخ ارز ثبت نشده است؛ پرداخت ریالی تا ثبت نرخ کار نمی‌کند."
+msgstr ""
+"No exchange rate is set; rial payments will not work until one is added."
+
+#: payment_module/models.py
+msgid "نرخ در لحظه پرداخت"
+msgstr "Rate at payment time"
+
+#: payment_module/templates/payment_module/topup.html
+msgid "نرخ فعلی برای پرداخت ریالی: هر دلار %(r)s تومان"
+msgstr "Current rate for rial payments: %(r)s toman per USD"
+
+#: payment_module/models.py
+msgid "نرخ های ارز"
+msgstr "Exchange rates"
+
+#: payment_module/models.py
+msgid "نرخ هر دلار به تومان"
+msgstr "Toman per USD"
+
+#: ads_module/models.py
+msgid "نرخ هر ۱۰۰۰ نمایش (سنت)"
+msgstr "Rate per 1000 impressions (cents)"
+
+#: ads_module/models.py
+msgid "نشست دانلود"
+msgstr "Download session"
+
+#: ads_module/models.py
+msgid "نشست های دانلود"
+msgstr "Download sessions"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "نمای کلی"
+msgstr "Overview"
+
+#: ads_module/templates/ads_module/earnings.html
+msgid "نمایش"
+msgstr "Impressions"
+
+#: link_module/forms.py link_module/models.py
+msgid "نمایش تبلیغ قبل از هدایت"
+msgstr "Show an ad before redirecting"
+
+#: ads_module/templates/ads_module/earnings.html
+msgid "نمایش معتبر"
+msgstr "Valid impressions"
+
+#: templates/shared/chart_timeseries.html
+msgid "نمودار روند دانلود، مجموع %(n)s"
+msgstr "Download trend chart, %(n)s total"
+
+#: link_module/forms.py
+msgid "نمی‌توان آدرس همین سایت را کوتاه کرد."
+msgstr "You cannot shorten a link to this site itself."
+
+#: upload_module/purchases.py
+msgid "نمی‌توانی فایل خودت را بخری"
+msgstr "You cannot buy your own file"
+
+#: account_module/models.py upload_module/models.py
+msgid "نوع"
+msgstr "Type"
+
+#: upload_module/models.py
+msgid "نوع دانلود"
+msgstr "Download type"
+
+#: link_module/models.py
+msgid "نوع لینک"
+msgstr "Link type"
+
+#: account_module/models.py
+msgid "نوع کیف پول"
+msgstr "Wallet type"
+
+#: contact_module/models.py
+msgid "نویسنده"
+msgstr "Author"
+
+#: ads_module/models.py
+msgid "نیاز به پشتیبانی از کوکی"
+msgstr "Require cookie support"
+
+#: link_module/models.py
+msgid "هدایت مستقیم"
+msgstr "Direct redirect"
+
+#: home_module/views.py
+msgid ""
+"هر بار که کسی از صفحه‌ی دانلود فایل تو عبور کند، سهمی از درآمد تبلیغات آن "
+"صفحه به حسابت می‌نشیند. اگر برای فایل قیمت گذاشته باشی، ۹۰٪ مبلغ فروش هم سهم"
+" توست."
+msgstr ""
+"Every time someone goes through your file download page, a share of that "
+"page ad revenue lands in your account. If you set a price, 90% of the sale "
+"is yours too."
+
+#: api_module/templates/api_module/docs.html
+msgid ""
+"هر خطا کد ماشین‌خوان دارد؛ روی همان شرط بگذار نه روی متن پیام که ترجمه "
+"می‌شود."
+msgstr ""
+"Every error has a machine-readable code; branch on that, not on the message "
+"text which gets translated."
+
+#: home_module/templates/home_module/about.html
+msgid ""
+"هر کسی که می‌خواهد فایلی را با یک لینک کوتاه و کنترل‌شده به دست دیگران "
+"برساند."
+msgstr ""
+"Anyone who wants to get a file to others through a short, controlled link."
+
+#: contact_module/forms.py
+msgid "هرچه دقیق‌تر بنویسی، سریع‌تر حل می‌شود."
+msgstr "The more detail you give, the faster it gets solved."
+
+#: api_module/templates/api_module/keys.html
+msgid "هرگز"
+msgstr "Never"
+
+#: api_module/models.py
+msgid "هش کلید"
+msgstr "Key hash"
+
+#: contact_module/templates/contact_module/ticket_list.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "همه"
+msgstr "All"
+
+#: home_module/templates/home_module/home_page.html
+msgid "همین حالا شروع کن"
+msgstr "Start now"
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "هنوز برداشتی ثبت نشده است"
+msgstr "No withdrawals yet"
+
+#: contact_module/templates/contact_module/ticket_list.html
+msgid "هنوز تیکتی ثبت نکرده‌اید"
+msgstr "You have not opened any tickets yet"
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "هنوز دانلودی ثبت نشده"
+msgstr "No downloads recorded yet"
+
+#: ads_module/templates/ads_module/earnings.html
+msgid "هنوز درآمدی ثبت نشده است"
+msgstr "No earnings yet"
+
+#: upload_module/templates/upload_module/my_files.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "هنوز فایلی آپلود نکرده‌اید"
+msgstr "You haven't uploaded any files yet"
+
+#: payment_module/templates/payment_module/topup.html
+msgid "هنوز پرداختی ثبت نشده است"
+msgstr "No payments yet"
+
+#: api_module/templates/api_module/keys.html
+msgid "هنوز کلیدی نساخته‌اید"
+msgstr "You have not created any keys yet"
+
+#: staff_module/templates/staff_module/overview.html
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "هیچ بازدیدی رد نشده است"
+msgstr "No visits were rejected"
+
+#: payment_module/templates/payment_module/topup.html
+msgid "هیچ روش پرداختی پیکربندی نشده است."
+msgstr "No payment method has been configured."
+
+#: templates/403.html templates/shared/nav_links.html
+#: templates/shared/site_footer.html
+#: user_panel_module/templates/user_panel_module/login.html
+#: user_panel_module/templates/user_panel_module/register.html
+msgid "ورود"
+msgstr "Log in"
+
+#: user_panel_module/templates/user_panel_module/login.html
+msgid "ورود به حساب کاربری"
+msgstr "Log in to your account"
+
+#: api_module/views.py
+msgid "ورودی نامعتبر است."
+msgstr "Invalid input."
+
+#: ads_module/models.py
+msgid "وزن"
+msgstr "Weight"
+
+#: ads_module/models.py ads_module/templates/ads_module/earnings.html
+#: api_module/templates/api_module/keys.html contact_module/models.py
+#: payment_module/models.py payment_module/templates/payment_module/topup.html
+#: staff_module/templates/staff_module/payments.html
+#: staff_module/templates/staff_module/users.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "وضعیت"
+msgstr "Status"
+
+#: upload_module/models.py user_panel_module/forms.py
+msgid "وضعیت انتشار"
+msgstr "Visibility"
+
+#: api_module/templates/api_module/docs.html
+msgid "پارامترها"
+msgstr "Parameters"
+
+#: api_module/templates/api_module/docs.html contact_module/forms.py
+msgid "پاسخ"
+msgstr "Reply"
+
+#: contact_module/models.py
+#: contact_module/templates/contact_module/component/ticket_status.html
+#: contact_module/templates/contact_module/ticket_list.html
+#: staff_module/templates/staff_module/tickets.html
+msgid "پاسخ داده شده"
+msgstr "Answered"
+
+#: contact_module/forms.py
+msgid "پاسخ شما…"
+msgstr "Your reply…"
+
+#: contact_module/models.py
+msgid "پاسخ پشتیبانی"
+msgstr "Support reply"
+
+#: account_module/models.py
+msgid "پراخت شده / نشده"
+msgstr "Paid / unpaid"
+
+#: payment_module/models.py
+msgid "پرداخت"
+msgstr "Payment"
+
+#: download_module/templates/download_module/purchase.html
+msgid "پرداخت از کیف پول"
+msgstr "Pay from wallet"
+
+#: payment_module/templates/payment_module/result.html
+msgid "پرداخت انجام نشد"
+msgstr "Payment failed"
+
+#: payment_module/templates/payment_module/result.html
+msgid "پرداخت با موفقیت انجام شد"
+msgstr "Payment completed successfully"
+
+#: payment_module/gateways/zarinpal.py
+msgid "پرداخت تأیید نشد"
+msgstr "The payment was not verified"
+
+#: payment_module/gateways/zarinpal.py
+msgid "پرداخت توسط شما لغو شد"
+msgstr "You canceled the payment"
+
+#: staff_module/templates/staff_module/withdrawals.html
+msgid "پرداخت شد"
+msgstr "Mark as paid"
+
+#: payment_module/models.py
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "پرداخت شده"
+msgstr "Paid"
+
+#: staff_module/templates/staff_module/overview.html
+msgid "پرداخت معلق"
+msgstr "Pending payments"
+
+#: payment_module/models.py staff_module/templates/staff_module/payments.html
+msgid "پرداخت ها"
+msgstr "Payments"
+
+#: payment_module/templates/payment_module/topup.html
+msgid "پرداخت های اخیر"
+msgstr "Recent payments"
+
+#: payment_module/gateways/crypto.py
+msgid "پرداخت کریپتو فقط با تأیید شبکه نهایی می‌شود"
+msgstr "Crypto payments are only finalized by network confirmation"
+
+#: staff_module/templates/staff_module/payments.html
+msgid "پرداختی نیست"
+msgstr "No payments"
+
+#: staff_module/templates/staff_module/withdrawals.html
+msgid "پرداخت‌شده اخیر"
+msgstr "Recently paid"
+
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "پردانلودترین فایل‌ها"
+msgstr "Most downloaded files"
+
+#: contact_module/templates/contact_module/ticket_detail.html
+#: templates/base.html templates/shared/site_footer.html
+msgid "پشتیبانی"
+msgstr "Support"
+
+#: staff_module/templates/staff_module/base.html
+msgid "پنل جنگو"
+msgstr "Django admin"
+
+#: account_module/templates/account_module/account.html
+#: home_module/templates/home_module/home_page.html
+#: templates/shared/nav_links.html templates/shared/site_footer.html
+msgid "پنل کاربری"
+msgstr "Dashboard"
+
+#: upload_module/models.py
+msgid "پوشه"
+msgstr "Folder"
+
+#: upload_module/models.py
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "پولی"
+msgstr "Paid"
+
+#: contact_module/models.py
+msgid "پیام تیکت"
+msgstr "Ticket message"
+
+#: contact_module/models.py
+msgid "پیام های تیکت"
+msgstr "Ticket messages"
+
+#: api_module/models.py api_module/templates/api_module/keys.html
+msgid "پیشوند"
+msgstr "Prefix"
+
+#: api_module/templates/api_module/docs.html
+msgid "پیش‌فرض private است. فایل خصوصی لینک عمومی ندارد."
+msgstr "Defaults to private. A private file has no public link."
+
+#: link_module/templates/link_module/preview.html
+msgid "پیش‌نمایش لینک"
+msgstr "Link preview"
+
+#: contact_module/forms.py contact_module/models.py
+msgid "پیوست"
+msgstr "Attachment"
+
+#: home_module/views.py
+msgid "چرا بعضی بازدیدها شمرده نمی‌شوند؟"
+msgstr "Why are some visits not counted?"
+
+#: home_module/views.py
+msgid "چرا درآمد تبلیغاتم بلافاصله قابل برداشت نیست؟"
+msgstr "Why is my ad revenue not immediately withdrawable?"
+
+#: home_module/views.py
+msgid "چرا صفحه‌ی دانلود دو مرحله دارد؟"
+msgstr "Why does the download page have two steps?"
+
+#: home_module/views.py
+msgid "چطور درآمد می‌گیرم؟"
+msgstr "How do I earn?"
+
+#: home_module/views.py
+msgid "چطور کیف پولم را شارژ کنم؟"
+msgstr "How do I top up my wallet?"
+
+#: user_panel_module/forms.py
+msgid "چند ساعت عمومی بماند؟"
+msgstr "How many hours should it stay public?"
+
+#: home_module/templates/home_module/privacy.html
+msgid "چه اطلاعاتی جمع می‌کنیم"
+msgstr "What we collect"
+
+#: home_module/templates/home_module/about.html
+msgid "چه چیزی ما را متفاوت می‌کند"
+msgstr "What makes us different"
+
+#: home_module/templates/home_module/about.html
+msgid "چه کاری انجام می‌دهیم"
+msgstr "What we do"
+
+#: account_module/models.py
+#: account_module/templates/account_module/account.html ads_module/models.py
+#: api_module/models.py contact_module/models.py
+#: contact_module/templates/contact_module/ticket_detail.html
+#: payment_module/models.py staff_module/templates/staff_module/payments.html
+#: staff_module/templates/staff_module/users.html
+#: staff_module/templates/staff_module/withdrawals.html
+msgid "کاربر"
+msgstr "User"
+
+#: account_module/models.py staff_module/templates/staff_module/overview.html
+#: staff_module/templates/staff_module/users.html
+msgid "کاربران"
+msgstr "Users"
+
+#: staff_module/templates/staff_module/users.html
+msgid "کاربری پیدا نشد"
+msgstr "No users found"
+
+#: staff_module/templates/staff_module/users.html
+msgid "کارمند"
+msgstr "Staff"
+
+#: link_module/templates/link_module/shorten.html
+msgid "کد"
+msgstr "Code"
+
+#: ads_module/models.py
+msgid "کد HTML/JS که شبکه می‌دهد. عیناً در صفحه قرار می‌گیرد."
+msgstr "The HTML/JS the network gives you. It is placed on the page verbatim."
+
+#: ads_module/models.py
+msgid "کد تبلیغ"
+msgstr "Ad code"
+
+#: account_module/models.py
+msgid "کد فعالسازی ایمیل"
+msgstr "Email activation code"
+
+#: payment_module/models.py
+#: payment_module/templates/payment_module/result.html
+msgid "کد پیگیری"
+msgstr "Tracking code"
+
+#: link_module/models.py
+msgid "کد کوتاه"
+msgstr "Short code"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+msgid "کل دانلود"
+msgstr "Total downloads"
+
+#: account_module/forms.py upload_module/test_i18n.py
+msgid "کلمه عبور"
+msgstr "Password"
+
+#: user_panel_module/views.py
+msgid "کلمه عبور اشتباه"
+msgstr "Incorrect password"
+
+#: account_module/forms.py
+msgid "کلمه عبور جدید"
+msgstr "New password"
+
+#: account_module/forms.py
+msgid "کلمه عبور و تکرار کلمه عبور مغایرت دارند"
+msgstr "Password and confirmation do not match"
+
+#: api_module/models.py
+msgid "کلید API"
+msgstr "API key"
+
+#: api_module/auth.py
+msgid "کلید API ارسال نشده است. هدر Authorization: Bearer <key> را بفرست."
+msgstr "No API key was sent. Send the Authorization: Bearer <key> header."
+
+#: api_module/auth.py
+msgid "کلید API نامعتبر یا غیرفعال است."
+msgstr "The API key is invalid or inactive."
+
+#: api_module/templates/api_module/docs.html
+msgid "کلید را در هدر هر درخواست بفرست. کلید را از صفحه‌ی کلیدهای API بساز."
+msgstr ""
+"Send the key in a header on every request. Create a key on the API keys "
+"page."
+
+#: api_module/templates/api_module/keys.html
+msgid "کلید ساخته شد — همین حالا کپی کن"
+msgstr "Key created — copy it now"
+
+#: api_module/models.py api_module/templates/api_module/keys.html
+msgid "کلیدهای API"
+msgstr "API keys"
+
+#: home_module/templates/home_module/privacy.html
+msgid "کلیدهای API هم هش می‌شوند و بعد از ساخت دیگر قابل بازیابی نیستند."
+msgstr "API keys are hashed too and cannot be recovered after creation."
+
+#: api_module/templates/api_module/keys.html
+msgid "کلیدهای شما"
+msgstr "Your keys"
+
+#: link_module/templates/link_module/shorten.html
+msgid "کلیک"
+msgstr "Clicks"
+
+#: contact_module/models.py
+msgid "کم"
+msgstr "Low"
+
+#: templates/429.html
+msgid "کمی آرام‌تر"
+msgstr "Slow down a moment"
+
+#: home_module/templates/home_module/about.html
+msgid "کنترل کامل روی انتشار: عمومی، خصوصی، یا عمومی برای مدت مشخص."
+msgstr ""
+"Full control over publishing: public, private, or public for a set period."
+
+#: link_module/templates/link_module/shorten.html
+msgid "کوتاه کن"
+msgstr "Shorten"
+
+#: link_module/templates/link_module/shorten.html templates/base.html
+#: templates/shared/site_footer.html
+msgid "کوتاه‌کننده لینک"
+msgstr "Link shortener"
+
+#: home_module/templates/home_module/privacy.html
+msgid "کوکی امنیتی (CSRF): برای محافظت از فرم‌ها."
+msgstr "Security cookie (CSRF): to protect forms."
+
+#: home_module/templates/home_module/privacy.html
+msgid "کوکی زبان: برای اینکه انتخاب زبانت یادمان بماند."
+msgstr "Language cookie: to remember your language choice."
+
+#: home_module/templates/home_module/privacy.html
+msgid "کوکی نشست: برای اینکه وارد حسابت بمانی."
+msgstr "Session cookie: to keep you logged in."
+
+#: home_module/templates/home_module/privacy.html
+msgid "کوکی‌ها"
+msgstr "Cookies"
+
+#: api_module/templates/api_module/keys.html
+#: link_module/templates/link_module/shorten.html
+#: upload_module/templates/upload_module/guest_upload.html
+msgid "کپی"
+msgstr "Copy"
+
+#: account_module/models.py
+msgid "کیف های پول"
+msgstr "Wallets"
+
+#: account_module/models.py
+#: staff_module/templates/staff_module/withdrawals.html
+#: user_panel_module/forms.py
+#: user_panel_module/templates/user_panel_module/user_dashboard_panel.html
+#: user_panel_module/templates/user_panel_module/withdrawal_list.html
+msgid "کیف پول"
+msgstr "Wallet"
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+#: user_panel_module/templates/user_panel_module/my_files.html
+msgid "گزارش"
+msgstr "Report"
+
+#: contact_module/models.py
+msgid "گزارش تخلف"
+msgstr "Report abuse"
+
+#: home_module/templates/home_module/about.html
+msgid "گزارش دقیق هر فایل: چند دانلود رایگان، چند دانلود پولی، و چقدر درآمد."
+msgstr ""
+"Detailed per-file reporting: how many free downloads, how many paid, and how"
+" much earned."
+
+#: user_panel_module/templates/user_panel_module/file_report.html
+msgid "گزارش فایل"
+msgstr "File report"
+
+#: home_module/views.py
+msgid "گزارش کامل"
+msgstr "Full reporting"
+
+#: api_module/templates/api_module/docs.html
+msgid "یا"
+msgstr "or"
+
+#: ads_module/models.py
+msgid "یک بازدیدکننده برای یک فایل، در این بازه فقط یک بار شمرده می‌شود."
+msgstr "A visitor is counted only once per file within this window."
+
+#: home_module/views.py
+msgid ""
+"یک صفحه‌ی دانلود می‌گیری که هر جا بخواهی می‌گذاری: کانال، سایت، شبکه "
+"اجتماعی."
+msgstr ""
+"You get a download page you can put anywhere: a channel, a site, social "
+"media."
+
+#: ads_module/models.py
+msgid "یک نفر نباید با رفتن سراغ فایل‌های مختلف، پشت‌سرهم درآمد بسازد."
+msgstr ""
+"One person should not be able to earn repeatedly by hopping between files."
+
+#: link_module/forms.py upload_module/guest.py
+msgid "۱ روز"
+msgstr "1 day"
+
+#: link_module/forms.py upload_module/guest.py
+msgid "۱ ساعت"
+msgstr "1 hour"
+
+#: home_module/templates/home_module/terms.html
+msgid "۱. حساب کاربری"
+msgstr "1. Your account"
+
+#: home_module/templates/home_module/terms.html
+msgid "۲. محتوای مجاز"
+msgstr "2. Permitted content"
+
+#: upload_module/guest.py
+msgid "۳ روز"
+msgstr "3 days"
+
+#: home_module/templates/home_module/terms.html
+msgid "۳. درآمد و پرداخت"
+msgstr "3. Earnings and payments"
+
+#: link_module/forms.py
+msgid "۳۰ روز"
+msgstr "30 days"
+
+#: home_module/templates/home_module/terms.html
+msgid "۴. حذف محتوا"
+msgstr "4. Content removal"
+
+#: upload_module/guest.py
+msgid "۵ روز"
+msgstr "5 days"
+
+#: home_module/templates/home_module/terms.html
+msgid "۵. در دسترس بودن سرویس"
+msgstr "5. Service availability"
+
+#: upload_module/guest.py
+msgid "۶ ساعت"
+msgstr "6 hours"
+
+#: home_module/templates/home_module/terms.html
+msgid "۶. تغییر قوانین"
+msgstr "6. Changes to these terms"
+
+#: link_module/forms.py
+msgid "۷ روز"
+msgstr "7 days"
+
+msgid "آپلود بدون ثبت‌نام"
+msgstr "Upload without signing up"
+
+msgid "آپلود بدون حساب کاربری"
+msgstr "Upload without an account"
+
+msgid ""
+"بدون حساب کاربری تا %(mb)s مگابایت — فایل بعد از مهلتی که خودت انتخاب می‌کنی"
+" پاک می‌شود."
+msgstr ""
+"Up to %(mb)s MB without an account — the file is deleted after the period "
+"you choose."
+
+msgid "فقط می‌خواهی یک فایل بفرستی؟"
+msgstr "Just want to send one file?"
+
+msgid "یا بدون حساب آپلود کن"
+msgstr "Or upload without an account"
+
+msgid "آخرین تلاش"
+msgstr "Last attempt"
+
+msgid "آخرین تلاش ناموفق بود"
+msgstr "The last attempt failed"
+
+msgid "آخرین خطا"
+msgstr "Last error"
+
+msgid "آخرین دریافت موفق"
+msgstr "Last successful fetch"
+
+msgid "ارائه‌دهنده"
+msgstr "Provider"
+
+msgid "این سرویس بدون کلید کار نمی‌کند."
+msgstr "This service does not work without a key."
+
+msgid ""
+"با فعال بودن این گزینه، نرخ بالا با هر بار اجرای به‌روزرسانی بازنویسی "
+"می‌شود."
+msgstr "While this is on, the rate above is overwritten on every update run."
+
+msgid "برای به‌روزرسانی خودکار و منظم، این دستور را در کران بگذار:"
+msgstr "For regular automatic updates, add this command to cron:"
+
+msgid ""
+"تا وقتی نرخ نباشد، نمایش تومانی کار نمی‌کند و درگاه ریالی مبلغ نمی‌سازد."
+msgstr ""
+"Without a rate, toman display does not work and the rial gateway cannot "
+"build an amount."
+
+msgid "تاریخچه"
+msgstr "History"
+
+msgid "تنظیم نرخ"
+msgstr "Rate settings"
+
+msgid "تنظیم نرخ ارز"
+msgstr "Exchange rate setting"
+
+msgid "تومان به ازای هر دلار"
+msgstr "Toman per dollar"
+
+msgid "خاموش"
+msgstr "Off"
+
+msgid "خودکار از API"
+msgstr "Automatic from API"
+
+msgid "دریافت الان"
+msgstr "Fetch now"
+
+msgid "دریافت خودکار"
+msgstr "Automatic fetch"
+
+msgid "دریافت خودکار نرخ از API"
+msgstr "Fetch the rate automatically from an API"
+
+msgid "دستی"
+msgstr "Manual"
+
+msgid "روشن"
+msgstr "On"
+
+msgid "سرویس نرخ"
+msgstr "Rate service"
+
+msgid "سرویس های موجود"
+msgstr "Available services"
+
+msgid "فقط برای سرویس‌هایی که کلید می‌خواهند."
+msgstr "Only for services that require a key."
+
+msgid "منبع"
+msgstr "Source"
+
+msgid "منبع نرخ"
+msgstr "Rate source"
+
+msgid "نرخ"
+msgstr "Rate"
+
+msgid "نرخ را خودکار از API بگیر"
+msgstr "Fetch the rate automatically from an API"
+
+msgid "نرخ فعلی"
+msgstr "Current rate"
+
+msgid "نرخ قبلی هنوز ملاک است و پرداخت متوقف نشده."
+msgstr "The previous rate still applies and payments have not stopped."
+
+msgid "نرخی که همین حالا ملاک تبدیل است."
+msgstr "The rate currently used for conversion."
+
+msgid "هنوز ثبت نشده"
+msgstr "Not set yet"
+
+msgid "هنوز نرخی ثبت نشده است."
+msgstr "No rate has been recorded yet."
+
+msgid "آدرس BEP20 باید با 0x شروع شود و ۴۰ رقم هگزادسیمال داشته باشد."
+msgstr "A BEP20 address must start with 0x and have 40 hexadecimal digits."
+
+msgid "آدرس TRC20 باید با T شروع شود و ۳۴ کاراکتر باشد."
+msgstr "A TRC20 address must start with T and be 34 characters long."
+
+msgid "آدرس TRC20 معتبر نیست."
+msgstr "This TRC20 address is not valid."
+
+msgid "آدرس TRC20 معتبر نیست. احتمالاً موقع کپی کردن ناقص شده."
+msgstr ""
+"This TRC20 address is not valid. It was probably truncated while copying."
+
+msgid "افزودن مقصد"
+msgstr "Add a destination"
+
+msgid "اول مقصد برداشت را ثبت کن"
+msgstr "Add a payout destination first"
+
+msgid "این آدرس متعلق به شبکه‌ی ترون نیست."
+msgstr "This address does not belong to the Tron network."
+
+msgid ""
+"این شبا معتبر نیست. رقم‌ها را دوباره بررسی کن — احتمالاً یکی جابه‌جا شده."
+msgstr ""
+"This IBAN is not valid. Check the digits again — two were probably swapped."
+
+msgid "این مقصد سابقه‌ی برداشت دارد و برای حفظ سوابق قابل حذف نیست."
+msgstr ""
+"This destination has withdrawal history and cannot be deleted, to keep the "
+"records intact."
+
+msgid "این مقصد قبلاً ثبت شده است."
+msgstr "This destination is already saved."
+
+msgid "این مقصد یک برداشت در انتظار دارد و تا تعیین تکلیف آن حذف نمی‌شود."
+msgstr ""
+"This destination has a pending withdrawal and cannot be deleted until that "
+"is resolved."
+
+msgid "بانکی"
+msgstr "Bank"
+
+msgid "برای شبا: IR و ۲۴ رقم. برای تتر: آدرس کامل کیف پول همان شبکه."
+msgstr ""
+"For IBAN: IR plus 24 digits. For USDT: the full wallet address on that same "
+"network."
+
+msgid "برای واریز بانکی نام صاحب حساب لازم است."
+msgstr "A bank transfer needs the account holder name."
+
+msgid ""
+"برداشت به شماره شبا یا کیف پول تتر انجام می‌شود. تا وقتی مقصدی ثبت نکرده "
+"باشی، درخواست برداشت ممکن نیست."
+msgstr ""
+"Withdrawals go to a bank IBAN or a USDT wallet. Until you save a "
+"destination, you cannot request one."
+
+msgid ""
+"به شبا واریز می‌شود و نام صاحب حساب باید دقیقاً با نام حساب یکی باشد، وگرنه "
+"بانک تراکنش را برمی‌گرداند."
+msgstr ""
+"Paid to your IBAN. The holder name must match the account exactly, or the "
+"bank will reverse the transfer."
+
+msgid "تا وقتی مقصد نداشته باشی، درخواست برداشت ثبت نمی‌شود."
+msgstr "Without a destination, no withdrawal request can be made."
+
+msgid "تتر"
+msgstr "USDT"
+
+msgid "تتر (USDT) — شبکه BEP20"
+msgstr "USDT — BEP20 network"
+
+msgid "تتر (USDT) — شبکه TRC20"
+msgstr "USDT — TRC20 network"
+
+msgid "تتر:"
+msgstr "USDT:"
+
+msgid "ثبت مقصد"
+msgstr "Save destination"
+
+msgid "ثبت مقصد برداشت"
+msgstr "Add a payout destination"
+
+msgid "حساب بانکی — شبا"
+msgstr "Bank account — IBAN"
+
+msgid "روش برداشت"
+msgstr "Payout method"
+
+msgid "روش برداشت نامعتبر است."
+msgstr "That payout method is not valid."
+
+msgid "شبا"
+msgstr "IBAN"
+
+msgid "شبا باید با IR شروع شود و ۲۴ رقم داشته باشد."
+msgstr "An IBAN must start with IR and have 24 digits."
+
+msgid "شبا یا آدرس کیف پول"
+msgstr "IBAN or wallet address"
+
+msgid ""
+"فقط USDT روی دو شبکه‌ی TRC20 و BEP20. آدرس را از همان شبکه بردار — تتری که "
+"به شبکه‌ی اشتباه فرستاده شود برنمی‌گردد."
+msgstr ""
+"USDT only, on TRC20 and BEP20. Take the address from that same network — "
+"USDT sent to the wrong network is gone."
+
+msgid "فقط برای واریز بانکی لازم است — باید دقیقاً با نام صاحب حساب یکی باشد."
+msgstr ""
+"Needed for bank transfers only — must match the account holder exactly."
+
+msgid "مقصد برداشت"
+msgstr "Payout destination"
+
+msgid "مقصدهای برداشت"
+msgstr "Payout destinations"
+
+msgid "مقصدهای من"
+msgstr "My destinations"
+
+msgid "نام صاحب حساب"
+msgstr "Account holder name"
+
+msgid "هنوز مقصدی ثبت نکرده‌ای."
+msgstr "You have not saved a destination yet."
+
+msgid "واریز بانکی:"
+msgstr "Bank transfer:"
+
+msgid "واریز به"
+msgstr "Paid to"
+
+msgid ""
+"بستگی به روش دارد: واریز بانکی به شبا از ۲ دلار، و تتر روی شبکه‌ی TRC20 یا "
+"BEP20 از ۱۰ دلار. کارمزد انتقال از مبلغ برداشت کم می‌شود، یعنی مبلغی که "
+"دریافت می‌کنی به اندازه‌ی کارمزد کمتر از مبلغ درخواستی است. جدول دقیق حداقل "
+"و کارمزد هر روش در صفحه‌ی برداشت هست."
+msgstr ""
+"It depends on the method: bank transfer to an IBAN from $2, and USDT on "
+"TRC20 or BEP20 from $10. The transfer fee comes out of the withdrawal "
+"amount, so what you receive is lower than what you requested by the fee. The"
+" exact minimum and fee for each method is listed on the withdrawal page."
+
+msgid "حداقل برداشت"
+msgstr "Minimum withdrawal"
+
+msgid "حداقل برداشت برای این روش %(min)s دلار است."
+msgstr "The minimum withdrawal for this method is $%(min)s."
+
+msgid "حداقل برداشت برای این روش %s است."
+msgstr "The minimum withdrawal for this method is %s."
+
+msgid "حداقل و کارمزد هر روش"
+msgstr "Minimum and fee per method"
+
+msgid "مبلغ باید از کارمزد انتقال بیشتر باشد."
+msgstr "The amount must be greater than the transfer fee."
+
+msgid "مبلغی که دریافت می‌کنی"
+msgstr "You will receive"
+
+msgid "کارمزد"
+msgstr "Fee"
+
+msgid "کارمزد انتقال"
+msgstr "Transfer fee"
+
+msgid ""
+"کارمزد انتقال از موجودی برداشت شما برداشته می‌شود؛ یعنی مبلغی که دریافت "
+"می‌کنی به اندازه‌ی کارمزد کمتر از مبلغ درخواستی است."
+msgstr ""
+"The transfer fee is deducted from your withdrawal amount, so what you "
+"receive is lower than what you requested by the fee."
+
+msgid "اسکریپت لودر شبکه"
+msgstr "Network loader script"
+
+msgid "اسکریپت مشترکی که شبکه می‌دهد. عیناً و بدون تغییر بگذار."
+msgstr ""
+"The shared script the network provides. Paste it verbatim, unmodified."
+
+msgid "صفحه میانی کوتاه‌کننده"
+msgstr "Shortener interstitial page"
+
+msgid "اشتراک فضا"
+msgstr "Storage plan"
+
+msgid "اشتراک های فضا"
+msgstr "Storage plans"
+
+msgid ""
+"انتخاب شما reCAPTCHA است ولی چون کلیدها ست نشده‌اند، همچنان کپچای محلی کار "
+"می‌کند."
+msgstr ""
+"You selected reCAPTCHA, but since the keys are not set the local captcha is "
+"still in use."
+
+msgid "الان فعال:"
+msgstr "Currently active:"
+
+msgid ""
+"اگر reCAPTCHA فعال باشد و سرور نتواند به گوگل وصل شود، فرم‌ها رد می‌شوند — "
+"نه اینکه بدون بررسی عبور کنند. این عمدی است: اگر باز می‌گذاشتیم، هر کسی با "
+"قطع کردن دسترسی سرور به گوگل کپچا را دور می‌زد."
+msgstr ""
+"If reCAPTCHA is active and the server cannot reach Google, forms are refused"
+" rather than let through unchecked. That is deliberate: leaving it open "
+"would let anyone bypass the captcha by cutting the server off from Google."
+
+msgid "بازدید لینک کوتاه"
+msgstr "Short link view"
+
+msgid "بازدیدهای لینک کوتاه"
+msgstr "Short link views"
+
+msgid "بسته فضا"
+msgstr "Storage package"
+
+msgid "بسته های فضا"
+msgstr "Storage packages"
+
+msgid "بسته‌ی انتخابی معتبر نیست."
+msgstr "That package is not valid."
+
+msgid "بسته‌های فعال"
+msgstr "Active packages"
+
+msgid "برای فضای بیشتر اشتراک بگیر."
+msgstr "Buy a plan for more space."
+
+msgid "برای تأیید کپچا باید جاوااسکریپت روشن باشد."
+msgstr "JavaScript must be enabled to verify the captcha."
+
+msgid "بررسی کپچا ممکن نشد. چند لحظه بعد دوباره تلاش کن."
+msgstr "The captcha could not be verified. Try again in a moment."
+
+msgid "تأیید کپچا ناموفق بود. دوباره تلاش کن."
+msgstr "Captcha verification failed. Try again."
+
+msgid "تا"
+msgstr "until"
+
+msgid "تنظیم کپچا"
+msgstr "Captcha setting"
+
+msgid "توکن بازیابی رمز"
+msgstr "Password reset token"
+
+msgid "توکن های بازیابی رمز"
+msgstr "Password reset tokens"
+
+msgid "حجم (بایت)"
+msgstr "Size (bytes)"
+
+msgid "خرید %(size)s فضای اضافه"
+msgstr "Purchase of %(size)s extra storage"
+
+msgid "خرید فضای اضافه"
+msgstr "Buy extra storage"
+
+msgid "در آن حالت، برگرداندن سویچ به کپچای محلی مشکل را همان لحظه حل می‌کند."
+msgstr ""
+"In that case, switching back to the local captcha fixes it immediately."
+
+msgid "دقیق‌تر است ولی به در دسترس بودن گوگل وابسته است."
+msgstr "More accurate, but depends on Google being reachable."
+
+msgid "روز"
+msgstr "days"
+
+msgid "سرویس انتخاب‌شده معتبر نیست."
+msgstr "That service is not valid."
+
+msgid "سرویس کپچا"
+msgstr "Captcha service"
+
+msgid "فضا (بایت)"
+msgstr "Space (bytes)"
+
+msgid "فضای اضافه (بایت)"
+msgstr "Extra space (bytes)"
+
+msgid "فضای ذخیره‌سازی"
+msgstr "Storage"
+
+msgid ""
+"فضای شما پر است. %(free)s آزاد مانده و این فایل %(size)s است. برای فضای "
+"بیشتر اشتراک بگیر."
+msgstr ""
+"Your storage is full. %(free)s free remains and this file is %(size)s. Buy a"
+" plan for more space."
+
+msgid "قیمت (سنت)"
+msgstr "Price (cents)"
+
+msgid "لطفاً تیک «من ربات نیستم» را بزن."
+msgstr "Please tick \"I am not a robot\"."
+
+msgid "لینک"
+msgstr "Link"
+
+msgid "مبلغ از کیف پول کسر می‌شود. بسته‌ها روی هم جمع می‌شوند."
+msgstr "The amount is taken from your wallet. Packages stack."
+
+msgid "مبلغ پرداختی (سنت)"
+msgstr "Amount paid (cents)"
+
+msgid "محلی"
+msgstr "Local"
+
+msgid "مدت (روز)"
+msgstr "Duration (days)"
+
+msgid "مصرف فضا"
+msgstr "Storage used"
+
+msgid "موجودی کیف پولت کافی نیست. اول کیف پول را شارژ کن."
+msgstr "Your wallet balance is not enough. Top up first."
+
+msgid "کلید ندارد"
+msgstr "No key set"
+
+msgid "کلیدها ست شده‌اند"
+msgstr "Keys are set"
+
+msgid ""
+"کلیدهای reCAPTCHA در متغیرهای محیطی ست نشده‌اند؛ تا آن‌ها را نگذاری این "
+"گزینه کار نمی‌کند."
+msgstr ""
+"The reCAPTCHA keys are not set in the environment; this option will not work"
+" until you add them."
+
+msgid "کپچای تصویری محلی"
+msgstr "Local image captcha"
+
+msgid "reCAPTCHA گوگل"
+msgstr "Google reCAPTCHA"
+
+msgid "برای فروش"
+msgstr "For sale"
+
+msgid "ترتیب نمایش"
+msgstr "Sort order"
+
+msgid ""
+"تصویر روی سرور خودمان ساخته می‌شود. به هیچ سرویس بیرونی وابسته نیست، پس "
+"فیلترینگ رویش اثر ندارد."
+msgstr ""
+"The image is generated on our own server. It depends on no external service,"
+" so filtering does not affect it."
+
+msgid "%(base)s فضای پایه رایگان است. بیشتر از آن با خرید بسته باز می‌شود."
+msgstr "%(base)s of base storage is free. Beyond that, buy a package."
+
+msgid "%(days)s روز"
+msgstr "%(days)s days"
+
+msgid "آدرس‌های داخلی و لوکال قابل کوتاه کردن نیستند."
+msgstr "Internal and local addresses cannot be shortened."
+
+msgid "این ایمیل از طرف %(site_name)s فرستاده شده است."
+msgstr "This email was sent by %(site_name)s."
+
+msgid "یک کلیک تا فعال شدن حسابت."
+msgstr "One click and your account is live."
+
+msgid "خوش آمدی"
+msgstr "Welcome"
+
+msgid "فعال‌سازی حساب"
+msgstr "Activate account"
+
+msgid "فعال‌سازی حساب در %(site_name)s"
+msgstr "Activate your %(site_name)s account"
+
+msgid ""
+"حساب تو در %(site_name)s ساخته شد. برای اینکه بتوانی وارد شوی، یک بار روی "
+"دکمه‌ی زیر بزن."
+msgstr ""
+"Your %(site_name)s account has been created. Press the button below once so "
+"you can sign in."
+
+msgid "اگر دکمه کار نکرد، این آدرس را در مرورگر باز کن:"
+msgstr "If the button does not work, open this address in your browser:"
+
+msgid ""
+"اگر این حساب را تو نساخته‌ای، این ایمیل را نادیده بگیر. بدون کلیک روی لینک "
+"بالا هیچ حسابی فعال نمی‌شود."
+msgstr ""
+"If you did not create this account, ignore this email. Nothing is activated "
+"until the link above is opened."
+
+msgid "حساب تو در %(site_name)s ساخته شد."
+msgstr "Your %(site_name)s account has been created."
+
+msgid "برای فعال کردنش این آدرس را باز کن:"
+msgstr "Open this address to activate it:"
+
+msgid ""
+"اگر این حساب را تو نساخته‌ای، این ایمیل را نادیده بگیر. بدون باز کردن لینک "
+"بالا هیچ حسابی فعال نمی‌شود."
+msgstr ""
+"If you did not create this account, ignore this email. Nothing is activated "
+"until the link above is opened."
+
+msgid "رمز تازه بگذار"
+msgstr "Set a new password"
+
+msgid "انتخاب رمز تازه"
+msgstr "Choose a new password"
+
+msgid "بازیابی رمز عبور در %(site_name)s"
+msgstr "Reset your %(site_name)s password"
+
+msgid "لینک تا %(valid_hours)s ساعت معتبر است."
+msgstr "The link is valid for %(valid_hours)s hours."
+
+msgid ""
+"کسی برای این ایمیل در %(site_name)s درخواست بازیابی رمز داده است. اگر خودت "
+"بودی، روی دکمه‌ی زیر بزن."
+msgstr ""
+"Someone asked to reset the %(site_name)s password for this address. If that "
+"was you, press the button below."
+
+msgid "این لینک تا %(valid_hours)s ساعت معتبر است و فقط یک بار کار می‌کند."
+msgstr "This link is valid for %(valid_hours)s hours and works once."
+
+msgid ""
+"اگر این درخواست را تو نداده‌ای، کاری لازم نیست. رمز فعلی‌ات دست‌نخورده "
+"می‌ماند و تا وقتی روی لینک بالا کلیک نشود چیزی عوض نمی‌شود."
+msgstr ""
+"If you did not ask for this, there is nothing to do. Your current password "
+"stays as it is, and nothing changes until the link above is opened."
+
+msgid "کسی برای این ایمیل در %(site_name)s درخواست بازیابی رمز داده است."
+msgstr "Someone asked to reset the %(site_name)s password for this address."
+
+msgid "اگر خودت بودی، این آدرس را باز کن:"
+msgstr "If that was you, open this address:"
+
+msgid ""
+"اگر این درخواست را تو نداده‌ای، کاری لازم نیست. رمز فعلی‌ات دست‌نخورده "
+"می‌ماند."
+msgstr ""
+"If you did not ask for this, there is nothing to do. Your current password "
+"stays as it is."
+
+msgid "ایمیل فعال‌سازی فرستاده شد"
+msgstr "Activation email sent"
+
+msgid "ایمیل را چک کن"
+msgstr "Check your email"
+
+msgid "نرسید؟"
+msgstr "Did it not arrive?"
+
+msgid "پوشه‌ی اسپم را نگاه کن."
+msgstr "Look in your spam folder."
+
+msgid "چند دقیقه صبر کن؛ گاهی با تأخیر می‌رسد."
+msgstr "Wait a few minutes; it sometimes takes a while."
+
+msgid "اگر آدرس بالا غلط است، دوباره ثبت‌نام کن."
+msgstr "If the address above is wrong, register again."
+
+msgid ""
+"لینک فعال‌سازی به %(email)s فرستاده شد. یک بار بازش کن تا بتوانی وارد شوی."
+msgstr ""
+"An activation link was sent to %(email)s. Open it once so you can sign in."
+
+msgid "فعال‌سازی حساب در دلتا آپلود"
+msgstr "Activate your Delta Upload account"
+
+msgid "بازیابی رمز عبور در دلتا آپلود"
+msgstr "Reset your Delta Upload password"
+
+msgid "حساب از قبل فعال بود"
+msgstr "Account was already active"
+
+msgid "حساب فعال شد"
+msgstr "Account activated"
+
+msgid "این حساب از قبل فعال بود"
+msgstr "This account was already active"
+
+msgid "لازم نیست کاری بکنی. وارد شو و شروع کن."
+msgstr "There is nothing to do. Sign in and get started."
+
+msgid "حسابت فعال شد"
+msgstr "Your account is active"
+
+msgid "حالا می‌توانی وارد شوی و اولین فایلت را آپلود کنی."
+msgstr "You can sign in now and upload your first file."
+
+msgid "زمان فعال‌سازی"
+msgstr "Activated at"
+
+msgid "زبان"
+msgstr "Language"
+
+msgid "ارائه به کاربران"
+msgstr "Offered to users"
+
+msgid "تنظیمات تلگرام"
+msgstr "Telegram settings"
+
+msgid "ربات ثبت نشده"
+msgstr "No bot registered"
+
+msgid "در انتظار اتصال کانال"
+msgstr "Waiting for a channel"
+
+msgid "دسترسی قطع شده"
+msgstr "Access lost"
+
+msgid "توکن ربات (رمزشده)"
+msgstr "Bot token (encrypted)"
+
+msgid "نام ربات"
+msgstr "Bot name"
+
+msgid "شناسه ربات"
+msgstr "Bot id"
+
+msgid "شناسه کانال"
+msgstr "Channel id"
+
+msgid "نام کانال"
+msgstr "Channel name"
+
+msgid "کد اتصال"
+msgstr "Link code"
+
+msgid "انقضای کد"
+msgstr "Code expires"
+
+msgid "تاریخ اتصال"
+msgstr "Linked at"
+
+msgid "زمان آخرین خطا"
+msgstr "Last error at"
+
+msgid "اتصال تلگرام"
+msgstr "Telegram connection"
+
+msgid "اتصال های تلگرام"
+msgstr "Telegram connections"
+
+msgid "در حال انتقال"
+msgstr "Transferring"
+
+msgid "در صف انتقال"
+msgstr "Queued for transfer"
+
+msgid "اتصال"
+msgstr "Connection"
+
+msgid "اندازه هر تکه"
+msgstr "Part size"
+
+msgid "نام اصلی فایل"
+msgstr "Original filename"
+
+msgid "تعداد تلاش"
+msgstr "Attempts"
+
+msgid "زمان ذخیره"
+msgstr "Stored at"
+
+msgid "فایل تلگرامی"
+msgstr "Telegram file"
+
+msgid "فایل های تلگرامی"
+msgstr "Telegram files"
+
+msgid "شماره تکه"
+msgstr "Part number"
+
+msgid "شناسه پیام"
+msgstr "Message id"
+
+msgid "شناسه فایل"
+msgstr "File id"
+
+msgid "شناسه یکتا"
+msgstr "Unique id"
+
+msgid "تکه فایل"
+msgstr "File part"
+
+msgid "تکه های فایل"
+msgstr "File parts"
+
+msgid "حذف شده در"
+msgstr "Deleted at"
+
+msgid "محل ذخیره"
+msgstr "Stored on"
+
+msgid "سرور دلتا"
+msgstr "Delta servers"
+
+msgid "تلگرام کاربر"
+msgstr "The user's Telegram"
+
+msgid "متصل"
+msgstr "Connected"
+
+msgid "ذخیره شده"
+msgstr "Stored"
+
+msgid "راه‌اندازی"
+msgstr "Setup"
+
+msgid "قطع"
+msgstr "Disconnected"
+
+msgid "ربات ثبت شد"
+msgstr "Bot registered"
+
+msgid "شروع نشده"
+msgstr "Not started"
+
+msgid "ربات"
+msgstr "Bot"
+
+msgid "کانال"
+msgstr "Channel"
+
+msgid "قطع اتصال کانال"
+msgstr "Disconnect the channel"
+
+msgid "حذف ربات"
+msgstr "Remove the bot"
+
+msgid ""
+"فایل‌های موجود در کانال شما می‌مانند، ولی تا وصل نشدن دوباره قابل دانلود "
+"نیستند."
+msgstr ""
+"Your files stay in the channel, but nobody can download them until you "
+"connect again."
+
+msgid "دسترسی ربات به کانال قطع شده است."
+msgstr "The bot has lost access to the channel."
+
+msgid ""
+"ربات را دوباره ادمین کانال کن، بعد دکمه‌ی زیر را بزن. فایل‌ها سر جایشان "
+"هستند و لازم نیست دوباره آپلود شوند."
+msgstr ""
+"Make the bot an admin of the channel again, then press the button below. "
+"Your files are where they were and do not need re-uploading."
+
+msgid "بررسی دوباره"
+msgstr "Check again"
+
+msgid "قدم ۱ از ۲ — ساختن ربات"
+msgstr "Step 1 of 2: create the bot"
+
+msgid "در تلگرام به"
+msgstr "In Telegram, message"
+
+msgid "پیام بده و"
+msgstr "and send"
+
+msgid "را بفرست."
+msgstr "to it."
+
+msgid "یک نام و یک آیدی برایش انتخاب کن. در آخر توکنی می‌دهد شبیه"
+msgstr "Give it a name and a username. At the end it hands you a token like"
+
+msgid "همان توکن را اینجا بگذار:"
+msgstr "Paste that token here:"
+
+msgid "ثبت ربات"
+msgstr "Register the bot"
+
+msgid ""
+"توکن رمزنگاری‌شده ذخیره می‌شود و هرگز دوباره نمایش داده نمی‌شود. هر وقت "
+"خواستی، با /revoke در BotFather باطلش کن."
+msgstr ""
+"The token is stored encrypted and is never shown again. Revoke it whenever "
+"you like with /revoke in BotFather."
+
+msgid "قدم ۲ از ۲ — اتصال کانال"
+msgstr "Step 2 of 2: connect the channel"
+
+msgid "ثبت شد."
+msgstr "is registered."
+
+msgid "در تلگرام یک کانال خصوصی بساز."
+msgstr "Create a private channel in Telegram."
+
+msgid "ربات خودت را ادمین کانال کن، با اجازه‌ی ارسال پیام."
+msgstr "Make your own bot an admin of that channel, with permission to post."
+
+msgid "این کد را در همان کانال بفرست:"
+msgstr "Send this code in that channel:"
+
+msgid "کد تا سی دقیقه معتبر است و بعد از استفاده عوض می‌شود."
+msgstr "The code is valid for thirty minutes and changes once it is used."
+
+msgid "بعد دکمه‌ی زیر را بزن."
+msgstr "Then press the button below."
+
+msgid "پیدا کردن کانال"
+msgstr "Find the channel"
+
+msgid "کد تازه بگیر"
+msgstr "Get a new code"
+
+msgid "ربات دیگری ثبت کن"
+msgstr "Register a different bot"
+
+msgid "چه چیزی را باید بدانی"
+msgstr "What you should know"
+
+msgid "ربات مال خودت است، نه ما"
+msgstr "The bot is yours, not ours"
+
+msgid ""
+"خودت می‌سازی‌اش و هر لحظه با /revoke در BotFather باطل می‌شود. ما نه شماره "
+"می‌خواهیم، نه کد ورود، نه رمز دو مرحله‌ای. توکن ربات یک حساب کاربری نیست: "
+"نمی‌تواند چت‌های خصوصی، مخاطبین یا Saved Messages تو را بخواند."
+msgstr ""
+"You create it, and /revoke in BotFather kills it at any moment. We ask for "
+"no phone number, no login code and no two-step password. A bot token is not "
+"an account: it cannot read your private chats, your contacts or your saved "
+"messages."
+
+msgid "توکن را رمزنگاری‌شده نگه می‌داریم."
+msgstr "We keep the token encrypted."
+
+msgid ""
+"ولی سرور برای استفاده ناچار است رمزگشایی کند. اگر ترجیح می‌دهی هیچ توکنی "
+"جایی جز دست خودت نباشد، این قابلیت را روشن نکن."
+msgstr ""
+"But the server has to decrypt it to use it. If you would rather no token "
+"existed anywhere but in your own hands, do not turn this on."
+
+msgid "فایل‌ها مال توست، و مسئولیتش هم."
+msgstr "The files are yours, and so is looking after them."
+
+msgid ""
+"اگر پیام‌های کانال یا خود کانال را حذف کنی، فایل از بین می‌رود. ما نسخه‌ی "
+"دیگری نگه نمی‌داریم و نمی‌توانیم برگردانیم."
+msgstr ""
+"Delete the channel or the messages in it and the file is gone. We keep no "
+"other copy and cannot bring it back."
+
+msgid "اکانت تلگرامت را از دست بدهی، فایل‌ها هم می‌روند."
+msgstr "Lose your Telegram account and the files go with it."
+
+msgid ""
+"اگر اکانتت حذف، مسدود یا دزدیده شود، فایل‌های ذخیره‌شده در کانالش هم از "
+"دسترس خارج می‌شوند."
+msgstr ""
+"If your account is deleted, blocked or stolen, the files in its channel "
+"become unreachable too."
+
+msgid "تلگرام قوانین خودش را دارد."
+msgstr "Telegram has rules of its own."
+
+msgid ""
+"اگر تلگرام محتوایی را ناقض قوانینش بداند، ممکن است کانال، ربات یا محتوا را "
+"محدود کند. این تصمیم دست ما نیست."
+msgstr ""
+"If Telegram decides some content breaks its rules it may restrict the "
+"channel, the bot or the content. That decision is not ours."
+
+msgid "دانلود کندتر است."
+msgstr "Downloads are slower."
+
+msgid ""
+"فایل تکه‌تکه در کانال ذخیره می‌شود و موقع دانلود از تلگرام گرفته و پشت سر هم"
+" فرستاده می‌شود. از فایلی که روی سرور خودمان است کندتر شروع می‌شود."
+msgstr ""
+"The file is stored in the channel in parts, fetched back from Telegram on "
+"download and sent on one after another. It starts more slowly than a file on"
+" our own servers."
+
+msgid "ما محتوای فایل را می‌بینیم."
+msgstr "We can see what is in the file."
+
+msgid ""
+"چون خودمان آن را در کانال آپلود می‌کنیم، دقیقا مثل حالت عادی. این قابلیت "
+"رمزنگاری سرتاسری نیست."
+msgstr ""
+"Because we upload it to the channel ourselves, exactly as we would "
+"otherwise. This is not end-to-end encryption."
+
+msgid "تلگرام تضمین نگهداری ابدی نمی‌دهد."
+msgstr "Telegram promises nothing about keeping files forever."
+
+msgid "برای فایلی که واقعا مهم است، به یک نسخه اکتفا نکن."
+msgstr "For anything that really matters, do not rely on a single copy."
+
+msgid "افزودن فایلی که خودت فرستادی"
+msgstr "Add a file you sent yourself"
+
+msgid ""
+"اگر فایلی را خودت در کانال فرستاده‌ای، لازم نیست دوباره آپلود کنی. روی پست "
+"در تلگرام «Copy Post Link» بزن و لینک را اینجا بگذار."
+msgstr ""
+"If you sent a file to the channel yourself, there is no need to upload it "
+"again. Use Copy Post Link on the post in Telegram and paste the link here."
+
+msgid "لینک پست"
+msgstr "Post link"
+
+msgid "افزودن به فایل‌های من"
+msgstr "Add to my files"
+
+msgid ""
+"نام فایل از خود پست برداشته می‌شود و بعدا در «فایل های من» قابل تغییر است. "
+"فایل تازه‌اضافه‌شده خصوصی است تا خودت عمومی‌اش کنی."
+msgstr ""
+"The name comes from the post itself and can be changed later under My files."
+" A newly added file is private until you publish it."
+
+msgid ""
+"موقع افزودن، یک کپی کوتاه‌مدت از پست در کانال ساخته و بلافاصله پاک می‌شود. "
+"این تنها راهی است که تلگرام برای خواندن یک پست قدیمی به ربات می‌دهد."
+msgstr ""
+"While adding it, a short-lived copy of the post appears in the channel and "
+"is deleted straight away. That is the only way Telegram lets a bot read an "
+"older post."
+
+msgid "فایل‌های تلگرامی"
+msgstr "Files in Telegram"
+
+msgid ""
+"فضای مصرف‌شده در تلگرام از سهمیه‌ی شما در دلتا آپلود کم نمی‌شود. فقط تا وقتی"
+" فایل در صف انتقال است روی سرور ما جا می‌گیرد، و آن صف سقف جداگانه دارد."
+msgstr ""
+"Space used in Telegram does not count against your Delta Upload quota. A "
+"file only occupies our servers while it is queued for transfer, and that "
+"queue has a limit of its own."
+
+msgid ""
+"سقف %(import_limit)s: تلگرام اجازه نمی‌دهد ربات فایل بزرگ‌تر از این را برای "
+"دانلود بردارد. فایل بزرگ‌تر را از همین سایت آپلود کن تا تکه‌تکه ذخیره شود و "
+"این محدودیت نداشته باشد."
+msgstr ""
+"Limit %(import_limit)s: Telegram will not let a bot fetch a file larger than"
+" that for download. Upload anything bigger through this site instead, so it "
+"is stored in parts and the limit does not apply."
+
+msgid "%(n)s در صف{% plural %}%(n)s در صف"
+msgstr "%(n)s queued{% plural %}%(n)s queued"
+
+msgid "تلگرام"
+msgstr "Telegram"
+
+msgid "ذخیره در تلگرام"
+msgstr "Telegram storage"
+
+msgid "وضعیت قابلیت"
+msgstr "Feature status"
+
+msgid ""
+"هر کاربر ربات خودش را از BotFather می‌سازد و توکنش را در پنل خودش ثبت "
+"می‌کند. اینجا توکنی وجود ندارد: هیچ رباتی مال سایت نیست، پس هیچ کلیدی هم "
+"نیست که به کانال کسی برسد."
+msgstr ""
+"Every user creates their own bot at BotFather and registers its token in "
+"their own panel. There is no token here: no bot belongs to the site, so "
+"there is no key that reaches anyone’s channel."
+
+msgid "خاموش کردن"
+msgstr "Turn off"
+
+msgid "روشن کردن"
+msgstr "Turn on"
+
+msgid ""
+"صفحه‌ی کاربران بسته می‌شود و آپلود تازه به تلگرام نمی‌رود. فایل‌های موجود در"
+" کانال کاربران دست‌نخورده می‌مانند."
+msgstr ""
+"The user page closes and new uploads stop going to Telegram. Files already "
+"in users’ channels are untouched."
+
+msgid "رمزنگاری توکن‌ها"
+msgstr "Token encryption"
+
+msgid "کلید اختصاصی TELEGRAM_TOKEN_KEY ست شده است."
+msgstr "A dedicated TELEGRAM_TOKEN_KEY is set."
+
+msgid "کلید از SECRET_KEY مشتق می‌شود."
+msgstr "The key is derived from SECRET_KEY."
+
+msgid ""
+"کار می‌کند، ولی یعنی عوض کردن SECRET_KEY همه‌ی توکن‌های ذخیره‌شده را غیرقابل"
+" خواندن می‌کند و هر کاربر باید ربات خود را دوباره ثبت کند. یک "
+"TELEGRAM_TOKEN_KEY جدا بگذار تا این دو به هم گره نخورند."
+msgstr ""
+"That works, but it ties the two together: changing SECRET_KEY would make "
+"every stored token unreadable and force every user to register their bot "
+"again. Set a separate TELEGRAM_TOKEN_KEY so they are independent."
+
+msgid ""
+"یعنی کلید رمزنگاری عوض شده است. این کاربران باید توکن ربات خود را دوباره ثبت"
+" کنند؛ فایل‌هایشان از بین نرفته و بعد از ثبت دوباره در دسترس می‌شود."
+msgstr ""
+"That means the encryption key changed. These users have to register their "
+"bot token again; their files are not lost and become reachable once they do."
+
+msgid ""
+"توکن‌ها با Fernet رمز می‌شوند. این رمزنگاری «در حالت سکون» است: سرور برای "
+"استفاده ناچار است رمزگشایی کند، پس کسی که روی سرور کد اجرا می‌کند می‌تواند "
+"بخواند. چیزی که جلویش را می‌گیرد حالت شایع‌تر است — بیرون رفتن دیتابیس بدون "
+"کلید."
+msgstr ""
+"Tokens are encrypted with Fernet. This is encryption at rest: the server "
+"must decrypt to use them, so anyone running code on the server can read "
+"them. What it stops is the far more common case, a database leaving without "
+"the key."
+
+msgid "استفاده"
+msgstr "Usage"
+
+msgid "ربات ثبت‌شده"
+msgstr "Bots registered"
+
+msgid "کانال متصل"
+msgstr "Channels connected"
+
+msgid "قطع شده"
+msgstr "Disconnected"
+
+msgid "فایل ذخیره‌شده"
+msgstr "Files stored"
+
+msgid "حجم کل"
+msgstr "Total size"
+
+msgid "کش دانلود"
+msgstr "Download cache"
+
+msgid ""
+"فایل در صف مانده یعنی ورکر اجرا نمی‌شود. کران باید هر چند دقیقه manage.py "
+"telegram_worker --once را صدا بزند، وگرنه فایل‌ها روی دیسک ما می‌مانند و "
+"هرگز منتقل نمی‌شوند."
+msgstr ""
+"Files stuck in the queue mean the worker is not running. Cron should call "
+"manage.py telegram_worker --once every few minutes, or files sit on our disk"
+" and are never transferred."
+
+msgid "%(n)s توکن قابل خواندن نیست.{% plural %}%(n)s توکن قابل خواندن نیست."
+msgstr "%(n)s token cannot be read.{% plural %}%(n)s tokens cannot be read."
+
+msgid "لینک پست را وارد کن."
+msgstr "Enter the post link."
+
+msgid "این لینک به کانال متصلِ تو اشاره نمی‌کند."
+msgstr "That link does not point at the channel you connected."
+
+msgid ""
+"لینک معتبر نیست. روی پست در تلگرام «Copy Post Link» بزن و همان را اینجا "
+"بگذار."
+msgstr ""
+"That is not a valid link. Use Copy Post Link on the post in Telegram and "
+"paste it here."
+
+msgid "تلگرام این پست را برنگرداند: %(reason)s"
+msgstr "Telegram would not return that post: %(reason)s"
+
+msgid "اول کانالت را وصل کن."
+msgstr "Connect your channel first."
+
+msgid "توکن ربات قابل خواندن نیست. دوباره ثبتش کن."
+msgstr "The bot token cannot be read. Register it again."
+
+msgid "این پست قبلا اضافه شده است."
+msgstr "That post has already been added."
+
+msgid "این پست فایلی ندارد. لینک پستی را بده که در آن فایل فرستاده‌ای."
+msgstr ""
+"That post has no file in it. Give the link of a post where you sent a file."
+
+msgid "حجم این فایل مشخص نیست و قابل اضافه کردن نیست."
+msgstr "The size of that file is unknown, so it cannot be added."
+
+msgid ""
+"این فایل %(size)s است. تلگرام اجازه نمی‌دهد رباتی فایل بزرگ‌تر از ۲۰ مگابایت"
+" را برای دانلود بردارد، پس این پست قابل استفاده نیست. برای فایل بزرگ‌تر، از "
+"همین سایت آپلودش کن تا تکه‌تکه ذخیره شود."
+msgstr ""
+"That file is %(size)s. Telegram does not let a bot fetch anything over 20 MB"
+" for download, so this post cannot be used. Upload a larger file through "
+"this site instead, so it is stored in parts."
+
+msgid "توکن ربات را وارد کن."
+msgstr "Enter the bot token."
+
+msgid ""
+"این شکل یک توکن نیست. BotFather چیزی شبیه 123456789:AAE... می‌دهد. نام ربات "
+"(@yourbot) توکن نیست."
+msgstr ""
+"That is not the shape of a token. BotFather gives something like "
+"123456789:AAE... . A bot username (@yourbot) is not a token."
+
+msgid "تلگرام این توکن را نپذیرفت: %(reason)s"
+msgstr "Telegram did not accept that token: %(reason)s"
+
+msgid "این توکن به یک ربات تعلق ندارد."
+msgstr "That token does not belong to a bot."
+
+msgid "این ربات قبلا به حساب دیگری وصل شده است."
+msgstr "That bot is already connected to another account."
+
+msgid ""
+"اتصال این کانال به دلتا آپلود قطع شد. فایل‌های موجود همچنان اینجا هستند."
+msgstr ""
+"This channel is no longer connected to Delta Upload. The files already here "
+"are untouched."
+
+msgid "ربات باید ادمین کانال باشد."
+msgstr "The bot must be an admin of the channel."
+
+msgid "ربات اجازه‌ی ارسال پیام در کانال را ندارد."
+msgstr "The bot is not allowed to post in the channel."
+
+msgid "اول توکن ربات را ثبت کن."
+msgstr "Register the bot token first."
+
+msgid "توکن ذخیره‌شده قابل خواندن نیست. دوباره ثبتش کن."
+msgstr "The stored token cannot be read. Register it again."
+
+msgid "نشد از تلگرام آپدیت گرفت: %(reason)s"
+msgstr "Could not fetch updates from Telegram: %(reason)s"
+
+msgid ""
+"کد در هیچ کانالی پیدا نشد. مطمئن شو ربات ادمین کانال است و کد را همان‌جا "
+"فرستاده‌ای، بعد دوباره امتحان کن."
+msgstr ""
+"The code was not found in any channel. Check that the bot is an admin and "
+"that you sent the code there, then try again."
+
+msgid "این کانال قبلا به حساب دیگری متصل شده است."
+msgstr "That channel is already connected to another account."
+
+msgid "اتصال برقرار شد. از این پس فایل‌های شما اینجا ذخیره می‌شوند."
+msgstr "Connected. Your files will be stored here from now on."
+
+msgid "ربات @%(name)s ثبت شد."
+msgstr "Bot @%(name)s registered."
+
+msgid "ربات حذف شد."
+msgstr "Bot removed."
+
+msgid "کانال «%(title)s» متصل شد."
+msgstr "Channel \"%(title)s\" connected."
+
+msgid "اتصال کانال قطع شد."
+msgstr "The channel is disconnected."
+
+msgid "اتصال دوباره برقرار است."
+msgstr "Connected again."
+
+msgid "هنوز وصل نیست. دسترسی ربات را بررسی کن."
+msgstr "Still not connected. Check the bot’s access."
+
+msgid "کد تازه ساخته شد."
+msgstr "A new code has been created."
+
+msgid "«%(name)s» اضافه شد."
+msgstr "\"%(name)s\" was added."
+
+msgid "قابلیت روشن شد."
+msgstr "The feature is on."
+
+msgid ""
+"قابلیت خاموش شد. صفحه‌ی کاربران دیگر باز نمی‌شود، ولی فایل‌های موجود سر "
+"جایشان هستند."
+msgstr ""
+"The feature is off. The user page no longer opens, but existing files are "
+"where they were."
+
+msgid ""
+"در صف انتقال به تلگرام جا نیست. %(free)s آزاد است و این فایل %(size)s. صبر "
+"کن تا فایل‌های قبلی منتقل شوند."
+msgstr ""
+"There is no room in the Telegram transfer queue. %(free)s is free and this "
+"file is %(size)s. Wait for the earlier files to move."
+
+msgid "ذخیره در کانال تلگرام من"
+msgstr "Store in my Telegram channel"
+
+msgid "از سهمیه‌ی فضای شما کم نمی‌شود"
+msgstr "Does not count against your quota"
+
+msgid "ویرایش فایل"
+msgstr "Edit file"
+
+msgid "ذخیره تغییرات"
+msgstr "Save changes"
+
+msgid ""
+"خود فایل قابل تعویض نیست. لینکی که قبلا به کسی داده‌ای همان فایل قبلی را "
+"می‌دهد، پس برای محتوای تازه باید فایل جدید آپلود کنی."
+msgstr ""
+"The file itself cannot be replaced. A link you already shared would still "
+"hand over the old file, so upload a new one for new content."
+
+msgid ""
+"خالی یعنی بدون محدودیت زمانی. عددی که می‌بینی زمان باقی‌مانده‌ی فعلی است."
+msgstr ""
+"Empty means no time limit. The number shown is the time currently remaining."
+
+msgid "حذف فایل"
+msgstr "Delete file"
+
+msgid "این کار برگشت‌پذیر نیست."
+msgstr "This cannot be undone."
+
+msgid "فایل از کانال تلگرام شما هم پاک می‌شود. ما نسخه‌ی دیگری نداریم."
+msgstr ""
+"The file is removed from your Telegram channel too. We have no other copy."
+
+msgid "فایل از سرور پاک می‌شود و قابل بازگردانی نیست."
+msgstr "The file is removed from the server and cannot be restored."
+
+msgid ""
+"بعد از حذف دیگر نمی‌توانند دانلودش کنند. پولی که پرداخت کرده‌اند برنمی‌گردد "
+"و سابقه‌ی خریدشان می‌ماند."
+msgstr ""
+"After deletion they can no longer download it. What they paid is not "
+"refunded and their purchase record remains."
+
+msgid ""
+"آمار دانلود و درآمد این فایل در گزارش‌ها باقی می‌ماند. فقط خود فایل پاک "
+"می‌شود."
+msgstr ""
+"The download and earnings figures for this file stay in the reports. Only "
+"the file itself is removed."
+
+msgid "بله، حذف کن"
+msgstr "Yes, delete it"
+
+msgid "صفحه عمومی"
+msgstr "Public page"
+
+msgid ""
+"%(n)s نفر این فایل را خریده است.{% plural %}%(n)s نفر این فایل را خریده‌اند."
+msgstr ""
+"%(n)s person has bought this file.{% plural %}%(n)s people have bought this "
+"file."
+
+msgid ""
+"%(n)s درآمد تأییدنشده روی این فایل هست و بعد از حذف هم سر جایش می‌ماند.{% "
+"plural %}%(n)s درآمد تأییدنشده روی این فایل هست و بعد از حذف هم سر جایشان "
+"می‌مانند."
+msgstr ""
+"%(n)s unconfirmed earning is attached to this file and stays after "
+"deletion.{% plural %}%(n)s unconfirmed earnings are attached to this file "
+"and stay after deletion."
+
+msgid "تغییرات ذخیره شد."
+msgstr "Changes saved."
+
+msgid "«%(name)s» حذف شد."
+msgstr "\"%(name)s\" was deleted."
+
+msgid "ویرایش"
+msgstr "Edit"
+
+msgid "فرم منقضی شد"
+msgstr "Form expired"
+
+msgid "این فرم منقضی شده بود"
+msgstr "That form had expired"
+
+msgid ""
+"صفحه‌ای که فرم را از آن فرستادی مدتی باز مانده بود. برگرد، صفحه را تازه کن و"
+" دوباره بفرست."
+msgstr ""
+"The page you submitted from had been open for a while. Go back, refresh it "
+"and send again."
+
+msgid "برگرد"
+msgstr "Go back"
+
+msgid "اگر باز هم تکرار شد، احتمالا مرورگر کوکی‌ها را نگه نمی‌دارد."
+msgstr "If it keeps happening, your browser is probably not keeping cookies."
+
+msgid "تعداد درخواست بیش از حد مجاز است. کمی بعد دوباره تلاش کن."
+msgstr "Too many requests. Try again shortly."
+
+msgid "پیدا نشد."
+msgstr "Not found."
+
+msgid "خطای نامشخص."
+msgstr "Unknown error."
+
+msgid "لینک نامعتبر است."
+msgstr "That link is not valid."
+
+msgid "٪"
+msgstr "%"
+
+msgid "خطای سرور"
+msgstr "Server error"
+
+msgid "مشکلی پیش آمد"
+msgstr "Something went wrong"
+
+msgid ""
+"خطایی از سمت ما رخ داد. تیم فنی خبردار شده است. چند دقیقه دیگر دوباره امتحان"
+" کن."
+msgstr ""
+"Something failed on our side. The technical team has been notified. Try "
+"again in a few minutes."
+
+msgid "آموزش قسمت اول"
+msgstr "Tutorial part one"
+
+msgid "بایت"
+msgstr "bytes"
+
+msgid "کیلوبایت"
+msgstr "KB"
+
+msgid "مگابایت"
+msgstr "MB"
+
+msgid "گیگابایت"
+msgstr "GB"
+
+msgid "ترابایت"
+msgstr "TB"
+
+msgid "زرین‌پال"
+msgstr "ZarinPal"
+
+msgid "TGJU (دلار آزاد) — بدون کلید"
+msgstr "TGJU (open market USD), no key needed"
+
+msgid "نوبیتکس (تتر) — بدون کلید"
+msgstr "Nobitex (USDT), no key needed"
+
+msgid "BrsApi (دلار آزاد) — با کلید"
+msgstr "BrsApi (open market USD), key required"
+
+msgid "ارز دیجیتال"
+msgstr "Cryptocurrency"
+
+msgid "کمیسیون سایت"
+msgstr "Site commission"

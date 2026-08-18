@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "ایمیل فعال‌سازی فرستاده شد" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-md py-12 text-center">
+        <h1 class="mb-3 text-xl font-bold">{% translate "ایمیل را چک کن" %}</h1>
+
+        {% comment %}
+        The address is repeated back deliberately. A typo in it is the most
+        common reason the message never arrives, and it is the one thing the
+        visitor can see and fix themselves.
+        {% endcomment %}
+        <p class="mb-6 text-sm muted">
+            {% blocktranslate %}لینک فعال‌سازی به {{ email }} فرستاده شد. یک بار بازش کن تا بتوانی وارد شوی.{% endblocktranslate %}
+        </p>
+
+        <div class="note mb-6 text-start text-sm">
+            <p class="mb-2 font-medium">{% translate "نرسید؟" %}</p>
+            <ul class="space-y-1 text-xs muted">
+                <li>{% translate "پوشه‌ی اسپم را نگاه کن." %}</li>
+                <li>{% translate "چند دقیقه صبر کن؛ گاهی با تأخیر می‌رسد." %}</li>
+                <li>{% translate "اگر آدرس بالا غلط است، دوباره ثبت‌نام کن." %}</li>
+            </ul>
+        </div>
+
+        <div class="flex flex-col justify-center gap-2 sm:flex-row">
+            <a class="btn-primary" href="{% url 'login_page' %}">{% translate "ورود" %}</a>
+            <a class="btn-secondary" href="{% url 'home_page' %}">{% translate "صفحه اصلی" %}</a>
+        </div>
+    </div>
+{% endblock %}

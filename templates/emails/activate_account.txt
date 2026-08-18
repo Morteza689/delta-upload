@@ -1,0 +1,11 @@
+{% load i18n %}{% blocktranslate %}حساب تو در {{ site_name }} ساخته شد.{% endblocktranslate %}
+
+{% translate "برای فعال کردنش این آدرس را باز کن:" %}
+
+{{ activation_url }}
+
+{% translate "اگر این حساب را تو نساخته‌ای، این ایمیل را نادیده بگیر. بدون باز کردن لینک بالا هیچ حسابی فعال نمی‌شود." %}
+
+--
+{{ site_name }}
+{{ site_url }}

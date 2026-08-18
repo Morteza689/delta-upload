@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "ورود" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-md">
+        <div class="panel">
+            <div class="panel-body">
+                <h1 class="mb-5 text-center text-lg font-bold sm:mb-6 sm:text-xl">{% translate "ورود به حساب کاربری" %}</h1>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% include 'shared/form_fields.html' %}
+
+                    <button type="submit" class="btn-primary w-full">{% translate "ورود" %}</button>
+                </form>
+
+                <div class="mt-5 flex flex-col gap-2 text-center text-sm">
+                    <a class="hover:underline" style="color: rgb(var(--brand))" href="{% url 'forgot_password_page' %}">
+                        {% translate "رمز عبور را فراموش کرده‌ام" %}
+                    </a>
+                    <span class="muted">
+                        {% translate "حساب ندارید؟" %}
+                        <a class="hover:underline" style="color: rgb(var(--brand))" href="{% url 'register_page' %}">
+                            {% translate "ثبت نام" %}
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

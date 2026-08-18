@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "پیش‌نمایش لینک" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-lg">
+        <div class="panel">
+            <div class="panel-body">
+                <h1 class="mb-4 text-lg font-bold">{% translate "این لینک کجا می‌رود؟" %}</h1>
+
+                {% if available %}
+                    <p class="label mb-2">{% translate "مقصد" %}</p>
+                    <p class="mb-5 break-all rounded-lg border hairline p-3 text-sm" dir="ltr">
+                        {{ link.target }}
+                    </p>
+
+                    <dl class="mb-5 space-y-2 text-sm">
+                        <div class="flex justify-between gap-4">
+                            <dt class="muted">{% translate "تعداد کلیک" %}</dt>
+                            <dd class="num font-medium">{{ link.clicks }}</dd>
+                        </div>
+                        <div class="flex justify-between gap-4">
+                            <dt class="muted">{% translate "تاریخ ساخت" %}</dt>
+                            <dd>{{ link.created_at|date:"Y/m/d" }}</dd>
+                        </div>
+                    </dl>
+
+                    <a class="btn-primary w-full" href="{{ link.target }}" rel="nofollow noopener">
+                        {% translate "ادامه به مقصد" %}
+                    </a>
+                    <p class="form-help mt-2">
+                        {% translate "دلتا آپلود مسئول محتوای سایت مقصد نیست." %}
+                    </p>
+                {% else %}
+                    <div class="note note-warn">
+                        {% translate "این لینک دیگر فعال نیست." %}
+                    </div>
+                    <a class="btn-secondary mt-4 w-full" href="{% url 'shorten_page' %}">
+                        {% translate "ساخت لینک کوتاه" %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

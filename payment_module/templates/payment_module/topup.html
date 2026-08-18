@@ -1,0 +1,113 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "شارژ کیف پول" %}{% endblock %}
+{% block page_title %}{% translate "شارژ کیف پول" %}{% endblock %}
+
+{% block content %}
+    <div class="grid gap-5 lg:grid-cols-2 lg:gap-6">
+
+        <div class="panel h-fit">
+            <div class="panel-body">
+                {% if gateways %}
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="note note-error mb-4">
+                                {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-5">
+                            <label class="form-label" for="{{ form.amount.id_for_label }}">
+                                {{ form.amount.label }}
+                            </label>
+                            {{ form.amount }}
+                            {% for error in form.amount.errors %}
+                                <p class="form-error">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-5">
+                            <span class="form-label">{{ form.gateway.label }}</span>
+                            <div class="space-y-2">
+                                {% for choice in form.gateway %}
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-lg border
+                                                  hairline px-4 py-3 transition
+                                                  hover:border-[rgb(var(--brand))]">
+                                        {{ choice.tag }}
+                                        <span class="text-sm font-medium">{{ choice.choice_label }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                            {% for error in form.gateway.errors %}
+                                <p class="form-error">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full">
+                            {% translate "ادامه و پرداخت" %}
+                        </button>
+                    </form>
+
+                    {% if rate %}
+                        <p class="form-help mt-4">
+                            {% blocktranslate with r=rate.usd_to_toman %}نرخ فعلی برای پرداخت ریالی: هر دلار {{ r }} تومان{% endblocktranslate %}
+                        </p>
+                    {% else %}
+                        <div class="note note-warn mt-4 text-xs">
+                            {% translate "نرخ ارز ثبت نشده است؛ پرداخت ریالی تا ثبت نرخ کار نمی‌کند." %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="note note-warn">
+                        {% translate "هیچ روش پرداختی پیکربندی نشده است." %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="panel h-fit">
+            <div class="panel-body">
+                <h2 class="panel-title mb-4">{% translate "پرداخت های اخیر" %}</h2>
+                <div class="overflow-x-auto">
+                    <table class="rtable">
+                        <thead class="table-head">
+                        <tr>
+                            <th class="px-2 py-2 text-start">{% translate "مبلغ" %}</th>
+                            <th class="px-2 py-2 text-start">{% translate "روش" %}</th>
+                            <th class="px-2 py-2 text-start">{% translate "تاریخ" %}</th>
+                            <th class="px-2 py-2 text-start">{% translate "وضعیت" %}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        {% for payment in payments %}
+                            <tr>
+                                <td class="px-2 py-2 font-medium" data-label='{% translate "مبلغ" %}'>{{ payment.amount|money }}</td>
+                                <td class="px-2 py-2" data-label='{% translate "روش" %}'>{{ payment.gateway }}</td>
+                                <td class="px-2 py-2" data-label='{% translate "تاریخ" %}'>{{ payment.created_at|date:"Y/m/d H:i" }}</td>
+                                <td class="px-2 py-2" data-label='{% translate "وضعیت" %}'>
+                                    {% if payment.status == 'paid' %}
+                                        <span class="chip chip-money">{{ payment.get_status_display }}</span>
+                                    {% elif payment.status == 'pending' or payment.status == 'awaiting' %}
+                                        <span class="chip chip-pending">{{ payment.get_status_display }}</span>
+                                    {% else %}
+                                        <span class="chip chip-muted">{{ payment.get_status_display }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="px-2 py-8 text-center faint">
+                                    {% translate "هنوز پرداختی ثبت نشده است" %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

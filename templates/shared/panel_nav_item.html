@@ -1,0 +1,24 @@
+{% comment %}
+One panel menu item.
+
+Phone: a horizontal pill. Desktop: a row with a thin edge rule marking the
+current page, deliberately instead of a full coloured pill, which sits quieter
+in a vertical list.
+{% endcomment %}
+{% if request.path == target %}
+    <a href="{{ target }}" aria-current="page"
+       class="relative shrink-0 whitespace-nowrap rounded-lg px-3 py-2 font-medium
+              lg:rounded-none lg:border-s-2 lg:ps-3"
+       style="background-color: rgb(var(--brand) / 0.1); color: rgb(var(--brand));
+              border-color: rgb(var(--brand))">
+        {{ label }}
+    </a>
+{% else %}
+    <a href="{{ target }}"
+       class="shrink-0 whitespace-nowrap rounded-lg px-3 py-2 transition-colors
+              hover:bg-[rgb(var(--sunken))] lg:rounded-none lg:border-s-2
+              lg:border-transparent lg:ps-3"
+       style="color: rgb(var(--ink-soft))">
+        {{ label }}
+    </a>
+{% endif %}

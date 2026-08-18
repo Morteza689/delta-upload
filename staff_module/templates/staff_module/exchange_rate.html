@@ -1,0 +1,171 @@
+{% extends 'staff_module/base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "نرخ ارز" %}{% endblock %}
+{% block page_title %}{% translate "نرخ ارز" %}{% endblock %}
+
+{% block content %}
+
+    {# ---------- Current state ---------- #}
+    <div class="mb-5 grid gap-4 sm:grid-cols-3">
+        <div class="panel">
+            <div class="panel-body">
+                <p class="label mb-2">{% translate "نرخ فعلی" %}</p>
+                {% if current %}
+                    <p class="metric num">{{ current.usd_to_toman|floatformat:0 }}</p>
+                    <p class="mt-1 text-xs faint">
+                        {% translate "تومان به ازای هر دلار" %}
+                    </p>
+                {% else %}
+                    <p class="text-sm" style="color: rgb(var(--danger))">
+                        {% translate "هنوز ثبت نشده" %}
+                    </p>
+                    <p class="mt-1 text-xs faint">
+                        {% translate "تا وقتی نرخ نباشد، نمایش تومانی کار نمی‌کند و درگاه ریالی مبلغ نمی‌سازد." %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <p class="label mb-2">{% translate "منبع" %}</p>
+                {% if current %}
+                    <p class="text-sm font-medium">
+                        {{ current.get_source_display }}
+                        {% if current.provider %}
+                            <span class="faint">· {{ current.provider }}</span>
+                        {% endif %}
+                    </p>
+                    <p class="mt-1 text-xs faint">{{ current.created_at|date:"Y/m/d H:i" }}</p>
+                {% else %}
+                    <p class="text-sm faint">—</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <p class="label mb-2">{% translate "دریافت خودکار" %}</p>
+                {% if setting.auto_update %}
+                    <span class="chip chip-money">{% translate "روشن" %}</span>
+                {% else %}
+                    <span class="chip">{% translate "خاموش" %}</span>
+                {% endif %}
+                {% if setting.last_success_at %}
+                    <p class="mt-2 text-xs faint">
+                        {% translate "آخرین دریافت موفق" %}:
+                        {{ setting.last_success_at|date:"Y/m/d H:i" }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {# ---------- Last attempt's error ---------- #}
+    {% if fetch_error %}
+        <p class="note note-error mb-5">{{ fetch_error }}</p>
+    {% elif setting.last_error %}
+        <div class="note note-error mb-5">
+            <p class="mb-1 text-xs font-medium">{% translate "آخرین تلاش ناموفق بود" %}</p>
+            <p class="text-sm">{{ setting.last_error }}</p>
+            <p class="mt-1 text-xs">
+                {% translate "نرخ قبلی هنوز ملاک است و پرداخت متوقف نشده." %}
+            </p>
+        </div>
+    {% endif %}
+
+    <div class="grid gap-5 lg:grid-cols-2">
+
+        {# ---------- Settings form ---------- #}
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "تنظیم نرخ" %}</h2>
+            </div>
+            <div class="panel-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% include 'shared/form_fields.html' %}
+
+                    <div class="flex flex-col gap-2 sm:flex-row">
+                        <button type="submit" class="btn-primary flex-1">
+                            {% translate "ذخیره" %}
+                        </button>
+                        {% comment %}
+                        A separate button with its own action: it saves no
+                        settings and only fetches the rate once, for trying the
+                        service out before switching automatic mode on.
+                        {% endcomment %}
+                        <button type="submit" name="action" value="fetch_now"
+                                class="btn-secondary" formnovalidate>
+                            {% translate "دریافت الان" %}
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-5 border-t hairline pt-4">
+                    <p class="label mb-2">{% translate "سرویس های موجود" %}</p>
+                    <ul class="space-y-1.5 text-xs muted">
+                        {% for key, info in providers.items %}
+                            <li class="flex items-baseline gap-2">
+                                <code class="shrink-0 rounded px-1.5 py-0.5 text-[11px]"
+                                      style="background-color: rgb(var(--sunken))" dir="ltr">{{ key }}</code>
+                                <span>{{ info.0 }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <p class="mt-3 text-xs faint">
+                        {% translate "برای به‌روزرسانی خودکار و منظم، این دستور را در کران بگذار:" %}
+                    </p>
+                    <code class="mt-1 block overflow-x-auto rounded-lg px-3 py-2 text-[11px]"
+                          style="background-color: rgb(var(--ink)); color: rgb(var(--paper))"
+                          dir="ltr">python manage.py update_exchange_rate</code>
+                </div>
+            </div>
+        </div>
+
+        {# ---------- History ---------- #}
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "تاریخچه" %}</h2>
+            </div>
+            <div class="panel-body">
+                {% if history %}
+                    <table class="rtable">
+                        <thead>
+                            <tr>
+                                <th>{% translate "نرخ" %}</th>
+                                <th>{% translate "منبع" %}</th>
+                                <th>{% translate "تاریخ" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for rate in history %}
+                                <tr>
+                                    <td data-label="{% translate 'نرخ' %}">
+                                        <span class="num font-medium">{{ rate.usd_to_toman|floatformat:0 }}</span>
+                                        {% if rate.is_active %}
+                                            <span class="chip chip-money ms-1">{% translate "فعال" %}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td data-label="{% translate 'منبع' %}">
+                                        <span class="text-xs">
+                                            {{ rate.get_source_display }}{% if rate.provider %} · {{ rate.provider }}{% endif %}
+                                        </span>
+                                    </td>
+                                    <td data-label="{% translate 'تاریخ' %}">
+                                        <span class="num text-xs faint">{{ rate.created_at|date:"Y/m/d H:i" }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="py-6 text-center text-sm faint">
+                        {% translate "هنوز نرخی ثبت نشده است." %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

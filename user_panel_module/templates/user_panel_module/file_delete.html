@@ -1,0 +1,84 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "حذف فایل" %}{% endblock %}
+{% block page_title %}{% translate "حذف فایل" %}{% endblock %}
+
+{% block content %}
+    <div class="mx-auto max-w-xl">
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title truncate">{{ file|file_label }}</h2>
+            </div>
+            <div class="panel-body">
+
+                <div class="note note-error">
+                    <p class="font-medium">{% translate "این کار برگشت‌پذیر نیست." %}</p>
+                    <p class="mt-1">
+                        {% if file.on_telegram %}
+                            {% translate "فایل از کانال تلگرام شما هم پاک می‌شود. ما نسخه‌ی دیگری نداریم." %}
+                        {% else %}
+                            {% translate "فایل از سرور پاک می‌شود و قابل بازگردانی نیست." %}
+                        {% endif %}
+                    </p>
+                </div>
+
+                <dl class="mt-5 grid grid-cols-2 gap-3 text-sm">
+                    <dt class="muted">{% translate "حجم" %}</dt>
+                    <dd class="num">{{ file.size_bytes|convertor_byte }}</dd>
+
+                    <dt class="muted">{% translate "دانلود" %}</dt>
+                    <dd class="num">{{ download_count }}</dd>
+
+                    <dt class="muted">{% translate "محل ذخیره" %}</dt>
+                    <dd>{{ file.get_storage_backend_display }}</dd>
+                </dl>
+
+                {% comment %}
+                Counted, not guessed at. Someone deleting a file that other
+                people paid for should be told so before, not find out from a
+                support ticket afterwards.
+                {% endcomment %}
+                {% if purchase_count %}
+                    <div class="note note-warn mt-4">
+                        <p class="font-medium">
+                            {% blocktranslate count n=purchase_count %}{{ n }} نفر این فایل را خریده است.{% plural %}{{ n }} نفر این فایل را خریده‌اند.{% endblocktranslate %}
+                        </p>
+                        <p class="mt-1">
+                            {% translate "بعد از حذف دیگر نمی‌توانند دانلودش کنند. پولی که پرداخت کرده‌اند برنمی‌گردد و سابقه‌ی خریدشان می‌ماند." %}
+                        </p>
+                    </div>
+                {% endif %}
+
+                {% if pending_earnings %}
+                    <div class="note mt-4">
+                        <p>
+                            {% blocktranslate count n=pending_earnings %}{{ n }} درآمد تأییدنشده روی این فایل هست و بعد از حذف هم سر جایش می‌ماند.{% plural %}{{ n }} درآمد تأییدنشده روی این فایل هست و بعد از حذف هم سر جایشان می‌مانند.{% endblocktranslate %}
+                        </p>
+                    </div>
+                {% endif %}
+
+                <p class="mt-4 text-xs muted">
+                    {% translate "آمار دانلود و درآمد این فایل در گزارش‌ها باقی می‌ماند. فقط خود فایل پاک می‌شود." %}
+                </p>
+
+                {% comment %}
+                POST, and a form rather than a link. A delete behind a plain
+                href gets fired by link prefetching, mail scanners and
+                crawlers, none of which meant to.
+                {% endcomment %}
+                <div class="mt-6 flex flex-col gap-2 border-t hairline pt-5 sm:flex-row-reverse">
+                    <form method="post" class="flex-1">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-danger w-full">
+                            {% translate "بله، حذف کن" %}
+                        </button>
+                    </form>
+                    <a href="{% url 'my_files_page' %}" class="btn-secondary flex-1">
+                        {% translate "انصراف" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% load i18n %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>{% block subject %}{{ site_name }}{% endblock %}</title>
+</head>
+{% comment %}
+    Email is not the web. Tables for layout, styles inline on every element,
+    no external stylesheet and no web font: Gmail strips <style> from forwarded
+    mail, Outlook renders with Word, and neither supports flex or grid.
+
+    The colours are the site's own palette from static/src/input.css, written
+    as literal hex because a mail client has no CSS variables:
+
+        paper #FCFCFA   surface #FFFFFF   sunken #F6F6F3
+        line  #E2E2DD   ink     #161618   ink-soft #5C5C63
+        brand #E03E26   pending #C27C08
+
+    Light only. The site follows the system theme, but a dark email is a
+    coin toss: several clients invert colours themselves and a hand-made dark
+    palette then comes back inverted twice.
+
+    600px wide, the widest that survives a phone in portrait.
+
+    Direction follows the reader's language rather than being fixed. Several
+    clients ignore dir on <html>, so every block that holds text carries its
+    own align, and the two paddings around the mark are swapped rather than
+    left as one-sided.
+{% endcomment %}
+<body style="margin:0; padding:0; background-color:#F6F6F3;
+             font-family:{% if LANGUAGE_BIDI %}Tahoma,Arial{% else %}Arial,Helvetica{% endif %},sans-serif; color:#161618;">
+
+<div style="display:none; max-height:0; overflow:hidden; opacity:0;">
+    {% comment %} The preview line an inbox shows beside the subject. Without it the
+       client picks the first words it finds, usually the site name. {% endcomment %}
+    {% block preheader %}{% endblock %}
+</div>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+       style="background-color:#F6F6F3;">
+    <tr>
+        <td align="center" style="padding:28px 12px;">
+
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                   width="600" style="width:100%; max-width:600px;">
+
+                {% comment %} The header mirrors the site: the delta mark, then the name,
+                   at the same weight and tracking. {% endcomment %}
+                <tr>
+                    <td style="padding:0 0 18px 0;"
+                        align="{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}">
+                        <a href="{{ site_url }}" style="text-decoration:none;">
+                            <table role="presentation" cellpadding="0" cellspacing="0"
+                                   border="0" style="display:inline-table;">
+                                <tr>
+                                    <td style="padding-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %}:8px;
+                                               vertical-align:middle;">
+                                        {% comment %} An inline SVG, not an image file: a
+                                           remote image is blocked by default in
+                                           most clients and the logo would be a
+                                           broken box. {% endcomment %}
+                                        <svg width="20" height="20" viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 2.5 18.5 17.5H1.5z" fill="#E03E26"/>
+                                            <path d="M10 8 14.5 16h-9z" fill="#FCFCFA"/>
+                                        </svg>
+                                    </td>
+                                    <td style="vertical-align:middle;">
+                                        <span style="color:#161618; font-size:16px;
+                                                     font-weight:bold; letter-spacing:-0.3px;">
+                                            {{ site_name }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}"
+                        align="{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}"
+                        style="background-color:#FFFFFF; border:1px solid #E2E2DD;
+                               border-radius:14px; padding:28px 24px;
+                               text-align:{% if LANGUAGE_BIDI %}right{% else %}left{% endif %};">
+
+                        {% block content %}{% endblock %}
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:18px 6px 0 6px; color:#8A8A92; font-size:12px;
+                               line-height:20px;"
+                        align="{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}">
+                        {% block footer %}
+                            <p style="margin:0 0 6px 0;">
+                                {% blocktranslate %}این ایمیل از طرف {{ site_name }} فرستاده شده است.{% endblocktranslate %}
+                            </p>
+                            <p style="margin:0;">
+                                <a href="{{ site_url }}" style="color:#5C5C63; text-decoration:none;">{{ site_url }}</a>
+                            </p>
+                        {% endblock %}
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

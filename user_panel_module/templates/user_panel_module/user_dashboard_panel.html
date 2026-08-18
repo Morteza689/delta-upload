@@ -1,0 +1,223 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "داشبورد" %}{% endblock %}
+{% block page_title %}{% translate "داشبورد" %}{% endblock %}
+
+{% block content %}
+    <div class="space-y-4">
+
+        {% comment %}
+        The layout is deliberately asymmetric: balance and earnings carry more
+        visual weight because they are why people open this page. The rest of
+        the numbers sit in one dense strip rather than in equal cards.
+        {% endcomment %}
+
+        {# ---------- First row: balance and the trend chart ---------- #}
+        <div class="grid gap-4 lg:grid-cols-[minmax(0,17rem)_1fr]">
+
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="label">{% translate "موجودی" %}</p>
+                    <p class="metric mt-2 money">{{ user.balance|money }}</p>
+
+                    <div class="mt-4 space-y-2 text-sm">
+                        <div class="flex items-baseline justify-between gap-3">
+                            <span class="muted">{% translate "از فروش" %}</span>
+                            <span class="num font-medium">{{ sales_share|money }}</span>
+                        </div>
+                        <div class="flex items-baseline justify-between gap-3">
+                            <span class="muted">{% translate "از تبلیغات" %}</span>
+                            <span class="num font-medium">{{ ad_confirmed_micro|micro_money }}</span>
+                        </div>
+                        {% if ad_pending_micro %}
+                            <div class="flex items-baseline justify-between gap-3">
+                                <span class="muted">{% translate "در انتظار تأیید" %}</span>
+                                <span class="num pending font-medium">{{ ad_pending_micro|micro_money }}</span>
+                            </div>
+                        {% endif %}
+                        <div class="flex items-baseline justify-between gap-3 border-t hairline pt-2">
+                            <span class="muted">{% translate "برداشت‌شده" %}</span>
+                            <span class="num font-medium">{{ all_amunt|money }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+                        <a class="btn-primary btn-sm flex-1" href="{% url 'topup_page' %}">
+                            {% translate "شارژ" %}
+                        </a>
+                        <a class="btn-secondary btn-sm flex-1" href="{% url 'withdrawal_page' %}">
+                            {% translate "برداشت" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {# ---------- Download trend ---------- #}
+            <div class="panel min-w-0">
+                <div class="panel-head">
+                    <div>
+                        <p class="panel-title">
+                            {% blocktranslate with d=chart_days %}دانلود {{ d }} روز اخیر{% endblocktranslate %}
+                        </p>
+                        <p class="metric-sm mt-1.5">{{ chart.total }}</p>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs">
+                        <span class="flex items-center gap-1.5">
+                            <span class="dot" style="background-color: rgb(var(--brand))"></span>
+                            <span class="muted">{% translate "دانلود" %}</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    {% if chart.has_data %}
+                        {% include 'shared/chart_timeseries.html' with chart=chart %}
+                    {% else %}
+                        <div class="flex h-[160px] flex-col items-center justify-center gap-1 text-center">
+                            <p class="text-sm muted">{% translate "هنوز دانلودی ثبت نشده" %}</p>
+                            <p class="text-xs faint">
+                                {% translate "لینک فایل‌هایت را به اشتراک بگذار تا نمودار پر شود" %}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {# ---------- Dense stats strip ---------- #}
+        <div class="panel">
+            <dl class="grid grid-cols-2 divide-y hairline sm:grid-cols-4 sm:divide-y-0
+                       [&>div]:border-s-0 sm:[&>div+div]:border-s">
+                <div class="p-4">
+                    <dt class="label">{% translate "کل دانلود" %}</dt>
+                    <dd class="metric-sm mt-2">{{ number_of_download }}</dd>
+                </div>
+                <div class="border-s hairline p-4">
+                    <dt class="label">{% translate "رایگان" %}</dt>
+                    <dd class="metric-sm mt-2">{{ free_downloads }}</dd>
+                </div>
+                <div class="p-4 sm:border-s sm:hairline">
+                    <dt class="label">{% translate "پولی" %}</dt>
+                    <dd class="metric-sm mt-2 money">{{ paid_downloads }}</dd>
+                </div>
+                <div class="border-s hairline p-4">
+                    <dt class="label">{% translate "فایل" %}</dt>
+                    <dd class="metric-sm mt-2">{{ file_count }}</dd>
+                </div>
+            </dl>
+        </div>
+
+        {# ---------- Third row: top files and the paid ratio ---------- #}
+        <div class="grid gap-4 lg:grid-cols-[1fr_minmax(0,17rem)]">
+
+            <div class="panel min-w-0">
+                <div class="panel-head">
+                    <p class="panel-title">{% translate "پردانلودترین فایل‌ها" %}</p>
+                    <a class="text-xs muted hover:underline" href="{% url 'my_files_page' %}">
+                        {% translate "همه" %}
+                    </a>
+                </div>
+                <div class="panel-body">
+                    {% if top_files %}
+                        <ol class="space-y-3">
+                            {% for file in top_files %}
+                                <li>
+                                    <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                                        <a class="min-w-0 truncate text-sm font-medium hover:underline"
+                                           href="{% url 'file_report' pk=file.id %}">
+                                            {{ file|file_label }}
+                                        </a>
+                                        <span class="num shrink-0 text-sm">{{ file.number_of_download }}</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-fill"
+                                             style="width: {% widthratio file.number_of_download top_files.0.number_of_download 100 %}%"></div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <div class="py-8 text-center">
+                            <p class="text-sm muted">{% translate "هنوز فایلی آپلود نکرده‌اید" %}</p>
+                            <a class="btn-primary btn-sm mt-3" href="{% url 'upload_page' %}">
+                                {% translate "آپلود اولین فایل" %}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <p class="panel-title">{% translate "سهم دانلود پولی" %}</p>
+                </div>
+                <div class="panel-body flex flex-col items-center">
+                    {% include 'shared/chart_ring.html' with ring=paid_ring %}
+                    <div class="mt-4 w-full space-y-2 text-sm">
+                        <div class="flex items-center justify-between gap-3">
+                            <span class="flex items-center gap-1.5">
+                                <span class="dot" style="background-color: rgb(var(--money))"></span>
+                                <span class="muted">{% translate "پولی" %}</span>
+                            </span>
+                            <span class="num font-medium">{{ paid_downloads }}</span>
+                        </div>
+                        <div class="flex items-center justify-between gap-3">
+                            <span class="flex items-center gap-1.5">
+                                <span class="dot" style="background-color: rgb(var(--line-strong))"></span>
+                                <span class="muted">{% translate "رایگان" %}</span>
+                            </span>
+                            <span class="num font-medium">{{ free_downloads }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# ---------- Recent withdrawals ---------- #}
+        <div class="panel">
+            <div class="panel-head">
+                <p class="panel-title">{% translate "آخرین برداشت‌ها" %}</p>
+                <a class="text-xs muted hover:underline" href="{% url 'withdrawal_list_page' %}">
+                    {% translate "همه" %}
+                </a>
+            </div>
+            <div class="panel-body">
+                <table class="rtable">
+                    <thead class="table-head">
+                    <tr>
+                        <th class="px-3 py-2 text-start">{% translate "شناسه" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "واریز به" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "مبلغ" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "تاریخ" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "وضعیت" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-body">
+                    {% for withdraw in list_last_withdrawal %}
+                        <tr>
+                            <td class="px-3 py-2 faint" data-label='{% translate "شناسه" %}'>{{ withdraw.id }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "واریز به" %}'>{{ withdraw.account.get_method_display }}</td>
+                            <td class="num px-3 py-2 font-medium" data-label='{% translate "مبلغ" %}'>{{ withdraw.withdrawal_amount|money }}</td>
+                            <td class="px-3 py-2 muted" data-label='{% translate "تاریخ" %}'>{{ withdraw.created_deta|date:"Y/m/d" }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "وضعیت" %}'>
+                                {% if withdraw.is_paid %}
+                                    <span class="chip chip-money">{% translate "پرداخت شده" %}</span>
+                                {% else %}
+                                    <span class="chip chip-pending">{% translate "در انتظار پرداخت" %}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="px-3 py-8 text-center text-sm muted">
+                                {% translate "هنوز برداشتی ثبت نشده است" %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

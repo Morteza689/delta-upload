@@ -1,0 +1,198 @@
+{% extends 'staff_module/base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "نمای کلی" %}{% endblock %}
+{% block page_title %}{% translate "نمای کلی" %}{% endblock %}
+
+{% block content %}
+    <div class="space-y-4">
+
+        {% comment %}
+        Whatever is waiting on someone comes first; that is what staff open
+        this page for. The general figures come after it, not before.
+        {% endcomment %}
+        <div class="panel">
+            <div class="panel-head">
+                <p class="panel-title">{% translate "در انتظار اقدام" %}</p>
+            </div>
+            <div class="grid grid-cols-2 divide-x-reverse sm:grid-cols-4">
+                <a href="{% url 'staff_tickets' %}"
+                   class="border-b border-e hairline p-4 transition-colors hover:bg-[rgb(var(--sunken))] sm:border-b-0">
+                    <p class="metric-sm {% if pending.tickets %}pending{% endif %}">{{ pending.tickets }}</p>
+                    <p class="mt-1.5 text-xs muted">{% translate "تیکت بی‌پاسخ" %}</p>
+                </a>
+                <a href="{% url 'staff_withdrawals' %}"
+                   class="border-b hairline p-4 transition-colors hover:bg-[rgb(var(--sunken))] sm:border-b-0 sm:border-e">
+                    <p class="metric-sm {% if pending.withdrawals %}pending{% endif %}">{{ pending.withdrawals }}</p>
+                    <p class="mt-1.5 text-xs muted">
+                        {% translate "برداشت" %}
+                        {% if pending.withdrawal_amount %}
+                            <span class="num">· {{ pending.withdrawal_amount|money }}</span>
+                        {% endif %}
+                    </p>
+                </a>
+                <a href="{% url 'staff_payments' %}?status=awaiting"
+                   class="border-e hairline p-4 transition-colors hover:bg-[rgb(var(--sunken))]">
+                    <p class="metric-sm">{{ pending.payments }}</p>
+                    <p class="mt-1.5 text-xs muted">{% translate "پرداخت معلق" %}</p>
+                </a>
+                <div class="p-4">
+                    <p class="metric-sm">{{ pending.ad_earnings }}</p>
+                    <p class="mt-1.5 text-xs muted">{% translate "درآمد آماده تأیید" %}</p>
+                </div>
+            </div>
+        </div>
+
+        {# --- Charts --- #}
+        <div class="grid gap-4 lg:grid-cols-2">
+            <div class="panel min-w-0">
+                <div class="panel-head">
+                    <div>
+                        <p class="panel-title">
+                            {% blocktranslate with d=chart_days %}دانلود {{ d }} روز اخیر{% endblocktranslate %}
+                        </p>
+                        <p class="metric-sm mt-1.5">{{ downloads_chart.total }}</p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {% if downloads_chart.has_data %}
+                        {% include 'shared/chart_timeseries.html' with chart=downloads_chart %}
+                    {% else %}
+                        <p class="flex h-[160px] items-center justify-center text-sm muted">
+                            {% translate "داده‌ای نیست" %}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="panel min-w-0">
+                <div class="panel-head">
+                    <div>
+                        <p class="panel-title">
+                            {% blocktranslate with d=chart_days %}ثبت‌نام {{ d }} روز اخیر{% endblocktranslate %}
+                        </p>
+                        <p class="metric-sm mt-1.5">{{ signups_chart.total }}</p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {% if signups_chart.has_data %}
+                        {% include 'shared/chart_timeseries.html' with chart=signups_chart %}
+                    {% else %}
+                        <p class="flex h-[160px] items-center justify-center text-sm muted">
+                            {% translate "داده‌ای نیست" %}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {# --- Totals --- #}
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="label">{% translate "کاربران" %}</p>
+                    <p class="metric mt-2">{{ users_total }}</p>
+                    <p class="mt-1 text-xs muted">
+                        {% blocktranslate with n=users_new %}{{ n }} در ۲۴ ساعت{% endblocktranslate %}
+                    </p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="label">{% translate "فایل‌ها" %}</p>
+                    <p class="metric mt-2">{{ files_total }}</p>
+                    <p class="mt-1 text-xs muted">
+                        {% blocktranslate with n=files_public %}{{ n }} عمومی{% endblocktranslate %}
+                    </p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="label">{% translate "دانلودها" %}</p>
+                    <p class="metric mt-2">{{ downloads_total }}</p>
+                    <p class="mt-1 text-xs muted">
+                        {% blocktranslate with n=downloads_today %}{{ n }} در ۲۴ ساعت{% endblocktranslate %}
+                    </p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="label">{% translate "ترافیک" %}</p>
+                    <p class="metric mt-2">{{ bandwidth|convertor_byte }}</p>
+                </div>
+            </div>
+        </div>
+
+        {# --- Money --- #}
+        <div class="panel">
+            <div class="panel-head">
+                <p class="panel-title">{% translate "خلاصه مالی" %}</p>
+            </div>
+            <div class="panel-body">
+                <dl class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                    <div>
+                        <dt class="label">{% translate "شارژ کیف پول" %}</dt>
+                        <dd class="metric-sm mt-1.5 money">{{ revenue_topup|money }}</dd>
+                    </div>
+                    <div>
+                        <dt class="label">{% translate "فروش فایل" %}</dt>
+                        <dd class="metric-sm mt-1.5">{{ sales_gross|money }}</dd>
+                    </div>
+                    <div>
+                        <dt class="label">{% translate "سهم فروشندگان" %}</dt>
+                        <dd class="metric-sm mt-1.5">{{ sales_share|money }}</dd>
+                    </div>
+                    <div>
+                        {% comment %}
+                        What the site kept. Only the payout used to be shown,
+                        so the commission had to be worked out by subtracting
+                        one figure from another.
+                        {% endcomment %}
+                        <dt class="label">{% translate "کمیسیون سایت" %}</dt>
+                        <dd class="metric-sm mt-1.5 money">{{ sales_commission|money }}</dd>
+                    </div>
+                    <div>
+                        <dt class="label">{% translate "درآمد تبلیغات پرداختی" %}</dt>
+                        <dd class="metric-sm mt-1.5">{{ ad_paid_micro|micro_money }}</dd>
+                    </div>
+                    <div>
+                        <dt class="label">{% translate "برداشت‌شده" %}</dt>
+                        <dd class="metric-sm mt-1.5">{{ withdrawn|money }}</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        {# --- Fraud --- #}
+        <div class="panel">
+            <div class="panel-head">
+                <p class="panel-title">{% translate "بازدیدهای ردشده (۳۰ روز)" %}</p>
+                {% if ad_setting %}
+                    <span class="text-xs muted num">
+                        CPM {{ ad_setting.cpm_cents }}c · {{ ad_setting.uploader_share_percent }}%
+                    </span>
+                {% else %}
+                    <span class="chip chip-pending">{% translate "تنظیمات تبلیغات ثبت نشده" %}</span>
+                {% endif %}
+            </div>
+            <div class="panel-body">
+                {% if fraud %}
+                    <ul class="space-y-2 text-sm">
+                        {% for row in fraud %}
+                            <li class="flex items-center justify-between gap-4">
+                                <span class="muted">
+                                    {% include 'user_panel_module/component/reject_reason.html' with reason=row.reject_reason %}
+                                </span>
+                                <span class="num font-medium">{{ row.count }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="py-4 text-center text-sm muted">
+                        {% translate "هیچ بازدیدی رد نشده است" %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

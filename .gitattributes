@@ -1,0 +1,19 @@
+# Normalise line endings in the repository to LF.
+#
+# Development happens on Windows and the server is Linux. Without this, the
+# same file gets committed twice over with different endings and every diff is
+# noise. The working copy keeps whatever the platform wants.
+* text=auto eol=lf
+
+# Binary, never touched.
+*.woff2 binary
+*.mo binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.gif binary
+
+# The compiled catalogue is generated from the .po next to it; a merge conflict
+# in it means nothing. Take either side and recompile.
+locale/**/*.mo -diff

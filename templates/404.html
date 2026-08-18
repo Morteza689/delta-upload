@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "صفحه پیدا نشد" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-md py-12 text-center">
+        <p class="metric mb-3" style="color: rgb(var(--line-strong))">404</p>
+        <h1 class="mb-3 text-xl font-bold">{% translate "این صفحه وجود ندارد" %}</h1>
+        <p class="mb-6 text-sm muted">
+            {% translate "شاید لینک اشتباه است، یا فایلی که دنبالش بودی حذف شده یا دیگر عمومی نیست." %}
+        </p>
+        <div class="flex flex-col justify-center gap-2 sm:flex-row">
+            <a class="btn-primary" href="{% url 'home_page' %}">
+                {% translate "صفحه اصلی" %}
+            </a>
+            <a class="btn-secondary" href="{% url 'faq_page' %}">
+                {% translate "سوالات متداول" %}
+            </a>
+        </div>
+    </div>
+{% endblock %}

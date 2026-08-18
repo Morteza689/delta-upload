@@ -1,0 +1,62 @@
+{% extends 'shared/legal_page.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "قوانین و مقررات" %}{% endblock %}
+{% block page_heading %}{% translate "قوانین و مقررات" %}{% endblock %}
+
+{% block page_lead %}
+    <p class="mt-3 text-xs muted">
+        {% translate "با ساخت حساب کاربری، این شرایط را می‌پذیری." %}
+    </p>
+{% endblock %}
+
+{% block page_body %}
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "۱. حساب کاربری" %}</h2>
+        <p class="muted">
+            {% translate "مسئولیت حفظ رمز عبور و هر فعالیتی که با حساب تو انجام شود بر عهده‌ی خودت است. اطلاعات ثبت‌نام باید درست باشد." %}
+        </p>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "۲. محتوای مجاز" %}</h2>
+        <p class="mb-2 muted">{% translate "آپلود این موارد ممنوع است و منجر به حذف فایل و مسدود شدن حساب می‌شود:" %}</p>
+        <ul class="space-y-1.5 muted">
+            <li>{% translate "محتوایی که حق نشر دیگری را نقض کند." %}</li>
+            <li>{% translate "بدافزار، ویروس، یا هر کد مخربی." %}</li>
+            <li>{% translate "محتوای غیرقانونی بر اساس قوانین جمهوری اسلامی ایران." %}</li>
+            <li>{% translate "اطلاعات شخصی دیگران بدون رضایتشان." %}</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "۳. درآمد و پرداخت" %}</h2>
+        <ul class="space-y-1.5 muted">
+            <li>{% translate "سهم آپلودکننده از درآمد تبلیغات و از فروش فایل، ۶۰ درصد است." %}</li>
+            <li>{% translate "درآمد تبلیغات پس از یک دوره‌ی تأیید به موجودی قابل برداشت اضافه می‌شود." %}</li>
+            <li>{% translate "بازدیدهایی که با ابزار خودکار، تکرار، یا هر روش مصنوعی ساخته شوند شمرده نمی‌شوند." %}</li>
+            <li>{% translate "تلاش برای دستکاری آمار بازدید، منجر به ابطال درآمد و مسدود شدن حساب می‌شود." %}</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "۴. حذف محتوا" %}</h2>
+        <p class="muted">
+            {% translate "ما این حق را داریم که هر فایلی را که ناقض این قوانین باشد بدون اطلاع قبلی غیرفعال کنیم. اگر معتقدی فایلت اشتباهی حذف شده، از طریق تیکت اعتراض کن." %}
+        </p>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "۵. در دسترس بودن سرویس" %}</h2>
+        <p class="muted">
+            {% translate "تلاش می‌کنیم سرویس همیشه در دسترس باشد، ولی تضمینی برای در دسترس بودن دائمی یا حفظ ابدی فایل‌ها نمی‌دهیم. از فایل‌های مهمت نسخه‌ی پشتیبان داشته باش." %}
+        </p>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "۶. تغییر قوانین" %}</h2>
+        <p class="muted">
+            {% translate "این شرایط ممکن است تغییر کند. تغییرات مهم از طریق سایت اطلاع‌رسانی می‌شود." %}
+        </p>
+    </section>
+{% endblock %}

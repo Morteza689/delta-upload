@@ -1,0 +1,20 @@
+{% load i18n %}
+{% comment %}
+Ratio ring. The fraction is drawn with stroke-dasharray on a single circle: no
+JavaScript, no library.
+{% endcomment %}
+<div class="relative" style="width: {{ ring.size }}px; height: {{ ring.size }}px">
+    <svg viewBox="0 0 {{ ring.size }} {{ ring.size }}"
+         class="h-full w-full" role="img"
+         aria-label="{% blocktranslate with p=ring.percent %}{{ p }} درصد{% endblocktranslate %}">
+        <circle cx="{{ ring.center }}" cy="{{ ring.center }}" r="{{ ring.radius }}"
+                fill="none" stroke-width="{{ ring.stroke }}" class="ring-track"/>
+        <circle cx="{{ ring.center }}" cy="{{ ring.center }}" r="{{ ring.radius }}"
+                fill="none" stroke-width="{{ ring.stroke }}" class="ring-value"
+                stroke="rgb(var(--money))"
+                stroke-dasharray="{{ ring.dash }} {{ ring.gap }}"/>
+    </svg>
+    <div class="absolute inset-0 flex flex-col items-center justify-center">
+        <span class="metric-sm">{{ ring.percent }}<span class="text-sm">٪</span></span>
+    </div>
+</div>

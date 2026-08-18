@@ -1,0 +1,29 @@
+{% load i18n %}{% load i18n static %}
+<!DOCTYPE html>
+{% comment %}
+The 500 page deliberately does not extend base.html.
+
+Reaching this page means something on the server is broken, and the context
+processors may be the broken thing. If this template leaned on them, the 500
+would itself raise a 500 and the visitor would get a blank page.
+{% endcomment %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% translate "خطای سرور" %}</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+</head>
+<body class="min-h-screen">
+    <main class="mx-auto max-w-md px-4 py-20 text-center">
+        <p class="metric mb-3" style="color: rgb(var(--line-strong))">500</p>
+        <h1 class="mb-3 text-xl font-bold">{% translate "مشکلی پیش آمد" %}</h1>
+        <p class="mb-6 text-sm muted">
+            {% translate "خطایی از سمت ما رخ داد. تیم فنی خبردار شده است. چند دقیقه دیگر دوباره امتحان کن." %}
+        </p>
+        <a class="btn-primary" href="/">{% translate "صفحه اصلی" %}</a>
+    </main>
+</body>
+</html>

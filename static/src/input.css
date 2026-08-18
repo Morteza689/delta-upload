@@ -1,0 +1,502 @@
+/* ===========================================================================
+   Delta Upload design system
+
+   Deliberate choices:
+   - Its own palette in explicit hex rather than Tailwind's defaults. The stock
+     sky and slate are used so widely that they read as a bought template.
+   - Visual weight comes from hairlines, not shadows. Shadows are reserved for
+     things that genuinely sit above the page, like a floating menu.
+   - tabular-nums throughout: this product is full of figures and the columns
+     have to line up.
+   - Denser than a marketing page. This is a working tool, not a landing.
+=========================================================================== */
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('../fonts/Vazirmatn-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('../fonts/Vazirmatn-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('../fonts/Vazirmatn-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* --- Surfaces --- */
+    --paper: 252 252 250;      /* warm white, not pure white */
+    --surface: 255 255 255;
+    --sunken: 246 246 243;
+    --line: 226 226 221;       /* hairline */
+    --line-strong: 205 205 199;
+
+    /* --- Text --- */
+    --ink: 22 22 24;
+    --ink-soft: 92 92 99;
+    --ink-faint: 138 138 146;
+
+    /* --- Semantic colours --- */
+    --brand: 224 62 38;        /* vermillion, primary action only */
+    --brand-ink: 255 255 255;
+    --money: 0 138 82;         /* jade, earnings and success */
+    --pending: 194 124 8;      /* amber, pending */
+    --danger: 190 40 40;
+  }
+
+  /* The dark palette is defined once and applied two ways:
+     1) the visitor's system setting, unless they explicitly chose light
+     2) their own explicit choice from the theme switch
+
+     With only a media query, someone whose system is dark could never see the
+     site in light. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --paper: 10 10 11;
+      --surface: 18 18 20;
+      --sunken: 14 14 16;
+      --line: 40 40 45;
+      --line-strong: 58 58 64;
+
+      --ink: 237 237 240;
+      --ink-soft: 158 158 168;
+      --ink-faint: 110 110 120;
+
+      --brand: 255 94 66;
+      --brand-ink: 20 10 8;
+      --money: 39 190 120;
+      --pending: 226 160 45;
+      --danger: 240 90 90;
+    }
+  }
+
+  :root[data-theme='dark'] {
+    --paper: 10 10 11;
+    --surface: 18 18 20;
+    --sunken: 14 14 16;
+    --line: 40 40 45;
+    --line-strong: 58 58 64;
+
+    --ink: 237 237 240;
+    --ink-soft: 158 158 168;
+    --ink-faint: 110 110 120;
+
+    --brand: 255 94 66;
+    --brand-ink: 20 10 8;
+    --money: 39 190 120;
+    --pending: 226 160 45;
+    --danger: 240 90 90;
+  }
+
+  /* Theme switch: only the icon for the current state is shown. */
+  [data-theme-icon] { display: none; }
+  :root:not([data-theme]) [data-theme-icon='system'],
+  :root[data-theme='dark'] [data-theme-icon='dark'],
+  :root[data-theme='light'] [data-theme-icon='light'] { display: block; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: rgb(var(--paper));
+    color: rgb(var(--ink));
+    @apply antialiased;
+    /* kern everywhere; ss01 only where it belongs, see below. */
+    font-feature-settings: 'kern';
+  }
+
+  /*
+     Persian digits, and only in Persian.
+
+     ss01 is the Vazirmatn feature that swaps 0-9 for ۰-۹. Applied to body it
+     reached every page in every language, so an English visitor read prices
+     and counts in Persian numerals.
+
+     Keyed off the document language, which base.html already sets from the
+     active locale, so nothing has to remember to switch it.
+  */
+  html[lang='fa'] body {
+    font-feature-settings: 'ss01', 'kern';
+  }
+
+  /*
+     Except where the digits are not prose.
+
+     A URL, an IBAN, a wallet address, a bot token or an API key is a string
+     to be copied or typed back, and copying ۱۲۳ out of one of those gives a
+     value nothing will accept. Everything marked ltr is in that category.
+  */
+  html[lang='fa'] [dir='ltr'],
+  html[lang='fa'] code,
+  html[lang='fa'] input,
+  html[lang='fa'] textarea {
+    font-feature-settings: 'kern';
+  }
+
+  /* Figures are everywhere here and must be monospaced so columns hold still. */
+  table, .num, input[type='number'] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+
+  :lang(en) {
+    letter-spacing: -0.005em;
+  }
+
+  ::selection {
+    background-color: rgb(var(--brand) / 0.2);
+  }
+
+  /* One consistent focus ring, for keyboard use. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* --------------------------------------------------------- Surfaces */
+
+  .panel {
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--line));
+    @apply rounded-xl;
+  }
+  .panel-body {
+    @apply p-4 sm:p-5;
+  }
+  /* Panel header: a small tracked label rather than a heavy heading. */
+  .panel-head {
+    border-bottom: 1px solid rgb(var(--line));
+    @apply flex flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-5;
+  }
+  .panel-title {
+    color: rgb(var(--ink-soft));
+    @apply text-[11px] font-medium uppercase tracking-[0.09em];
+  }
+
+  .hairline {
+    border-color: rgb(var(--line));
+  }
+
+  /* ------------------------------------------------------------- Text */
+
+  .muted   { color: rgb(var(--ink-soft)); }
+  .faint   { color: rgb(var(--ink-faint)); }
+  .money   { color: rgb(var(--money)); }
+  .pending { color: rgb(var(--pending)); }
+
+  /* Headline figure: large, tight, monospaced. */
+  .metric {
+    @apply text-[1.75rem] font-bold leading-none tracking-[-0.03em] sm:text-[2rem];
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-sm {
+    @apply text-xl font-bold leading-none tracking-[-0.02em];
+    font-variant-numeric: tabular-nums;
+  }
+  .label {
+    color: rgb(var(--ink-soft));
+    @apply text-[11px] font-medium uppercase tracking-[0.09em];
+  }
+
+  /* ---------------------------------------------------------- Buttons */
+
+  .btn {
+    @apply inline-flex min-h-11 select-none items-center justify-center gap-2
+           rounded-lg px-4 text-sm font-medium transition-colors
+           disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-9;
+  }
+  .btn-primary {
+    @apply btn;
+    background-color: rgb(var(--brand));
+    color: rgb(var(--brand-ink));
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: rgb(var(--brand) / 0.88);
+  }
+  .btn-secondary {
+    @apply btn;
+    background-color: rgb(var(--surface));
+    color: rgb(var(--ink));
+    border: 1px solid rgb(var(--line-strong));
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background-color: rgb(var(--sunken));
+  }
+  .btn-ghost {
+    @apply btn;
+    color: rgb(var(--ink-soft));
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background-color: rgb(var(--sunken));
+    color: rgb(var(--ink));
+  }
+  .btn-danger {
+    @apply btn;
+    background-color: transparent;
+    color: rgb(var(--danger));
+    border: 1px solid rgb(var(--danger) / 0.35);
+  }
+  .btn-danger:hover:not(:disabled) {
+    background-color: rgb(var(--danger) / 0.08);
+  }
+  .btn-sm {
+    @apply min-h-9 px-3 text-xs sm:min-h-8;
+  }
+
+  /* ------------------------------------------------------------- Chips */
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-md px-2 py-0.5 text-xs font-medium;
+  }
+  .chip-money {
+    background-color: rgb(var(--money) / 0.12);
+    color: rgb(var(--money));
+  }
+  .chip-pending {
+    background-color: rgb(var(--pending) / 0.14);
+    color: rgb(var(--pending));
+  }
+  .chip-muted {
+    background-color: rgb(var(--ink-soft) / 0.12);
+    color: rgb(var(--ink-soft));
+  }
+  .chip-brand {
+    background-color: rgb(var(--brand) / 0.12);
+    color: rgb(var(--brand));
+  }
+  /* A status dot beside text: quieter than a full coloured badge. */
+  .dot {
+    @apply inline-block h-1.5 w-1.5 shrink-0 rounded-full;
+  }
+
+  /* ------------------------------------------------------------ Forms */
+
+  .field {
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--line-strong));
+    color: rgb(var(--ink));
+    @apply w-full rounded-lg px-3 py-2.5 text-sm transition-colors sm:py-2;
+  }
+  .field::placeholder {
+    color: rgb(var(--ink-faint));
+  }
+  .field:focus {
+    border-color: rgb(var(--brand));
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(var(--brand) / 0.14);
+  }
+  .form-label {
+    color: rgb(var(--ink-soft));
+    @apply mb-1.5 block text-xs font-medium;
+  }
+  .form-error {
+    color: rgb(var(--danger));
+    @apply mt-1 text-xs;
+  }
+  .form-help {
+    color: rgb(var(--ink-faint));
+    @apply mt-1 text-xs;
+  }
+
+  /* ------------------------------------------------------------ Notes */
+
+  .note {
+    @apply rounded-lg px-4 py-3 text-sm;
+  }
+  .note-error {
+    background-color: rgb(var(--danger) / 0.08);
+    color: rgb(var(--danger));
+    border: 1px solid rgb(var(--danger) / 0.2);
+  }
+  .note-warn {
+    background-color: rgb(var(--pending) / 0.09);
+    color: rgb(var(--pending));
+    border: 1px solid rgb(var(--pending) / 0.22);
+  }
+  .note-money {
+    background-color: rgb(var(--money) / 0.08);
+    color: rgb(var(--money));
+    border: 1px solid rgb(var(--money) / 0.2);
+  }
+
+  /* --------------------------------------------- Embedded content box */
+
+  /* The class name deliberately says nothing about ads. Adblock hides classes
+     like ad, ads, banner and sponsor, and the publisher rules treat using them
+     as a violation. utils/test_adblock.py guards this. */
+  /* Deliberately not flex, and it constrains neither width nor height. A flex
+     wrapper turns its child into a flex item and changes how the network's
+     banner sizes itself, which the publisher rules count as altering the
+     delivered code. Only a min-height, so the page does not jump on load. */
+  .embed-frame {
+    @apply min-h-[90px] w-full;
+  }
+
+  /* The dashed border is for an empty slot only, never around a real ad. */
+  .embed-frame-empty {
+    border: 1px dashed rgb(var(--line-strong));
+    color: rgb(var(--ink-faint));
+    @apply flex min-h-[90px] w-full items-center justify-center rounded-lg text-xs;
+  }
+
+  /* ----------------------------------------------------------- Tables */
+
+  .table-head {
+    border-bottom: 1px solid rgb(var(--line));
+    color: rgb(var(--ink-faint));
+    @apply text-[11px] font-medium uppercase tracking-[0.08em];
+  }
+  .table-body > tr + tr {
+    border-top: 1px solid rgb(var(--line));
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive tables
+
+   A six-column table on a phone either scrolls sideways or is unreadable.
+   Below 768px each row becomes a card and every cell takes its title from its
+   own data-label.
+--------------------------------------------------------------------------- */
+.rtable {
+  @apply w-full text-sm;
+}
+
+@media (max-width: 767px) {
+  .rtable thead { @apply hidden; }
+
+  .rtable tbody > tr {
+    border: 1px solid rgb(var(--line));
+    @apply block rounded-lg p-3;
+  }
+  .rtable tbody > tr + tr {
+    @apply mt-2;
+    border-top-width: 1px;
+  }
+
+  .rtable td {
+    @apply flex items-start justify-between gap-4 px-0 py-1 text-end;
+  }
+  .rtable td::before {
+    content: attr(data-label);
+    color: rgb(var(--ink-faint));
+    @apply shrink-0 text-start text-xs font-medium;
+  }
+  .rtable td:not([data-label]) {
+    @apply block text-center;
+  }
+  .rtable td:not([data-label])::before { content: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Charts: inline SVG, no library
+
+   A charting library is hundreds of kilobytes and usually arrives from a CDN,
+   which for our visitors means a slow page or no chart at all.
+--------------------------------------------------------------------------- */
+.chart-grid line {
+  stroke: rgb(var(--line));
+  stroke-width: 1;
+}
+.chart-area {
+  fill: rgb(var(--brand) / 0.1);
+}
+.chart-line {
+  fill: none;
+  stroke: rgb(var(--brand));
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.chart-dot {
+  fill: rgb(var(--surface));
+  stroke: rgb(var(--brand));
+  stroke-width: 2;
+}
+.chart-bar {
+  fill: rgb(var(--brand) / 0.85);
+  transition: fill 120ms;
+}
+.chart-bar:hover { fill: rgb(var(--brand)); }
+.chart-label {
+  fill: rgb(var(--ink-faint));
+  font-size: 10px;
+}
+
+/* Ratio ring */
+.ring-track { stroke: rgb(var(--line)); }
+.ring-value {
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+/* ---------------------------------------------------------------------------
+   Upload progress bar
+--------------------------------------------------------------------------- */
+.progress-track {
+  background-color: rgb(var(--line));
+  @apply h-1.5 w-full overflow-hidden rounded-full;
+}
+.progress-fill {
+  background-color: rgb(var(--brand));
+  @apply h-full rounded-full;
+  transition: width 200ms linear;
+}
+
+/* ---------------------------------------------------------------------------
+   Landing page 3D scene
+--------------------------------------------------------------------------- */
+.scene { perspective: 1200px; perspective-origin: 50% 40%; }
+
+.stage {
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 10deg)) rotateY(var(--ry, -14deg));
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card3d { transform-style: preserve-3d; backface-visibility: hidden; }
+.layer-back  { transform: translateZ(-60px) scale(0.94); }
+.layer-mid   { transform: translateZ(0); }
+.layer-front { transform: translateZ(70px); }
+
+@keyframes float-y {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -10px; }
+}
+.floaty      { animation: float-y 6s ease-in-out infinite; }
+.floaty-slow { animation: float-y 8s ease-in-out infinite 0.6s; }
+.floaty-fast { animation: float-y 5s ease-in-out infinite 1.2s; }
+
+@keyframes flow-dash { to { stroke-dashoffset: -24; } }
+.flow-line {
+  stroke-dasharray: 5 7;
+  animation: flow-dash 1.4s linear infinite;
+}
+
+/* Respect the system setting: continuous motion makes some people ill. */
+@media (prefers-reduced-motion: reduce) {
+  .floaty, .floaty-slow, .floaty-fast, .flow-line { animation: none; }
+  .stage, .progress-fill { transition: none; }
+}

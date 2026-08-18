@@ -1,0 +1,19 @@
+{% load i18n %}
+{% comment %}
+reCAPTCHA v2 widget.
+
+Google's script loads here rather than in base.html: only pages that actually
+carry a captcha should fetch it, and nothing renders at all when the switch is
+set to the local captcha.
+
+async and defer follow Google's own documentation. If the script cannot load,
+the box stays empty and the form is rejected, which is the right outcome: the
+server-side check fails too and the captcha is not bypassed.
+{% endcomment %}
+<div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
+<noscript>
+    <p class="form-help" style="color: rgb(var(--danger))">
+        {% translate "برای تأیید کپچا باید جاوااسکریپت روشن باشد." %}
+    </p>
+</noscript>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>

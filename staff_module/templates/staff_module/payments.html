@@ -1,0 +1,58 @@
+{% extends 'staff_module/base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "پرداخت ها" %}{% endblock %}
+{% block page_title %}{% translate "پرداخت ها" %}{% endblock %}
+
+{% block page_actions %}
+    <span class="text-sm muted">
+        {% blocktranslate with n=totals.count a=totals.paid|money %}{{ n }} پرداخت موفق · {{ a }}{% endblocktranslate %}
+    </span>
+{% endblock %}
+
+{% block content %}
+    <div class="panel">
+        <div class="panel-body">
+            <table class="rtable">
+                <thead class="table-head">
+                <tr>
+                    <th class="px-3 py-2 text-start">{% translate "شناسه" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "کاربر" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "مبلغ" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "روش" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "تاریخ" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "وضعیت" %}</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                {% for item in payments %}
+                    <tr>
+                        <td class="px-3 py-2 faint num" data-label='{% translate "شناسه" %}'>#{{ item.pk }}</td>
+                        <td class="px-3 py-2" data-label='{% translate "کاربر" %}'>{{ item.user }}</td>
+                        <td class="num px-3 py-2 font-medium" data-label='{% translate "مبلغ" %}'>{{ item.amount|money }}</td>
+                        <td class="px-3 py-2 muted" data-label='{% translate "روش" %}'>{{ item.gateway }}</td>
+                        <td class="px-3 py-2 muted" data-label='{% translate "تاریخ" %}'>{{ item.created_at|date:"Y/m/d H:i" }}</td>
+                        <td class="px-3 py-2" data-label='{% translate "وضعیت" %}'>
+                            {% if item.status == 'paid' %}
+                                <span class="chip chip-money">{{ item.get_status_display }}</span>
+                            {% elif item.status == 'pending' or item.status == 'awaiting' %}
+                                <span class="chip chip-pending">{{ item.get_status_display }}</span>
+                            {% else %}
+                                <span class="chip chip-muted">{{ item.get_status_display }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="px-3 py-8 text-center text-sm muted">
+                            {% translate "پرداختی نیست" %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if is_paginated %}{% include 'shared/pagination.html' %}{% endif %}
+{% endblock %}

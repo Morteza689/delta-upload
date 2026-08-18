@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% if is_csrf_failure %}{% translate "فرم منقضی شد" %}{% else %}{% translate "دسترسی ندارید" %}{% endif %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-md py-12 text-center">
+        <p class="metric mb-3" style="color: rgb(var(--line-strong))">403</p>
+
+        {% comment %}
+        Two different problems share this status code, and telling someone
+        "you do not have access" when their form simply went stale sends them
+        to support over something a reload fixes.
+        {% endcomment %}
+        {% if is_csrf_failure %}
+            <h1 class="mb-3 text-xl font-bold">
+                {% translate "این فرم منقضی شده بود" %}
+            </h1>
+            <p class="mb-6 text-sm muted">
+                {% translate "صفحه‌ای که فرم را از آن فرستادی مدتی باز مانده بود. برگرد، صفحه را تازه کن و دوباره بفرست." %}
+            </p>
+            <div class="flex flex-col justify-center gap-2 sm:flex-row">
+                <button type="button" class="btn-primary" onclick="history.back()">
+                    {% translate "برگرد" %}
+                </button>
+                <a class="btn-secondary" href="{% url 'home_page' %}">
+                    {% translate "صفحه اصلی" %}
+                </a>
+            </div>
+            <p class="mt-6 text-xs faint">
+                {% translate "اگر باز هم تکرار شد، احتمالا مرورگر کوکی‌ها را نگه نمی‌دارد." %}
+            </p>
+        {% else %}
+            <h1 class="mb-3 text-xl font-bold">{% translate "به این بخش دسترسی نداری" %}</h1>
+            <p class="mb-6 text-sm muted">
+                {% translate "اگر فکر می‌کنی اشتباهی رخ داده، وارد حسابت شو یا تیکت بزن." %}
+            </p>
+            <div class="flex flex-col justify-center gap-2 sm:flex-row">
+                <a class="btn-primary" href="{% url 'home_page' %}">{% translate "صفحه اصلی" %}</a>
+                {% if not user.is_authenticated %}
+                    <a class="btn-secondary" href="{% url 'login_page' %}">{% translate "ورود" %}</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

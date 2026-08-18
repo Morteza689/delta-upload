@@ -1,0 +1,207 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "گزارش فایل" %}{% endblock %}
+{% block page_title %}
+    {% translate "گزارش" %}: {{ file|file_label }}
+{% endblock %}
+
+{% block content %}
+    <div class="space-y-6">
+
+        {# --- Summary cards --- #}
+        <div class="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="metric-sm">{{ total_downloads }}</p>
+                    <p class="mt-1 text-sm muted">
+                        {% translate "کل دانلود" %}
+                    </p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="metric-sm">
+                        {{ free.count }}
+                    </p>
+                    <p class="mt-1 text-sm muted">
+                        {% translate "دانلود رایگان" %}
+                    </p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="metric-sm money">
+                        {{ paid.count }}
+                    </p>
+                    <p class="mt-1 text-sm muted">
+                        {% translate "دانلود پولی" %}
+                    </p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <p class="metric-sm">{{ unique_visitors }}</p>
+                    <p class="mt-1 text-sm muted">
+                        {% translate "بازدیدکننده یکتا" %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        {# --- Earnings --- #}
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-4">{% translate "درآمد این فایل" %}</h2>
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+                    <div class="rounded-lg border hairline p-4">
+                        <p class="text-xs muted">
+                            {% translate "فروش (سهم شما)" %}
+                        </p>
+                        <p class="metric-sm money">
+                            {{ sales_share|money }}
+                        </p>
+                        <p class="mt-1 text-xs muted">
+                            {% blocktranslate count n=sales_count %}{{ n }} فروش{% plural %}{{ n }} فروش{% endblocktranslate %}
+                        </p>
+                    </div>
+                    <div class="rounded-lg border hairline p-4">
+                        <p class="text-xs muted">
+                            {% translate "تبلیغات (تأییدشده)" %}
+                        </p>
+                        <p class="metric-sm">
+                            {{ ad_confirmed_micro|micro_money }}
+                        </p>
+                        <p class="mt-1 text-xs muted">
+                            {% blocktranslate with n=ad_impressions %}{{ n }} نمایش{% endblocktranslate %}
+                        </p>
+                    </div>
+                    <div class="rounded-lg border hairline p-4">
+                        <p class="text-xs muted">
+                            {% translate "تبلیغات (در انتظار)" %}
+                        </p>
+                        <p class="metric-sm pending">
+                            {{ ad_pending_micro|micro_money }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# --- Daily trend --- #}
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-4">
+                    {% blocktranslate with d=days %}دانلود در {{ d }} روز گذشته{% endblocktranslate %}
+                </h2>
+                {% if daily %}
+                    <div class="flex h-40 items-end gap-1 overflow-x-auto">
+                        {% for row in daily %}
+                            <div class="flex min-w-[1.25rem] flex-1 flex-col items-center gap-1"
+                                 title="{{ row.day }}: {{ row.count }}">
+                                <div class="chart-bar w-full rounded-t"
+                                     style="height: {{ row.percent }}%"></div>
+                                <span class="text-[10px] faint">{{ row.day|date:"m/d" }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="py-8 text-center faint">
+                        {% translate "در این بازه دانلودی ثبت نشده است" %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        {# --- Fraud --- #}
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-1">{% translate "بازدیدهای ردشده" %}</h2>
+                <p class="mb-4 text-xs muted">
+                    {% blocktranslate with total=sessions_total counted=sessions_counted %}از {{ total }} بازدید، {{ counted }} مورد برای درآمد شمرده شد.{% endblocktranslate %}
+                </p>
+
+                {% if rejections %}
+                    <div class="overflow-x-auto">
+                        <table class="rtable">
+                            <thead class="table-head">
+                            <tr>
+                                <th class="px-3 py-2 text-start">{% translate "دلیل" %}</th>
+                                <th class="px-3 py-2 text-start">{% translate "تعداد" %}</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-body">
+                            {% for row in rejections %}
+                                <tr>
+                                    <td class="px-3 py-2" data-label='{% translate "دلیل" %}'>
+                                        {% include 'user_panel_module/component/reject_reason.html' with reason=row.reject_reason %}
+                                    </td>
+                                    <td class="px-3 py-2" data-label='{% translate "تعداد" %}'>{{ row.count }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="py-4 text-center faint">
+                        {% translate "هیچ بازدیدی رد نشده است" %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        {# --- File details --- #}
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-4">{% translate "مشخصات" %}</h2>
+                <dl class="grid gap-3 text-sm sm:grid-cols-2">
+                    <div class="flex justify-between gap-4">
+                        <dt class="muted">{% translate "حجم" %}</dt>
+                        <dd class="font-medium">{{ file.size_bytes|convertor_byte }}</dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                        <dt class="muted">{% translate "ترافیک مصرفی" %}</dt>
+                        <dd class="font-medium">{{ bytes_total|convertor_byte }}</dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                        <dt class="muted">{% translate "قیمت" %}</dt>
+                        <dd class="font-medium">
+                            {% if file.is_free %}{% translate "رایگان" %}{% else %}{{ file.price|money }}{% endif %}
+                        </dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                        <dt class="muted">{% translate "انتشار" %}</dt>
+                        <dd class="font-medium">
+                            {% if file.is_public_now %}
+                                <span class="chip chip-money">{% translate "عمومی" %}</span>
+                            {% elif file.visibility == 'public' %}
+                                <span class="chip chip-pending">{% translate "منقضی شده" %}</span>
+                            {% else %}
+                                <span class="chip chip-muted">{% translate "خصوصی" %}</span>
+                            {% endif %}
+                        </dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                        <dt class="muted">{% translate "دانلود خودتان" %}</dt>
+                        <dd class="font-medium">{{ owner.count }}</dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                        <dt class="muted">{% translate "تاریخ آپلود" %}</dt>
+                        <dd class="font-medium">{{ file.created_deta|date:"Y/m/d" }}</dd>
+                    </div>
+                </dl>
+
+                {% if file.is_public_now %}
+                    <a class="btn-secondary mt-5 w-full"
+                       href="{% url 'download_page' slug=file.slug %}">
+                        {% translate "مشاهده صفحه دانلود" %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <a class="btn-secondary" href="{% url 'my_files_page' %}">
+            {% translate "بازگشت به فایل ها" %}
+        </a>
+    </div>
+{% endblock %}

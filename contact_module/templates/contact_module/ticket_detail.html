@@ -1,0 +1,113 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n %}
+
+{% block title %}{{ ticket.subject }}{% endblock %}
+{% block page_title %}
+    <span class="faint num me-1 text-sm">#{{ ticket.pk }}</span>{{ ticket.subject }}
+{% endblock %}
+
+{% block page_actions %}
+    {% include 'contact_module/component/ticket_status.html' with status=ticket.status %}
+{% endblock %}
+
+{% block content %}
+    <div class="space-y-4">
+
+        {# --- Details --- #}
+        <div class="panel">
+            <dl class="grid grid-cols-2 gap-x-4 gap-y-3 p-4 text-sm sm:grid-cols-4">
+                <div>
+                    <dt class="label">{% translate "بخش" %}</dt>
+                    <dd class="mt-1">{{ ticket.get_department_display }}</dd>
+                </div>
+                <div>
+                    <dt class="label">{% translate "اولویت" %}</dt>
+                    <dd class="mt-1">{{ ticket.get_priority_display }}</dd>
+                </div>
+                <div>
+                    <dt class="label">{% translate "ایجاد" %}</dt>
+                    <dd class="mt-1">{{ ticket.created_at|date:"Y/m/d" }}</dd>
+                </div>
+                {% if is_staff_view %}
+                    <div>
+                        <dt class="label">{% translate "کاربر" %}</dt>
+                        <dd class="mt-1 truncate">{{ ticket.user }}</dd>
+                    </div>
+                {% endif %}
+            </dl>
+        </div>
+
+        {# --- Message thread --- #}
+        <div class="space-y-3">
+            {% for message in messages_list %}
+                <div class="panel {% if message.is_staff_reply %}border-s-2{% endif %}"
+                     {% if message.is_staff_reply %}style="border-inline-start-color: rgb(var(--brand))"{% endif %}>
+                    <div class="panel-body">
+                        <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
+                            <span class="text-sm font-medium">
+                                {% if message.is_staff_reply %}
+                                    <span style="color: rgb(var(--brand))">
+                                        {% translate "پشتیبانی" %}
+                                    </span>
+                                {% else %}
+                                    {{ message.author|default:_("کاربر حذف‌شده") }}
+                                {% endif %}
+                            </span>
+                            <span class="text-xs faint">{{ message.created_at|date:"Y/m/d H:i" }}</span>
+                        </div>
+
+                        <p class="whitespace-pre-line text-sm leading-relaxed">{{ message.body }}</p>
+
+                        {% if message.attachment %}
+                            <a class="btn-secondary btn-sm mt-3"
+                               href="{% url 'ticket_attachment' pk=message.pk %}">
+                                {% translate "دریافت پیوست" %}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {# --- Reply --- #}
+        {% if ticket.is_open %}
+            <div class="panel">
+                <div class="panel-body">
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        {% include 'shared/form_fields.html' %}
+
+                        <div class="flex flex-col gap-2 sm:flex-row">
+                            <button type="submit" class="btn-primary sm:flex-1">
+                                {% translate "ارسال پاسخ" %}
+                            </button>
+                            <button type="submit" name="action" value="close"
+                                    class="btn-secondary">
+                                {% translate "بستن تیکت" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <div class="panel">
+                <div class="panel-body flex flex-wrap items-center justify-between gap-3">
+                    <p class="text-sm muted">
+                        {% translate "این تیکت بسته شده است." %}
+                    </p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="action" value="reopen"
+                                class="btn-secondary btn-sm">
+                            {% translate "بازکردن دوباره" %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+
+        <a class="btn-ghost btn-sm" href="{% url 'ticket_list' %}">
+            {% translate "بازگشت به تیکت ها" %}
+        </a>
+    </div>
+{% endblock %}

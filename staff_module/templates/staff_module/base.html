@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% comment %}
+Staff dashboard shell. Kept apart from the user panel because the menu and the
+audience differ; merging them would show ordinary users links they cannot open.
+{% endcomment %}
+
+{% block body %}
+    <div class="grid gap-5 lg:grid-cols-[12.5rem_1fr] lg:gap-8">
+
+        <aside class="min-w-0 lg:sticky lg:top-20 lg:h-fit">
+            <p class="label mb-3 hidden lg:block">{% translate "مدیریت" %}</p>
+
+            <nav class="-mx-4 flex gap-1 overflow-x-auto px-4 pb-1 text-sm
+                        [scrollbar-width:none] lg:mx-0 lg:flex-col lg:gap-0
+                        lg:overflow-visible lg:px-0 lg:pb-0">
+                {% url 'staff_overview' as s_home %}
+                {% url 'staff_users' as s_users %}
+                {% url 'staff_files' as s_files %}
+                {% url 'staff_tickets' as s_tickets %}
+                {% url 'staff_withdrawals' as s_wd %}
+                {% url 'staff_payments' as s_pay %}
+                {% url 'staff_exchange_rate' as s_rate %}
+                {% url 'staff_security' as s_sec %}
+                {% url 'staff_telegram' as s_tg %}
+
+                {% include 'shared/panel_nav_item.html' with target=s_home label=_("نمای کلی") %}
+                {% include 'shared/panel_nav_item.html' with target=s_tickets label=_("تیکت ها") %}
+                {% include 'shared/panel_nav_item.html' with target=s_wd label=_("برداشت ها") %}
+                {% include 'shared/panel_nav_item.html' with target=s_pay label=_("پرداخت ها") %}
+                {% include 'shared/panel_nav_item.html' with target=s_rate label=_("نرخ ارز") %}
+                {% include 'shared/panel_nav_item.html' with target=s_sec label=_("امنیت") %}
+                {% include 'shared/panel_nav_item.html' with target=s_tg label=_("تلگرام") %}
+                {% include 'shared/panel_nav_item.html' with target=s_users label=_("کاربران") %}
+                {% include 'shared/panel_nav_item.html' with target=s_files label=_("فایل ها") %}
+
+                <span class="hidden lg:my-2 lg:block lg:border-t lg:hairline"></span>
+
+                <a href="/admin/" class="shrink-0 whitespace-nowrap rounded-lg px-3 py-2
+                          transition-colors hover:bg-[rgb(var(--sunken))] lg:rounded-none
+                          lg:border-s-2 lg:border-transparent lg:ps-3"
+                   style="color: rgb(var(--ink-soft))">
+                    {% translate "پنل جنگو" %}
+                </a>
+            </nav>
+        </aside>
+
+        <section class="min-w-0">
+            <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <h1 class="text-lg font-bold tracking-[-0.02em] sm:text-xl">
+                    {% block page_title %}{% endblock %}
+                </h1>
+                {% block page_actions %}{% endblock %}
+            </div>
+            {% block content %}{% endblock %}
+        </section>
+    </div>
+{% endblock %}

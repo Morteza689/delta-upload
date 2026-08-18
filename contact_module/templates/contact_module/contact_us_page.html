@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "تماس با ما" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-lg">
+        <div class="panel">
+            <div class="panel-body">
+                <h1 class="mb-5 text-lg font-bold sm:mb-6 sm:text-xl">{% translate "تماس با ما" %}</h1>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% include 'shared/form_fields.html' %}
+
+                    <button type="submit" class="btn-primary w-full">{% translate "ارسال" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

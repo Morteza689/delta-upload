@@ -1,0 +1,59 @@
+{% extends 'shared/legal_page.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "حریم خصوصی" %}{% endblock %}
+{% block page_heading %}{% translate "حریم خصوصی" %}{% endblock %}
+
+{% block page_body %}
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "چه اطلاعاتی جمع می‌کنیم" %}</h2>
+        <ul class="space-y-1.5 muted">
+            <li>{% translate "اطلاعات حساب: نام کاربری و ایمیل." %}</li>
+            <li>{% translate "فایل‌هایی که آپلود می‌کنی و اطلاعات مربوط به آنها." %}</li>
+            <li>{% translate "سابقه‌ی مالی: شارژ، خرید، فروش و برداشت." %}</li>
+            <li>{% translate "آمار بازدید صفحات دانلود، برای محاسبه‌ی درآمد و تشخیص تقلب." %}</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "درباره‌ی آدرس IP" %}</h2>
+        <p class="muted">
+            {% translate "برای تشخیص بازدید تکراری و جلوگیری از تقلب، به شناسه‌ای یکتا از هر بازدیدکننده نیاز داریم. آدرس IP خام ذخیره نمی‌شود؛ به‌جایش یک هش رمزنگاری‌شده از ترکیب آدرس و مرورگر نگه داشته می‌شود که قابل برگرداندن به آدرس اصلی نیست." %}
+        </p>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "کوکی‌ها" %}</h2>
+        <ul class="space-y-1.5 muted">
+            <li>{% translate "کوکی نشست: برای اینکه وارد حسابت بمانی." %}</li>
+            <li>{% translate "کوکی زبان: برای اینکه انتخاب زبانت یادمان بماند." %}</li>
+            <li>{% translate "کوکی امنیتی (CSRF): برای محافظت از فرم‌ها." %}</li>
+        </ul>
+        <p class="mt-2 muted">
+            {% translate "شبکه‌های تبلیغاتی ممکن است کوکی‌های خودشان را روی صفحات دانلود قرار دهند؛ سیاست آنها جدا از ماست." %}
+        </p>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "با چه کسانی به اشتراک می‌گذاریم" %}</h2>
+        <p class="muted">
+            {% translate "اطلاعات شخصی تو را نمی‌فروشیم. داده فقط با سرویس‌هایی که برای کار سایت لازم‌اند در میان گذاشته می‌شود: درگاه پرداخت (فقط مبلغ و شناسه‌ی تراکنش) و شبکه‌ی تبلیغاتی (فقط بازدید صفحه)." %}
+        </p>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "امنیت" %}</h2>
+        <ul class="space-y-1.5 muted">
+            <li>{% translate "رمز عبور به‌صورت هش‌شده ذخیره می‌شود، نه متن ساده." %}</li>
+            <li>{% translate "کلیدهای API هم هش می‌شوند و بعد از ساخت دیگر قابل بازیابی نیستند." %}</li>
+            <li>{% translate "فایل‌های خصوصی هیچ آدرس عمومی ندارند و فقط با بررسی مالکیت سرو می‌شوند." %}</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "حق تو" %}</h2>
+        <p class="muted">
+            {% translate "می‌توانی هر زمان فایل‌هایت را حذف کنی. برای حذف کامل حساب و داده‌هایت، تیکت بزن." %}
+        </p>
+    </section>
+{% endblock %}

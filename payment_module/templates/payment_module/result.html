@@ -1,0 +1,67 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "نتیجه پرداخت" %}{% endblock %}
+{% block page_title %}{% translate "نتیجه پرداخت" %}{% endblock %}
+
+{% block content %}
+    <div class="max-w-lg">
+        <div class="panel">
+            <div class="panel-body">
+
+                {% if payment.status == 'paid' %}
+                    <div class="note note-money mb-5">
+                        <p class="panel-title">{% translate "پرداخت با موفقیت انجام شد" %}</p>
+                        <p class="mt-1 text-sm">
+                            {% blocktranslate with a=payment.amount|money %}{{ a }} به کیف پول شما اضافه شد.{% endblocktranslate %}
+                        </p>
+                    </div>
+                {% elif payment.status == 'awaiting' %}
+                    <div class="note note-warn mb-5">
+                        <p class="panel-title">{% translate "در انتظار تأیید شبکه" %}</p>
+                        <p class="mt-1 text-sm">
+                            {% translate "تراکنش شما ثبت شد. به محض تأیید روی شبکه، موجودی به‌طور خودکار شارژ می‌شود. این کار معمولاً چند دقیقه طول می‌کشد." %}
+                        </p>
+                    </div>
+                {% else %}
+                    <div class="alert-error mb-5">
+                        <p class="panel-title">{% translate "پرداخت انجام نشد" %}</p>
+                        {% if payment.error %}
+                            <p class="mt-1 text-sm">{{ payment.error }}</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <dl class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <dt class="muted">{% translate "مبلغ" %}</dt>
+                        <dd class="font-medium">{{ payment.amount|money }}</dd>
+                    </div>
+                    <div class="flex justify-between">
+                        <dt class="muted">{% translate "روش" %}</dt>
+                        <dd class="font-medium">{{ payment.gateway }}</dd>
+                    </div>
+                    {% if payment.tracking_code %}
+                        <div class="flex justify-between gap-4">
+                            <dt class="muted">{% translate "کد پیگیری" %}</dt>
+                            <dd class="truncate font-mono text-xs">{{ payment.tracking_code }}</dd>
+                        </div>
+                    {% endif %}
+                    <div class="flex justify-between border-t hairline pt-3">
+                        <dt class="muted">{% translate "موجودی فعلی" %}</dt>
+                        <dd class="font-bold" style="color: rgb(var(--brand))">{{ user.balance|money }}</dd>
+                    </div>
+                </dl>
+
+                <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+                    <a class="btn-secondary flex-1" href="{% url 'topup_page' %}">
+                        {% translate "شارژ کیف پول" %}
+                    </a>
+                    <a class="btn-primary flex-1" href="{% url 'user_dashbord' %}">
+                        {% translate "داشبورد" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

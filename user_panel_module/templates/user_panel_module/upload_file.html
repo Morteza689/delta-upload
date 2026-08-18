@@ -1,0 +1,59 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n static %}
+
+{% block title %}{% translate "آپلود فایل" %}{% endblock %}
+{% block page_title %}{% translate "آپلود فایل" %}{% endblock %}
+
+{% block content %}
+    <div class="max-w-2xl">
+        <div class="panel">
+            <div class="panel-body">
+
+                <form method="post" enctype="multipart/form-data" novalidate
+                      data-upload-form
+                      data-upload-success-url="{% url 'my_files_page' %}"
+                      data-upload-messages='{"remaining": "{% translate "باقی‌مانده" %}", "done": "{% translate "در حال ذخیره…" %}", "failed": "{% translate "آپلود ناموفق بود" %}", "network": "{% translate "ارتباط قطع شد" %}", "percent": "{% translate "٪" %}"}'>
+                    {% csrf_token %}
+
+                    <p class="note note-error mb-4" data-upload-error hidden></p>
+
+                    {% include 'shared/form_fields.html' %}
+
+                    {% comment %}
+                    The progress bar stays hidden until an upload starts. The
+                    hidden attribute rather than a CSS class, so that with no
+                    JavaScript this section never appears and the plain form
+                    still works.
+                    {% endcomment %}
+                    <div class="mb-4 rounded-lg border hairline p-4" data-upload-progress hidden>
+                        <div class="mb-2 flex items-baseline justify-between gap-3">
+                            <span class="text-sm font-medium" data-upload-percent>0%</span>
+                            <span class="num text-xs muted" data-upload-size></span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 0%" data-upload-fill></div>
+                        </div>
+                        <p class="mt-2 text-xs faint" data-upload-status></p>
+                    </div>
+
+                    <p class="note note-warn mb-4 text-xs">
+                        {% translate "فایل خصوصی فقط در پنل خودتان قابل دسترسی است و لینک عمومی ندارد." %}
+                    </p>
+
+                    <div class="flex gap-2">
+                        <button type="submit" class="btn-primary flex-1">
+                            {% translate "آپلود" %}
+                        </button>
+                        <button type="button" class="btn-secondary" data-upload-cancel hidden>
+                            {% translate "لغو" %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'src/upload.js' %}" defer></script>
+{% endblock %}

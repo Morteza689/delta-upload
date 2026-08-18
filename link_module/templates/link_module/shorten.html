@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "کوتاه‌کننده لینک" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-2xl">
+
+        <header class="mb-6 text-center">
+            <h1 class="mb-2 text-2xl font-bold tracking-[-0.02em] sm:text-3xl">
+                {% translate "کوتاه‌کننده لینک" %}
+            </h1>
+            <p class="text-sm muted">
+                {% translate "آدرس بلندت را کوتاه کن. نیازی به ساخت حساب نیست." %}
+            </p>
+        </header>
+
+        {% if link %}
+            {# The result sits above the form so it is seen straight away. #}
+            <div class="note note-money mb-5">
+                <p class="mb-2 text-xs font-medium">{% translate "لینک کوتاه آماده است" %}</p>
+                <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+                    <code id="short-result" dir="ltr"
+                          class="flex-1 overflow-x-auto rounded-lg px-4 py-3 font-mono text-sm"
+                          style="background-color: rgb(var(--ink)); color: rgb(var(--paper))"
+                    >{{ request.scheme }}://{{ request.get_host }}{{ link.get_absolute_url }}</code>
+                    <button type="button" class="btn-secondary shrink-0 js-copy"
+                            data-copy-target="#short-result">
+                        {% translate "کپی" %}
+                    </button>
+                </div>
+                <p class="mt-2 truncate text-xs" dir="ltr">{{ link.target }}</p>
+            </div>
+        {% endif %}
+
+        <div class="panel">
+            <div class="panel-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% include 'shared/form_fields.html' %}
+
+                    <button type="submit" class="btn-primary w-full">
+                        {% translate "کوتاه کن" %}
+                    </button>
+                </form>
+
+                {% if not user.is_authenticated %}
+                    <p class="form-help mt-3">
+                        {% translate "اگر وارد حسابت شوی، لینک‌هایت ذخیره می‌شوند، آمار کلیک می‌بینی و کپچا هم نمی‌خواهد." %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if recent %}
+            <div class="panel mt-5">
+                <div class="panel-head">
+                    <p class="panel-title">{% translate "لینک های اخیر شما" %}</p>
+                </div>
+                <div class="panel-body">
+                    <table class="rtable">
+                        <thead class="table-head">
+                        <tr>
+                            <th class="px-3 py-2 text-start">{% translate "کد" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "مقصد" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "کلیک" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "تاریخ" %}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        {% for item in recent %}
+                            <tr>
+                                <td class="px-3 py-2" data-label='{% translate "کد" %}'>
+                                    <a class="font-mono hover:underline" dir="ltr"
+                                       style="color: rgb(var(--brand))"
+                                       href="{{ item.get_absolute_url }}">{{ item.code }}</a>
+                                </td>
+                                <td class="max-w-xs truncate px-3 py-2 muted" dir="ltr"
+                                    data-label='{% translate "مقصد" %}'>{{ item.target }}</td>
+                                <td class="num px-3 py-2" data-label='{% translate "کلیک" %}'>{{ item.clicks }}</td>
+                                <td class="px-3 py-2 muted" data-label='{% translate "تاریخ" %}'>{{ item.created_at|date:"Y/m/d" }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n static dup_filters %}
+
+{% block title %}{% translate "برداشت" %}{% endblock %}
+{% block page_title %}{% translate "درخواست برداشت" %}{% endblock %}
+
+{% block content %}
+    <div class="max-w-xl">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="mb-5 rounded-lg border hairline p-4">
+                    <p class="text-sm muted">{% translate "موجودی قابل برداشت" %}</p>
+                    <p class="metric money">
+                        {{ user.balance|money }}
+                    </p>
+                </div>
+
+                {% comment %}
+                With no destination saved, the select is empty and the form is
+                rejected without explaining itself. People need to see what the
+                previous step is, not a form that cannot work.
+                {% endcomment %}
+                {% if accounts %}
+                    <p class="note note-pending mb-5 text-xs">
+                        {% translate "کارمزد انتقال از موجودی برداشت شما برداشته می‌شود؛ یعنی مبلغی که دریافت می‌کنی به اندازه‌ی کارمزد کمتر از مبلغ درخواستی است." %}
+                    </p>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {% include 'shared/form_fields.html' %}
+
+                        {% comment %}
+                        Live preview of what will arrive. It starts hidden and
+                        is only revealed by JavaScript; if the script never
+                        loads nothing is lost, because the rules table is
+                        further down this page.
+                        {% endcomment %}
+                        <div class="mb-4 rounded-lg border hairline p-4" hidden
+                             data-net-preview
+                             data-rules="{{ rules_json }}"
+                             data-label-min="{% translate 'حداقل برداشت برای این روش %s است.' %}">
+                            <div class="flex items-baseline justify-between gap-3 text-sm">
+                                <span class="muted">{% translate "کارمزد انتقال" %}</span>
+                                <span class="num" data-net-fee>—</span>
+                            </div>
+                            <div class="mt-2 flex items-baseline justify-between gap-3 border-t hairline pt-2">
+                                <span class="text-sm font-medium">{% translate "مبلغی که دریافت می‌کنی" %}</span>
+                                <span class="num text-lg font-bold money" data-net-amount>—</span>
+                            </div>
+                            <p class="mt-2 text-xs" style="color: rgb(var(--danger))"
+                               data-net-note hidden></p>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full">{% translate "ثبت درخواست" %}</button>
+                    </form>
+
+                    {% comment %}
+                    The table comes from the same source the form validates
+                    against, so the figures printed here can never disagree with
+                    what the form accepts.
+                    {% endcomment %}
+                    <div class="mt-6 border-t hairline pt-5">
+                        <p class="label mb-3">{% translate "حداقل و کارمزد هر روش" %}</p>
+                        <table class="rtable">
+                            <thead>
+                                <tr>
+                                    <th>{% translate "روش" %}</th>
+                                    <th>{% translate "حداقل برداشت" %}</th>
+                                    <th>{% translate "کارمزد انتقال" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rule in rules %}
+                                    <tr>
+                                        <td data-label="{% translate 'روش' %}">
+                                            <span class="text-xs">{{ rule.label }}</span>
+                                        </td>
+                                        <td data-label="{% translate 'حداقل برداشت' %}">
+                                            <span class="num text-xs font-medium">{{ rule.min_cents|money }}</span>
+                                        </td>
+                                        <td data-label="{% translate 'کارمزد انتقال' %}">
+                                            {% if rule.fee_cents %}
+                                                <span class="num text-xs">{{ rule.fee_cents|money }}</span>
+                                            {% else %}
+                                                <span class="chip chip-money">{% translate "رایگان" %}</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="note mb-4">
+                        <p class="mb-1 text-sm font-medium">{% translate "اول مقصد برداشت را ثبت کن" %}</p>
+                        <p class="text-xs">
+                            {% translate "برداشت به شماره شبا یا کیف پول تتر انجام می‌شود. تا وقتی مقصدی ثبت نکرده باشی، درخواست برداشت ممکن نیست." %}
+                        </p>
+                    </div>
+                    <a class="btn-primary w-full" href="{% url 'payout_accounts_page' %}">
+                        {% translate "ثبت مقصد برداشت" %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'src/withdrawal.js' %}" defer></script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% load i18n %}
+{% comment %}
+Consistent rendering for form fields. The input classes are declared on the
+Python widgets (account_module.forms.INPUT_CLASS) so only layout and errors are
+left here.
+{% endcomment %}
+
+{% if form.non_field_errors %}
+    <div class="note note-error mb-4">
+        {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+    </div>
+{% endif %}
+
+{% for field in form %}
+    <div class="mb-4">
+        <label class="form-label" for="{{ field.id_for_label }}">
+            {{ field.label }}
+            {% if field.field.required %}<span class="">*</span>{% endif %}
+        </label>
+        {{ field }}
+        {% if field.help_text %}<p class="form-help">{{ field.help_text }}</p>{% endif %}
+        {% for error in field.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+    </div>
+{% endfor %}

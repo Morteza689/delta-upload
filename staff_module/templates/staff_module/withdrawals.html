@@ -1,0 +1,134 @@
+{% extends 'staff_module/base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "برداشت ها" %}{% endblock %}
+{% block page_title %}{% translate "برداشت ها" %}{% endblock %}
+
+{% block content %}
+    <div class="space-y-4">
+
+        <div class="panel">
+            <div class="panel-head">
+                <p class="panel-title">{% translate "در انتظار پرداخت" %}</p>
+            </div>
+            <div class="panel-body">
+                {% if pending %}
+                    <table class="rtable">
+                        <thead class="table-head">
+                        <tr>
+                            <th class="px-3 py-2 text-start">{% translate "شناسه" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "کاربر" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "مبلغ" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "واریز به" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "تاریخ" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "عملیات" %}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        {% for item in pending %}
+                            <tr>
+                                <td class="px-3 py-2 faint num" data-label='{% translate "شناسه" %}'>#{{ item.pk }}</td>
+                                <td class="px-3 py-2" data-label='{% translate "کاربر" %}'>{{ item.user }}</td>
+                                {% comment %}
+                                The figure to actually send is the net amount.
+                                Gross and fee sit smaller underneath so the
+                                answer is here if the user asks.
+                                {% endcomment %}
+                                <td class="px-3 py-2" data-label='{% translate "مبلغ" %}'>
+                                    <span class="num block font-medium money">{{ item.net_amount|money }}</span>
+                                    {% if item.fee %}
+                                        <span class="block text-[11px] faint num">
+                                            {{ item.withdrawal_amount|money }} − {{ item.fee|money }}
+                                            {% translate "کارمزد" %}
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                {% comment %}
+                                This is what the operator needs to make the
+                                transfer. The destination is shown in full, not
+                                truncated: it has to be copied, not just read.
+                                {% endcomment %}
+                                <td class="px-3 py-2" data-label='{% translate "واریز به" %}'>
+                                    {% if item.account.is_crypto %}
+                                        <span class="chip chip-brand mb-1">{{ item.account.network }}</span>
+                                        <span class="block text-xs">{% translate "تتر" %}</span>
+                                    {% else %}
+                                        <span class="chip mb-1">{% translate "شبا" %}</span>
+                                        {% if item.toman %}
+                                            <span class="block text-xs font-medium num">{{ item.toman|floatformat:0 }} {% translate "تومان" %}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                    <code class="block break-all text-[11px] faint" dir="ltr">{{ item.account.destination }}</code>
+                                    {% if item.account.holder_name %}
+                                        <span class="block text-[11px] faint">{{ item.account.holder_name }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-3 py-2 muted" data-label='{% translate "تاریخ" %}'>{{ item.created_deta|date:"Y/m/d" }}</td>
+                                <td class="px-3 py-2" data-label='{% translate "عملیات" %}'>
+                                    <div class="flex gap-2">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="withdrawal_id" value="{{ item.pk }}">
+                                            <button type="submit" name="action" value="mark_paid"
+                                                    class="btn-primary btn-sm">
+                                                {% translate "پرداخت شد" %}
+                                            </button>
+                                        </form>
+                                        <form method="post"
+                                              onsubmit="return confirm('{% translate "برداشت رد شود و مبلغ به کیف پول کاربر برگردد؟" %}')">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="withdrawal_id" value="{{ item.pk }}">
+                                            <button type="submit" name="action" value="reject"
+                                                    class="btn-danger btn-sm">
+                                                {% translate "رد" %}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="py-8 text-center text-sm muted">
+                        {% translate "برداشت در انتظاری نیست" %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-head">
+                <p class="panel-title">{% translate "پرداخت‌شده اخیر" %}</p>
+            </div>
+            <div class="panel-body">
+                <table class="rtable">
+                    <thead class="table-head">
+                    <tr>
+                        <th class="px-3 py-2 text-start">{% translate "شناسه" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "کاربر" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "مبلغ" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "تاریخ واریز" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-body">
+                    {% for item in recent %}
+                        <tr>
+                            <td class="px-3 py-2 faint num" data-label='{% translate "شناسه" %}'>#{{ item.pk }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "کاربر" %}'>{{ item.user }}</td>
+                            <td class="num px-3 py-2" data-label='{% translate "مبلغ" %}'>{{ item.withdrawal_amount|money }}</td>
+                            <td class="px-3 py-2 muted" data-label='{% translate "تاریخ واریز" %}'>{{ item.deta_is_paid|date:"Y/m/d H:i"|default:"—" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="px-3 py-8 text-center text-sm muted">
+                                {% translate "موردی نیست" %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

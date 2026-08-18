@@ -1,0 +1,75 @@
+{% load i18n %}
+{% comment %}
+Footer in columns, which stack on a phone.
+
+The links are grouped by what someone is trying to do, not by the site's
+internal structure.
+{% endcomment %}
+<footer class="mt-16 border-t hairline">
+    <div class="mx-auto max-w-[1180px] px-4 py-10">
+
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+
+            <div class="lg:col-span-1">
+                <div class="mb-3 flex items-center gap-2">
+                    <svg viewBox="0 0 20 20" class="h-5 w-5" aria-hidden="true">
+                        <path d="M10 2.5 18.5 17.5H1.5z" fill="rgb(var(--brand))"/>
+                        <path d="M10 8 14.5 16h-9z" fill="rgb(var(--paper))"/>
+                    </svg>
+                    <span class="font-bold tracking-[-0.02em]">{% translate "دلتا آپلود" %}</span>
+                </div>
+                <p class="text-xs leading-6 muted">
+                    {% translate "فایلت را آپلود کن، لینک بگیر، و از هر دانلود درآمد بساز." %}
+                </p>
+            </div>
+
+            <div>
+                <p class="label mb-3">{% translate "محصول" %}</p>
+                <ul class="space-y-2 text-sm">
+                    <li><a class="muted hover:underline" href="{% url 'home_page' %}">{% translate "صفحه اصلی" %}</a></li>
+                    <li><a class="muted hover:underline" href="{% url 'guest_upload_page' %}">{% translate "آپلود سریع" %}</a></li>
+                    <li><a class="muted hover:underline" href="{% url 'shorten_page' %}">{% translate "کوتاه‌کننده لینک" %}</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a class="muted hover:underline" href="{% url 'upload_page' %}">{% translate "آپلود فایل" %}</a></li>
+                        <li><a class="muted hover:underline" href="{% url 'user_dashbord' %}">{% translate "پنل کاربری" %}</a></li>
+                        <li><a class="muted hover:underline" href="{% url 'api_docs_page' %}">{% translate "راهنمای API" %}</a></li>
+                    {% else %}
+                        <li><a class="muted hover:underline" href="{% url 'register_page' %}">{% translate "ثبت نام" %}</a></li>
+                        <li><a class="muted hover:underline" href="{% url 'login_page' %}">{% translate "ورود" %}</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div>
+                <p class="label mb-3">{% translate "پشتیبانی" %}</p>
+                <ul class="space-y-2 text-sm">
+                    <li><a class="muted hover:underline" href="{% url 'faq_page' %}">{% translate "سوالات متداول" %}</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a class="muted hover:underline" href="{% url 'ticket_list' %}">{% translate "تیکت های من" %}</a></li>
+                        <li><a class="muted hover:underline" href="{% url 'ticket_new' %}">{% translate "تیکت جدید" %}</a></li>
+                    {% endif %}
+                    <li><a class="muted hover:underline" href="{% url 'contact_us_page' %}">{% translate "تماس با ما" %}</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <p class="label mb-3">{% translate "قوانین" %}</p>
+                <ul class="space-y-2 text-sm">
+                    <li><a class="muted hover:underline" href="{% url 'about_page' %}">{% translate "درباره ما" %}</a></li>
+                    <li><a class="muted hover:underline" href="{% url 'terms_page' %}">{% translate "قوانین و مقررات" %}</a></li>
+                    <li><a class="muted hover:underline" href="{% url 'privacy_page' %}">{% translate "حریم خصوصی" %}</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-8 flex flex-col items-center justify-between gap-3 border-t hairline
+                    pt-6 text-xs sm:flex-row">
+            <span class="muted">{% translate "دلتا آپلود" %} · {% now "Y" %}</span>
+            <span class="muted">
+                {% translate "ساخته شده توسط" %}
+                <a href="https://yaspardaz.ir" target="_blank" rel="noopener"
+                   class="hover:underline" style="color: rgb(var(--brand))">yaspardaz.ir</a>
+            </span>
+        </div>
+    </div>
+</footer>

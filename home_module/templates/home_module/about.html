@@ -1,0 +1,46 @@
+{% extends 'shared/legal_page.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "درباره ما" %}{% endblock %}
+{% block page_heading %}{% translate "درباره دلتا آپلود" %}{% endblock %}
+
+{% block page_lead %}
+    <p class="mt-3 muted">
+        {% translate "سرویس اشتراک‌گذاری فایل با امکان کسب درآمد از هر دانلود." %}
+    </p>
+{% endblock %}
+
+{% block page_body %}
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "چه کاری انجام می‌دهیم" %}</h2>
+        <p class="muted">
+            {% translate "دلتا آپلود جایی است که فایلت را می‌گذاری و یک لینک می‌گیری. هر بار که کسی از آن لینک فایل را بگیرد، سهمی از درآمد تبلیغات به حسابت می‌نشیند. اگر بخواهی می‌توانی برای فایل قیمت بگذاری و مستقیم بفروشی." %}
+        </p>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "برای چه کسانی" %}</h2>
+        <ul class="space-y-2 muted">
+            <li>{% translate "سازندگان محتوا که فایل آموزشی، نرم‌افزار یا رسانه منتشر می‌کنند." %}</li>
+            <li>{% translate "صاحبان سایت که می‌خواهند فایل‌هایشان را جای دیگری میزبانی کنند و از API استفاده می‌کنند." %}</li>
+            <li>{% translate "هر کسی که می‌خواهد فایلی را با یک لینک کوتاه و کنترل‌شده به دست دیگران برساند." %}</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "چه چیزی ما را متفاوت می‌کند" %}</h2>
+        <ul class="space-y-2 muted">
+            <li>{% translate "کنترل کامل روی انتشار: عمومی، خصوصی، یا عمومی برای مدت مشخص." %}</li>
+            <li>{% translate "گزارش دقیق هر فایل: چند دانلود رایگان، چند دانلود پولی، و چقدر درآمد." %}</li>
+            <li>{% translate "شفافیت در شمارش: در گزارش می‌بینی کدام بازدیدها شمرده نشده‌اند و چرا." %}</li>
+            <li>{% translate "API برای سایت‌هایی که می‌خواهند آپلود را خودکار کنند." %}</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="mb-2 font-bold">{% translate "تماس" %}</h2>
+        <p class="muted">
+            {% translate "برای هر سوال یا مشکلی می‌توانی تیکت بزنی. تیم پشتیبانی در بخش‌های فنی، مالی و حساب کاربری پاسخ می‌دهد." %}
+        </p>
+    </section>
+{% endblock %}

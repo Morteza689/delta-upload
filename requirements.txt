@@ -1,0 +1,39 @@
+asgiref==3.12.1
+Django==5.2.17
+django-render-partial==0.4
+django-storages==1.14.6
+Pillow==10.4.0
+sqlparse==0.5.5
+tzdata==2026.3
+
+# Public API: authentication, serialisers, throttling, and one error shape.
+djangorestframework==3.18.0
+
+# Postgres in production. Development falls back to SQLite when DATABASE_URL
+# is unset, so a fresh clone runs with no database to set up first.
+psycopg[binary]==3.3.4
+
+# S3 storage (USE_S3=1)
+boto3==1.43.70
+
+# Payment gateways, exchange rates, and the Telegram Bot API
+requests==2.34.2
+
+# Encrypts the bot tokens users register. Each token is that user's own
+# credential, so it must not sit in the database in plain text.
+cryptography==50.0.0
+
+# Rate limiting. The counters live in the cache, so REDIS_URL must be set in
+# production: with an in-process cache each worker keeps its own counter and
+# the effective limit multiplies by the worker count.
+django-ratelimit==4.1.0
+redis==8.1.0
+
+# Local captcha. Deliberately not Google reCAPTCHA by default: it is often
+# unreachable for our users, so it blocks real people rather than bots. Which
+# provider is live is a switch in the admin.
+django-simple-captcha==0.7.0
+
+# Development only: compiles .po files without needing gettext installed
+# (manage.py compilepo)
+polib==1.2.0

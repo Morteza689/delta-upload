@@ -1,0 +1,49 @@
+{% extends 'emails/base.html' %}
+{% load i18n %}
+
+{% block subject %}{% blocktranslate %}فعال‌سازی حساب در {{ site_name }}{% endblocktranslate %}{% endblock %}
+
+{% block preheader %}{% translate "یک کلیک تا فعال شدن حسابت." %}{% endblock %}
+
+{% block content %}
+    <h1 style="margin:0 0 16px 0; font-size:20px; line-height:30px; color:#161618;">
+        {% translate "خوش آمدی" %}
+    </h1>
+
+    <p style="margin:0 0 16px 0; font-size:15px; line-height:26px; color:#5C5C63;">
+        {% blocktranslate %}حساب تو در {{ site_name }} ساخته شد. برای اینکه بتوانی وارد شوی، یک بار روی دکمه‌ی زیر بزن.{% endblocktranslate %}
+    </p>
+
+    {% comment %}
+        A table around the button, not a styled <a> on its own: Outlook
+        ignores padding on an anchor and the button collapses to plain text.
+    {% endcomment %}
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+           style="margin:0 0 20px 0;">
+        <tr>
+            <td style="background-color:#E03E26; border-radius:10px;">
+                <a href="{{ activation_url }}"
+                   style="display:inline-block; padding:12px 28px; color:#FFFFFF;
+                          font-size:15px; font-weight:bold; text-decoration:none;">
+                    {% translate "فعال‌سازی حساب" %}
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p style="margin:0 0 8px 0; font-size:13px; line-height:22px; color:#8A8A92;">
+        {% translate "اگر دکمه کار نکرد، این آدرس را در مرورگر باز کن:" %}
+    </p>
+    {% comment %} Wrapped in a bordered box and broken anywhere, because a long URL
+       otherwise runs past the edge of a narrow screen. {% endcomment %}
+    <p style="margin:0 0 20px 0; padding:10px 12px; background-color:#F6F6F3;
+              border:1px solid #E2E2DD; border-radius:10px; font-size:12px;
+              line-height:20px; color:#5C5C63; word-break:break-all;"
+       dir="ltr">
+        {{ activation_url }}
+    </p>
+
+    <p style="margin:0; font-size:13px; line-height:22px; color:#8A8A92;">
+        {% translate "اگر این حساب را تو نساخته‌ای، این ایمیل را نادیده بگیر. بدون کلیک روی لینک بالا هیچ حسابی فعال نمی‌شود." %}
+    </p>
+{% endblock %}

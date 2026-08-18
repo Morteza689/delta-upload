@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load i18n dup_filters %}
+
+{% block body %}
+    <div class="grid gap-5 lg:grid-cols-[13.5rem_1fr] lg:gap-8">
+
+        <aside class="min-w-0 lg:sticky lg:top-20 lg:h-fit">
+            {% comment %}
+            A scrolling horizontal bar on a phone, a vertical list on desktop.
+            Left full width above the content on a phone, the sidebar would make
+            every page start with the whole menu.
+
+            The current page is marked by a thin edge rule rather than a full
+            coloured pill: quieter, and closer to how real tools look.
+            {% endcomment %}
+            <nav class="-mx-4 flex gap-1 overflow-x-auto px-4 pb-1 text-sm
+                        [scrollbar-width:none] lg:mx-0 lg:flex-col lg:gap-0
+                        lg:overflow-visible lg:px-0 lg:pb-0">
+                {% url 'user_dashbord' as u_dash %}
+                {% url 'my_files_page' as u_files %}
+                {% url 'upload_page' as u_upload %}
+                {% url 'storage_plans_page' as u_storage %}
+                {% url 'telegram_connect_page' as u_telegram %}
+                {% url 'earnings_page' as u_earn %}
+                {% url 'topup_page' as u_topup %}
+                {% url 'withdrawal_page' as u_wd %}
+                {% url 'withdrawal_list_page' as u_wdl %}
+                {% url 'payout_accounts_page' as u_payout %}
+                {% url 'api_keys_page' as u_keys %}
+                {% url 'ticket_list' as u_tickets %}
+
+                {% include 'shared/panel_nav_item.html' with target=u_dash label=_("داشبورد") %}
+                {% include 'shared/panel_nav_item.html' with target=u_files label=_("فایل های من") %}
+                {% include 'shared/panel_nav_item.html' with target=u_upload label=_("آپلود فایل") %}
+                {% include 'shared/panel_nav_item.html' with target=u_storage label=_("فضای ذخیره‌سازی") %}
+                {% if telegram_enabled %}
+                    {% include 'shared/panel_nav_item.html' with target=u_telegram label=_("ذخیره در تلگرام") %}
+                {% endif %}
+                {% include 'shared/panel_nav_item.html' with target=u_earn label=_("درآمد تبلیغات") %}
+
+                <span class="hidden lg:my-2 lg:block lg:border-t lg:hairline"></span>
+
+                {% include 'shared/panel_nav_item.html' with target=u_topup label=_("شارژ کیف پول") %}
+                {% include 'shared/panel_nav_item.html' with target=u_payout label=_("مقصدهای برداشت") %}
+                {% include 'shared/panel_nav_item.html' with target=u_wd label=_("برداشت") %}
+                {% include 'shared/panel_nav_item.html' with target=u_wdl label=_("تاریخچه برداشت") %}
+
+                <span class="hidden lg:my-2 lg:block lg:border-t lg:hairline"></span>
+
+                {% include 'shared/panel_nav_item.html' with target=u_keys label=_("کلیدهای API") %}
+                {% include 'shared/panel_nav_item.html' with target=u_tickets label=_("پشتیبانی") %}
+            </nav>
+
+            {# Balance in the sidebar on desktop only; on a phone the dashboard itself shows it. #}
+            <div class="mt-6 hidden rounded-lg border hairline p-3 lg:block">
+                <p class="label">{% translate "موجودی" %}</p>
+                <p class="metric-sm mt-1.5 money">{{ user.balance|money }}</p>
+                <a class="btn-secondary btn-sm mt-3 w-full" href="{% url 'topup_page' %}">
+                    {% translate "شارژ کیف پول" %}
+                </a>
+            </div>
+        </aside>
+
+        <section class="min-w-0">
+            <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <h1 class="text-lg font-bold tracking-[-0.02em] sm:text-xl">
+                    {% block page_title %}{% endblock %}
+                </h1>
+                {% block page_actions %}{% endblock %}
+            </div>
+            {% block content %}{% endblock %}
+        </section>
+    </div>
+{% endblock %}

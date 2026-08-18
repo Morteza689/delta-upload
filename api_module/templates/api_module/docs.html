@@ -1,0 +1,120 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "راهنمای API" %}{% endblock %}
+{% block page_title %}{% translate "راهنمای API" %}{% endblock %}
+
+{% block content %}
+    <div class="space-y-6">
+
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-2">{% translate "احراز هویت" %}</h2>
+                <p class="mb-3 text-sm muted">
+                    {% translate "کلید را در هدر هر درخواست بفرست. کلید را از صفحه‌ی کلیدهای API بساز." %}
+                </p>
+                <pre class="overflow-x-auto rounded-lg p-4 text-xs" style="background-color: rgb(var(--ink)); color: rgb(var(--paper))" dir="ltr"><code>Authorization: Bearer dup_xxxxxxxx_yyyyyyyyyyyy</code></pre>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-2">{% translate "آپلود فایل" %}</h2>
+                <p class="mb-3 text-sm muted">
+                    {% translate "درخواست باید multipart/form-data باشد. پاسخ شامل download_page_url است — همان صفحه‌ی دانلودی که به کاربرت می‌دهی." %}
+                </p>
+<pre class="overflow-x-auto rounded-lg p-4 text-xs" style="background-color: rgb(var(--ink)); color: rgb(var(--paper))" dir="ltr"><code>curl -X POST {{ base_url }}/api/v1/files/ \
+  -H "Authorization: Bearer $DUP_API_KEY" \
+  -F "file=@video.mp4" \
+  -F "name={% translate "آموزش قسمت اول" %}" \
+  -F "visibility=public" \
+  -F "public_for_hours=48" \
+  -F "price=0"</code></pre>
+
+                <p class="mb-2 mt-4 text-sm font-medium">{% translate "پاسخ" %}</p>
+<pre class="overflow-x-auto rounded-lg p-4 text-xs" style="background-color: rgb(var(--ink)); color: rgb(var(--paper))" dir="ltr"><code>{
+  "slug": "a1b2c3d4e5f6",
+  "name": "{% translate 'آموزش قسمت اول' %}",
+  "size": 10485760,
+  "visibility": "public",
+  "price": 0,
+  "is_free": true,
+  "public_until": "2026-08-16T12:00:00+03:30",
+  "is_public_now": true,
+  "downloads": 0,
+  "download_page_url": "{{ base_url }}/dl/a1b2c3d4e5f6"
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-3">{% translate "پارامترها" %}</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="border-b hairline text-xs uppercase muted  ">
+                        <tr>
+                            <th class="px-3 py-2 text-start">{% translate "نام" %}</th>
+                            <th class="px-3 py-2 text-start">{% translate "توضیح" %}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        <tr>
+                            <td class="px-3 py-2 font-mono text-xs">file</td>
+                            <td class="px-3 py-2">{% translate "خود فایل. اجباری." %}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2 font-mono text-xs">name</td>
+                            <td class="px-3 py-2">{% translate "نام نمایشی. اگر ندهی، نام فایل استفاده می‌شود." %}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2 font-mono text-xs">visibility</td>
+                            <td class="px-3 py-2">
+                                <code class="text-xs">public</code> {% translate "یا" %}
+                                <code class="text-xs">private</code> —
+                                {% translate "پیش‌فرض private است. فایل خصوصی لینک عمومی ندارد." %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2 font-mono text-xs">public_for_hours</td>
+                            <td class="px-3 py-2">{% translate "بعد از این مدت لینک عمومی می‌بندد. خالی یعنی بدون انقضا." %}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2 font-mono text-xs">price</td>
+                            <td class="px-3 py-2">{% translate "قیمت به سنت. صفر یعنی رایگان. فایل خصوصی قابل فروش نیست." %}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-3">{% translate "بقیه‌ی اندپوینت‌ها" %}</h2>
+                <ul class="space-y-2 text-sm" dir="ltr">
+                    <li><code class="text-xs">GET    /api/v1/files/</code> — {% translate "فهرست فایل‌ها" %}</li>
+                    <li><code class="text-xs">GET    /api/v1/files/&lt;slug&gt;/</code> — {% translate "جزئیات" %}</li>
+                    <li><code class="text-xs">PATCH  /api/v1/files/&lt;slug&gt;/</code> — {% translate "تغییر انتشار یا قیمت" %}</li>
+                    <li><code class="text-xs">DELETE /api/v1/files/&lt;slug&gt;/</code> — {% translate "حذف" %}</li>
+                    <li><code class="text-xs">GET    /api/v1/me/</code> — {% translate "اطلاعات حساب" %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <h2 class="panel-title mb-2">{% translate "خطاها و محدودیت‌ها" %}</h2>
+                <p class="mb-3 text-sm muted">
+                    {% translate "هر خطا کد ماشین‌خوان دارد؛ روی همان شرط بگذار نه روی متن پیام که ترجمه می‌شود." %}
+                </p>
+<pre class="overflow-x-auto rounded-lg p-4 text-xs" style="background-color: rgb(var(--ink)); color: rgb(var(--paper))" dir="ltr"><code>{"error": {"code": "validation_failed", "message": "...", "fields": {"price": ["..."]}}}</code></pre>
+                <ul class="mt-4 space-y-1 text-sm muted">
+                    <li>{% translate "آپلود: ۶۰ درخواست در ساعت به ازای هر کلید" %}</li>
+                    <li>{% translate "خواندن: ۶۰۰ درخواست در ساعت به ازای هر کلید" %}</li>
+                    <li>{% translate "عبور از سقف: پاسخ ۴۲۹" %}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

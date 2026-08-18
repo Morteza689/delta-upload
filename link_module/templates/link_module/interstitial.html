@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% translate "در حال انتقال…" %}{% endblock %}
+
+{% block body %}
+    {# The ad slot: the reason this page exists. #}
+    <div class="mb-6">
+        {% include 'download_module/component/ad_slot.html' with slot='link_interstitial' %}
+    </div>
+
+    <div class="mx-auto max-w-lg">
+        <div class="panel">
+            <div class="panel-body text-center">
+                <p class="label mb-3">{% translate "در حال انتقال به" %}</p>
+
+                <p class="mb-6 break-all rounded-lg border hairline p-3 text-sm" dir="ltr">
+                    {{ link.target }}
+                </p>
+
+                {% comment %}
+                The button is in the page from the start and merely disabled,
+                rather than built by JavaScript. If the script never loads the
+                browser can still submit the form and nobody is stuck.
+                {% endcomment %}
+                <form method="get" action="{% url 'short_link_continue' code=link.code %}">
+                    <button type="submit" class="btn-primary w-full"
+                            data-continue data-wait="{{ wait_seconds }}">
+                        <span data-continue-label>{% translate "ادامه" %}</span>
+                        <span data-continue-timer class="num"></span>
+                    </button>
+                </form>
+
+                {% if link.remaining_clicks is not None %}
+                    <p class="form-help mt-3">
+                        {% blocktranslate with n=link.remaining_clicks %}{{ n }} بار استفاده باقی مانده{% endblocktranslate %}
+                    </p>
+                {% endif %}
+
+                <p class="form-help mt-2">
+                    {% translate "دلتا آپلود مسئول محتوای سایت مقصد نیست." %}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'src/interstitial.js' %}" defer></script>
+{% endblock %}

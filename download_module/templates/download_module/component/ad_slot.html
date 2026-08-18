@@ -1,0 +1,29 @@
+{% load i18n %}
+{% comment %}
+Ad slot. The network's code comes from the AdSlot model so switching networks
+needs no code change.
+
+The script renders through |safe because it is deliberately raw HTML. That makes
+this field as powerful as the site's own code: only staff may edit it, and it
+must never be filled from user input.
+
+Three rules taken from the Yektanet publisher terms, each of them penalised if
+broken:
+
+1. The delivered code is never altered. The wrapper is not flex and constrains
+   neither width nor height, since both change how the banner renders.
+2. No class or attribute hints at advertising: no ad, ads, banner or sponsor.
+   Adblock lists target exactly those names. utils/test_adblock.py guards it.
+3. A banner slot may not sit inside a modal or pop-up and may not be floating or
+   fixed. This wrapper is none of those and must stay that way.
+
+The network loader is not here. It is shared and comes once in the page head,
+from base.html; inside each slot, a two-slot page would load it twice.
+{% endcomment %}
+{% if ad_slot %}
+    <div class="embed-frame" data-embed-slot="{{ slot }}">{{ ad_slot.script|safe }}</div>
+{% else %}
+    <div class="embed-frame-empty" data-embed-slot="{{ slot }}">
+        <span>{% translate "جایگاه تبلیغ" %}</span>
+    </div>
+{% endif %}

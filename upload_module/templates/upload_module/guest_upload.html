@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% translate "آپلود سریع" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-2xl">
+
+        <header class="mb-6 text-center">
+            <h1 class="mb-2 text-2xl font-bold tracking-[-0.02em] sm:text-3xl">
+                {% translate "آپلود سریع" %}
+            </h1>
+            <p class="text-sm muted">
+                {% blocktranslate with mb=size_limit_mb %}بدون ساخت حساب، تا {{ mb }} مگابایت. فایل بعد از مهلتی که انتخاب می‌کنی خودکار پاک می‌شود.{% endblocktranslate %}
+            </p>
+        </header>
+
+        {% if upload %}
+            <div class="note note-money mb-5">
+                <p class="mb-2 text-xs font-medium">{% translate "فایل آپلود شد" %}</p>
+                <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+                    <code id="guest-link" dir="ltr"
+                          class="flex-1 overflow-x-auto rounded-lg px-4 py-3 font-mono text-sm"
+                          style="background-color: rgb(var(--ink)); color: rgb(var(--paper))"
+                    >{{ request.scheme }}://{{ request.get_host }}{{ upload.get_absolute_url }}</code>
+                    <button type="button" class="btn-secondary shrink-0 js-copy"
+                            data-copy-target="#guest-link">
+                        {% translate "کپی" %}
+                    </button>
+                </div>
+                <p class="mt-2 text-xs">
+                    {% blocktranslate with until=upload.auto_delete_at|date:"Y/m/d H:i" %}این فایل تا {{ until }} در دسترس است و بعد پاک می‌شود.{% endblocktranslate %}
+                </p>
+            </div>
+        {% endif %}
+
+        <div class="panel">
+            <div class="panel-body">
+                <form method="post" enctype="multipart/form-data" novalidate
+                      data-upload-form
+                      data-upload-messages='{"remaining": "{% translate "باقی‌مانده" %}", "done": "{% translate "در حال ذخیره…" %}", "failed": "{% translate "آپلود ناموفق بود" %}", "network": "{% translate "ارتباط قطع شد" %}", "percent": "{% translate "٪" %}"}'>
+                    {% csrf_token %}
+
+                    <p class="note note-error mb-4" data-upload-error hidden></p>
+
+                    {% include 'shared/form_fields.html' %}
+
+                    <div class="mb-4 rounded-lg border hairline p-4" data-upload-progress hidden>
+                        <div class="mb-2 flex items-baseline justify-between gap-3">
+                            <span class="text-sm font-medium" data-upload-percent>0%</span>
+                            <span class="num text-xs muted" data-upload-size></span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 0%" data-upload-fill></div>
+                        </div>
+                        <p class="mt-2 text-xs faint" data-upload-status></p>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button type="submit" class="btn-primary flex-1">
+                            {% translate "آپلود" %}
+                        </button>
+                        <button type="button" class="btn-secondary" data-upload-cancel hidden>
+                            {% translate "لغو" %}
+                        </button>
+                    </div>
+                </form>
+
+                <p class="form-help mt-4">
+                    {% translate "با حساب کاربری: فایل بزرگ‌تر، بدون حذف خودکار، و درآمد از هر دانلود." %}
+                    <a class="hover:underline" style="color: rgb(var(--brand))"
+                       href="{% url 'register_page' %}">{% translate "ثبت نام" %}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'src/upload.js' %}" defer></script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% load i18n %}
+{% comment %}
+Display currency picker. Internally every amount stays in US cents; this only
+changes how they are shown.
+
+POST, like the language switcher, so a plain link cannot change someone's
+settings.
+{% endcomment %}
+<form action="{% url 'set_currency' %}" method="post"
+      class="flex items-center rounded-lg border hairline p-0.5">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+    <button type="submit" name="currency" value="usd"
+            class="rounded-md px-2.5 py-1 text-xs font-medium transition
+                   {% if request.display_currency != 'toman' %}text-[rgb(var(--brand-ink))]{% else %}muted{% endif %}"
+            {% if request.display_currency != 'toman' %}style="background-color: rgb(var(--brand))" aria-current="true"{% endif %}>
+        $
+    </button>
+    <button type="submit" name="currency" value="toman"
+            class="rounded-md px-2.5 py-1 text-xs font-medium transition
+                   {% if request.display_currency == 'toman' %}text-[rgb(var(--brand-ink))]{% else %}muted{% endif %}"
+            {% if request.display_currency == 'toman' %}style="background-color: rgb(var(--brand))" aria-current="true"{% endif %}>
+        {% translate "تومان" %}
+    </button>
+</form>

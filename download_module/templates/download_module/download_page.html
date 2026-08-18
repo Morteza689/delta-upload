@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% blocktranslate with n=file.name %}دانلود {{ n }}{% endblocktranslate %}{% endblock %}
+
+{% block body %}
+    {# Step 1 ad slot #}
+    <div class="mb-6">
+        {% include 'download_module/component/ad_slot.html' with slot='download_step1' %}
+    </div>
+
+    <div class="mx-auto max-w-2xl">
+        <div class="panel">
+            <div class="panel-body">
+                <h1 class="mb-1 break-words text-2xl font-bold">
+                    {{ file|file_label }}
+                </h1>
+
+                {% if file.description %}
+                    <p class="mb-4 whitespace-pre-line muted">{{ file.description }}</p>
+                {% endif %}
+
+                <dl class="mb-6 grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-3">
+                    <div>
+                        <dt class="muted">{% translate "آپلودکننده" %}</dt>
+                        <dd class="font-medium">{{ file.author }}</dd>
+                    </div>
+                    <div>
+                        <dt class="muted">{% translate "حجم" %}</dt>
+                        <dd class="font-medium">{{ file.size_bytes|convertor_byte }}</dd>
+                    </div>
+                    <div>
+                        <dt class="muted">{% translate "تعداد دانلود" %}</dt>
+                        <dd class="font-medium">{{ file.number_of_download }}</dd>
+                    </div>
+                    {% if not file.is_free %}
+                        <div>
+                            <dt class="muted">{% translate "قیمت" %}</dt>
+                            <dd class="font-bold" style="color: rgb(var(--brand))">
+                                {{ file.price|money }}
+                            </dd>
+                        </div>
+                    {% endif %}
+                </dl>
+
+                {% if file.public_until %}
+                    <p class="mb-4 text-xs pending">
+                        {% blocktranslate with until=file.public_until %}این لینک تا {{ until }} در دسترس است{% endblocktranslate %}
+                    </p>
+                {% endif %}
+
+                {# A real navigation to step 2 rather than AJAX, so the ad view counts as two separate pages. #}
+                {% if needs_purchase %}
+                    <a class="btn-primary w-full" href="{% url 'purchase_page' slug=file.slug %}">
+                        {% translate "خرید و دریافت لینک دانلود" %}
+                    </a>
+                {% else %}
+                    <a class="btn-primary w-full" href="{% url 'download_page_step2' token=session_token %}">
+                        {% translate "دریافت لینک دانلود" %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

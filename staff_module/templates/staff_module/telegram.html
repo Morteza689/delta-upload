@@ -1,0 +1,138 @@
+{% extends 'staff_module/base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "تلگرام" %}{% endblock %}
+{% block page_title %}{% translate "ذخیره در تلگرام" %}{% endblock %}
+
+{% block content %}
+    {% if notice %}<div class="note note-money mb-5">{{ notice }}</div>{% endif %}
+
+    <div class="grid gap-5 lg:grid-cols-2">
+
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "وضعیت قابلیت" %}</h2>
+                {% if setting.is_enabled %}
+                    <span class="chip chip-money">{% translate "روشن" %}</span>
+                {% else %}
+                    <span class="chip chip-muted">{% translate "خاموش" %}</span>
+                {% endif %}
+            </div>
+            <div class="panel-body">
+
+                {% comment %}
+                There is no token field here on purpose. Each user brings their
+                own bot, so nothing site-wide exists to configure, and staff
+                never hold a credential that reaches anyone's channel.
+                {% endcomment %}
+                <p class="mb-4 text-sm muted">
+                    {% translate "هر کاربر ربات خودش را از BotFather می‌سازد و توکنش را در پنل خودش ثبت می‌کند. اینجا توکنی وجود ندارد: هیچ رباتی مال سایت نیست، پس هیچ کلیدی هم نیست که به کانال کسی برسد." %}
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="toggle">
+                    {% if setting.is_enabled %}
+                        <button type="submit" class="btn-ghost w-full">
+                            {% translate "خاموش کردن" %}
+                        </button>
+                        <p class="mt-2 text-xs muted">
+                            {% translate "صفحه‌ی کاربران بسته می‌شود و آپلود تازه به تلگرام نمی‌رود. فایل‌های موجود در کانال کاربران دست‌نخورده می‌مانند." %}
+                        </p>
+                    {% else %}
+                        <button type="submit" class="btn-primary w-full">
+                            {% translate "روشن کردن" %}
+                        </button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "رمزنگاری توکن‌ها" %}</h2>
+            </div>
+            <div class="panel-body space-y-4 text-sm">
+
+                {% if key_is_explicit %}
+                    <div class="note note-money">
+                        {% translate "کلید اختصاصی TELEGRAM_TOKEN_KEY ست شده است." %}
+                    </div>
+                {% else %}
+                    <div class="note">
+                        <p class="font-medium">{% translate "کلید از SECRET_KEY مشتق می‌شود." %}</p>
+                        <p class="mt-1 text-xs">
+                            {% translate "کار می‌کند، ولی یعنی عوض کردن SECRET_KEY همه‌ی توکن‌های ذخیره‌شده را غیرقابل خواندن می‌کند و هر کاربر باید ربات خود را دوباره ثبت کند. یک TELEGRAM_TOKEN_KEY جدا بگذار تا این دو به هم گره نخورند." %}
+                        </p>
+                        <p class="mt-2 text-xs num" dir="ltr">
+                            python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+                        </p>
+                    </div>
+                {% endif %}
+
+                {% if unreadable %}
+                    <div class="note note-error">
+                        <p class="font-medium">
+                            {% blocktranslate count n=unreadable %}{{ n }} توکن قابل خواندن نیست.{% plural %}{{ n }} توکن قابل خواندن نیست.{% endblocktranslate %}
+                        </p>
+                        <p class="mt-1 text-xs">
+                            {% translate "یعنی کلید رمزنگاری عوض شده است. این کاربران باید توکن ربات خود را دوباره ثبت کنند؛ فایل‌هایشان از بین نرفته و بعد از ثبت دوباره در دسترس می‌شود." %}
+                        </p>
+                    </div>
+                {% endif %}
+
+                <p class="text-xs muted">
+                    {% translate "توکن‌ها با Fernet رمز می‌شوند. این رمزنگاری «در حالت سکون» است: سرور برای استفاده ناچار است رمزگشایی کند، پس کسی که روی سرور کد اجرا می‌کند می‌تواند بخواند. چیزی که جلویش را می‌گیرد حالت شایع‌تر است — بیرون رفتن دیتابیس بدون کلید." %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel mt-5">
+        <div class="panel-head">
+            <h2 class="panel-title">{% translate "استفاده" %}</h2>
+        </div>
+        <div class="panel-body">
+            <div class="grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
+                <div>
+                    <p class="label">{% translate "ربات ثبت‌شده" %}</p>
+                    <p class="metric num">{{ connections.with_bot|default:"0" }}</p>
+                </div>
+                <div>
+                    <p class="label">{% translate "کانال متصل" %}</p>
+                    <p class="metric num">{{ connections.active|default:"0" }}</p>
+                </div>
+                <div>
+                    <p class="label">{% translate "قطع شده" %}</p>
+                    <p class="metric num">{{ connections.broken|default:"0" }}</p>
+                </div>
+                <div>
+                    <p class="label">{% translate "فایل ذخیره‌شده" %}</p>
+                    <p class="metric num">{{ files.stored|default:"0" }}</p>
+                </div>
+                <div>
+                    <p class="label">{% translate "حجم کل" %}</p>
+                    <p class="metric num">{{ files.bytes|default:0|filesizeformat }}</p>
+                </div>
+                <div>
+                    <p class="label">{% translate "در صف انتقال" %}</p>
+                    <p class="metric num">{{ files.queued|default:"0" }}</p>
+                </div>
+                <div>
+                    <p class="label">{% translate "ناموفق" %}</p>
+                    <p class="metric num">{{ files.failed|default:"0" }}</p>
+                </div>
+                <div>
+                    <p class="label">{% translate "کش دانلود" %}</p>
+                    <p class="metric num">{{ cache.bytes|default:0|filesizeformat }}</p>
+                </div>
+            </div>
+
+            {% if files.queued %}
+                <p class="mt-5 border-t hairline pt-4 text-xs muted">
+                    {% translate "فایل در صف مانده یعنی ورکر اجرا نمی‌شود. کران باید هر چند دقیقه manage.py telegram_worker --once را صدا بزند، وگرنه فایل‌ها روی دیسک ما می‌مانند و هرگز منتقل نمی‌شوند." %}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

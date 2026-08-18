@@ -1,0 +1,94 @@
+{% extends 'staff_module/base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "امنیت" %}{% endblock %}
+{% block page_title %}{% translate "امنیت" %}{% endblock %}
+
+{% block content %}
+    <div class="max-w-2xl">
+
+        {% if error %}
+            <p class="note note-error mb-5">{{ error }}</p>
+        {% endif %}
+
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title">{% translate "سرویس کپچا" %}</h2>
+            </div>
+            <div class="panel-body">
+
+                {% comment %}
+                This is a switch, not a fallback. Exactly one provider is live
+                at a time and the server decides which.
+
+                If the server accepted either one, an attacker would always
+                pick the weaker, and the security level would equal the weakest
+                option on offer.
+                {% endcomment %}
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <div class="space-y-3">
+                        {% for value, label in choices %}
+                            <label class="flex cursor-pointer items-start gap-3 rounded-xl border hairline p-4
+                                          transition-colors hover:bg-[rgb(var(--sunken))]">
+                                <input type="radio" name="provider" value="{{ value }}"
+                                       class="mt-1 shrink-0"
+                                       {% if setting.provider == value %}checked{% endif %}>
+                                <span class="min-w-0">
+                                    <span class="block text-sm font-medium">{{ label }}</span>
+
+                                    {% if value == 'local' %}
+                                        <span class="mt-1 block text-xs muted">
+                                            {% translate "تصویر روی سرور خودمان ساخته می‌شود. به هیچ سرویس بیرونی وابسته نیست، پس فیلترینگ رویش اثر ندارد." %}
+                                        </span>
+                                    {% else %}
+                                        <span class="mt-1 block text-xs muted">
+                                            {% translate "دقیق‌تر است ولی به در دسترس بودن گوگل وابسته است." %}
+                                        </span>
+                                        {% if recaptcha_ready %}
+                                            <span class="chip chip-money mt-2">{% translate "کلیدها ست شده‌اند" %}</span>
+                                        {% else %}
+                                            <span class="chip chip-pending mt-2">{% translate "کلید ندارد" %}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                </span>
+                            </label>
+                        {% endfor %}
+                    </div>
+
+                    <button type="submit" class="btn-primary mt-5 w-full">
+                        {% translate "ذخیره" %}
+                    </button>
+                </form>
+
+                {% comment %}
+                Selected and active are not the same thing. With reCAPTCHA
+                chosen but no keys configured, the local captcha stays in use,
+                and that has to be said plainly here or staff will believe they
+                changed something they did not.
+                {% endcomment %}
+                {% if active != setting.provider %}
+                    <p class="note note-error mt-5 text-xs">
+                        {% translate "انتخاب شما reCAPTCHA است ولی چون کلیدها ست نشده‌اند، همچنان کپچای محلی کار می‌کند." %}
+                    </p>
+                {% endif %}
+
+                <div class="mt-5 border-t hairline pt-4 text-xs muted">
+                    <p class="mb-2">
+                        <span class="font-medium">{% translate "الان فعال:" %}</span>
+                        <span class="chip ms-1">
+                            {% if active == 'recaptcha' %}reCAPTCHA{% else %}{% translate "محلی" %}{% endif %}
+                        </span>
+                    </p>
+                    <p class="mb-2">
+                        {% translate "اگر reCAPTCHA فعال باشد و سرور نتواند به گوگل وصل شود، فرم‌ها رد می‌شوند — نه اینکه بدون بررسی عبور کنند. این عمدی است: اگر باز می‌گذاشتیم، هر کسی با قطع کردن دسترسی سرور به گوگل کپچا را دور می‌زد." %}
+                    </p>
+                    <p>
+                        {% translate "در آن حالت، برگرداندن سویچ به کپچای محلی مشکل را همان لحظه حل می‌کند." %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

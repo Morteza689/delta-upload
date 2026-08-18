@@ -1,0 +1,35 @@
+{% load i18n %}
+{% comment %}
+Time series chart: inline SVG, no library.
+
+preserveAspectRatio="none" stretches it horizontally so it fills any width, and
+vector-effect keeps the stroke width constant, which the stretch would otherwise
+distort.
+{% endcomment %}
+<figure class="m-0" role="img"
+        aria-label="{% blocktranslate with n=chart.total %}نمودار روند دانلود، مجموع {{ n }}{% endblocktranslate %}">
+    <svg viewBox="0 0 {{ chart.width }} {{ chart.height }}"
+         preserveAspectRatio="none"
+         class="h-[160px] w-full overflow-visible">
+
+        {# Horizontal guide lines #}
+        <g class="chart-grid">
+            {% for line in chart.gridlines %}
+                <line x1="0" y1="{{ line.y }}" x2="{{ chart.width }}" y2="{{ line.y }}"
+                      vector-effect="non-scaling-stroke"/>
+            {% endfor %}
+        </g>
+
+        <path d="{{ chart.area }}" class="chart-area"/>
+        <path d="{{ chart.line }}" class="chart-line" vector-effect="non-scaling-stroke"/>
+    </svg>
+
+    {# Labels live outside the stretched SVG, or the text would be distorted too. #}
+    <div class="mt-1 flex justify-between text-[10px] faint">
+        {% for point in chart.points %}
+            {% if point.show_label %}
+                <span>{{ point.day|date:"m/d" }}</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+</figure>

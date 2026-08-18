@@ -1,0 +1,29 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "تیکت جدید" %}{% endblock %}
+{% block page_title %}{% translate "تیکت جدید" %}{% endblock %}
+
+{% block content %}
+    <div class="max-w-2xl">
+        <div class="panel">
+            <div class="panel-body">
+                <form method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    {% include 'shared/form_fields.html' %}
+
+                    <button type="submit" class="btn-primary w-full">
+                        {% translate "ثبت تیکت" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <p class="mt-4 text-xs muted">
+            {% translate "قبل از ثبت تیکت، سری هم به سوالات متداول بزن — شاید جوابت آنجا باشد." %}
+            <a class="hover:underline" style="color: rgb(var(--brand))" href="{% url 'faq_page' %}">
+                {% translate "سوالات متداول" %}
+            </a>
+        </p>
+    </div>
+{% endblock %}

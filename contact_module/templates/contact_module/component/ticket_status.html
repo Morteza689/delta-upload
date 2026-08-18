@@ -1,0 +1,12 @@
+{% load i18n %}
+{% comment %}
+Ticket status chip. The status says whose turn it is, so the colour should say
+the same: amber means it is waiting on us, green means we have replied.
+{% endcomment %}
+{% if status == 'open' %}
+    <span class="chip chip-pending shrink-0">{% translate "در انتظار پاسخ" %}</span>
+{% elif status == 'answered' %}
+    <span class="chip chip-money shrink-0">{% translate "پاسخ داده شده" %}</span>
+{% else %}
+    <span class="chip chip-muted shrink-0">{% translate "بسته شده" %}</span>
+{% endif %}

@@ -1,0 +1,86 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "ویرایش فایل" %}{% endblock %}
+{% block page_title %}{% translate "ویرایش فایل" %}{% endblock %}
+
+{% block content %}
+    <div class="mx-auto max-w-2xl">
+        <div class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title truncate">{{ file|file_label }}</h2>
+                {% if file.is_public_now %}
+                    <span class="chip chip-money">{% translate "عمومی" %}</span>
+                {% elif file.visibility == 'public' %}
+                    <span class="chip chip-pending">{% translate "منقضی شده" %}</span>
+                {% else %}
+                    <span class="chip chip-muted">{% translate "خصوصی" %}</span>
+                {% endif %}
+            </div>
+            <div class="panel-body">
+
+                {% comment %}
+                Facts that cannot be edited, shown so the page does not look
+                like it is hiding them. The file itself is one of them: swapping
+                the bytes under a slug that is already shared would hand a
+                different file to everyone holding the link.
+                {% endcomment %}
+                <dl class="mb-5 grid grid-cols-2 gap-3 border-b hairline pb-5 text-sm">
+                    <dt class="muted">{% translate "حجم" %}</dt>
+                    <dd class="num">{{ file.size_bytes|convertor_byte }}</dd>
+
+                    <dt class="muted">{% translate "دانلود" %}</dt>
+                    <dd class="num">{{ file.number_of_download }}</dd>
+
+                    <dt class="muted">{% translate "محل ذخیره" %}</dt>
+                    <dd>{{ file.get_storage_backend_display }}</dd>
+
+                    <dt class="muted">{% translate "تاریخ آپلود" %}</dt>
+                    <dd class="num">{{ file.created_deta|date:"Y/m/d H:i" }}</dd>
+                </dl>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% include 'shared/form_fields.html' %}
+
+                    <div class="mt-5 flex flex-col gap-2 sm:flex-row">
+                        <button type="submit" class="btn-primary flex-1">
+                            {% translate "ذخیره تغییرات" %}
+                        </button>
+                        <a href="{% url 'my_files_page' %}" class="btn-ghost flex-1">
+                            {% translate "انصراف" %}
+                        </a>
+                    </div>
+                </form>
+
+                <div class="mt-5 flex flex-col gap-2 border-t hairline pt-4 sm:flex-row">
+                    <a href="{% url 'owner_download' pk=file.id %}"
+                       class="btn-secondary btn-sm flex-1">
+                        {% translate "دانلود فایل" %}
+                    </a>
+                    <a href="{% url 'file_report' pk=file.id %}"
+                       class="btn-secondary btn-sm flex-1">
+                        {% translate "گزارش" %}
+                    </a>
+                    {% if file.is_public_now %}
+                        <a href="{% url 'download_page' slug=file.slug %}"
+                           class="btn-secondary btn-sm flex-1">
+                            {% translate "صفحه عمومی" %}
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="mt-5 border-t hairline pt-4">
+                    <a href="{% url 'file_delete' pk=file.id %}"
+                       class="btn-danger btn-sm w-full">
+                        {% translate "حذف فایل" %}
+                    </a>
+                </div>
+
+                <p class="mt-4 text-xs faint">
+                    {% translate "خود فایل قابل تعویض نیست. لینکی که قبلا به کسی داده‌ای همان فایل قبلی را می‌دهد، پس برای محتوای تازه باید فایل جدید آپلود کنی." %}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

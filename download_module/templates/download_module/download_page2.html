@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% blocktranslate with n=file.name %}دانلود {{ n }}{% endblocktranslate %}{% endblock %}
+
+{% block body %}
+    {# Step 2 ad slot #}
+    <div class="mb-6">
+        {% include 'download_module/component/ad_slot.html' with slot='download_step2' %}
+    </div>
+
+    <div class="mx-auto max-w-2xl">
+        <div class="panel">
+            <div class="panel-body text-center">
+                <h1 class="mb-4 break-words text-2xl font-bold">
+                    {{ file|file_label }}
+                </h1>
+
+                <dl class="mb-6 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
+                    <div>
+                        <dt class="muted">{% translate "نام فایل" %}</dt>
+                        <dd class="font-medium">{{ file|file_label }}</dd>
+                    </div>
+                    <div>
+                        <dt class="muted">{% translate "حجم" %}</dt>
+                        <dd class="font-medium">{{ file.size_bytes|convertor_byte }}</dd>
+                    </div>
+                    <div>
+                        <dt class="muted">{% translate "آپلودکننده" %}</dt>
+                        <dd class="font-medium">{{ file.author }}</dd>
+                    </div>
+                </dl>
+
+                {% comment %}
+                The link itself sits above the button and can be copied.
+
+                The reason is practical: someone using a download manager, or
+                opening the file on another device, needs the address rather
+                than the button. Right-clicking the button also works, but not
+                on a phone.
+
+                dir="ltr" is required. A Latin address inside a right-to-left
+                page otherwise renders broken up and reversed.
+                {% endcomment %}
+                <div class="mb-5 text-start">
+                    <p class="label mb-1.5">{% translate "لینک دانلود" %}</p>
+                    <div class="flex flex-col gap-2 sm:flex-row sm:items-stretch">
+                        {% comment %}
+                        Styled as a read-only field rather than an inverted
+                        slab. It sits beside a normal button and reads as
+                        something to copy, which is what it is; a solid dark
+                        block next to a light form looks like a code sample and
+                        fights every other surface on the page.
+
+                        A <code> and not an <input>: nothing here is editable,
+                        and a real input invites people to type in it.
+                        {% endcomment %}
+                        <code id="download-link" dir="ltr"
+                              class="field min-w-0 flex-1 overflow-x-auto whitespace-nowrap
+                                     font-mono text-xs leading-6">{{ download_url }}</code>
+                        <button type="button" class="btn-secondary shrink-0 js-copy"
+                                data-copy-target="#download-link">
+                            {% translate "کپی" %}
+                        </button>
+                    </div>
+                </div>
+
+                <a href="{{ download_url }}" class="btn-primary w-full">
+                    {% translate "دانلود فایل" %}
+                </a>
+
+                <p class="mt-3 text-xs faint">
+                    {% translate "این لینک یک‌بارمصرف است و تا ۱۵ دقیقه اعتبار دارد." %}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

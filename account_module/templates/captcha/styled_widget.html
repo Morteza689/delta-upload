@@ -1,0 +1,36 @@
+{% load i18n %}
+{% comment %}
+Captcha widget styled to match the rest of the forms.
+
+Deliberately inside an app's templates directory rather than the project's:
+Django's form renderer uses a separate template engine that only sees app
+template directories, not the project DIRS.
+
+The captcha is a MultiWidget: the first subwidget is a hidden key, the second a
+text input. They have to be rendered from subwidgets, otherwise the field names
+(captcha_0/captcha_1) come out wrong and the form never validates.
+{% endcomment %}
+<div class="flex flex-wrap items-center gap-3">
+    <div class="shrink-0 overflow-hidden rounded-lg border hairline bg-[rgb(var(--surface))] ">
+        <img src="{{ image }}" alt="{% translate 'تصویر کپچا' %}" class="captcha block">
+    </div>
+
+    <button type="button"
+            class="btn-secondary btn-sm js-captcha-refresh"
+            data-refresh-url="{% url 'captcha-refresh' %}">
+        &#8635; {% translate "تصویر جدید" %}
+    </button>
+
+    {% spaceless %}
+        {% for subwidget in widget.subwidgets %}
+            {% if subwidget.type == 'hidden' %}
+                {% include subwidget.template_name with widget=subwidget %}
+            {% else %}
+                <input type="text" name="{{ subwidget.name }}" id="{{ subwidget.attrs.id }}"
+                       autocomplete="off" autocapitalize="off" spellcheck="false"
+                       class="field sm:w-40"
+                       {% if subwidget.attrs.required %}required{% endif %}>
+            {% endif %}
+        {% endfor %}
+    {% endspaceless %}
+</div>

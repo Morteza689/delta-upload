@@ -1,0 +1,58 @@
+{% extends 'staff_module/base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "کاربران" %}{% endblock %}
+{% block page_title %}{% translate "کاربران" %}{% endblock %}
+
+{% block content %}
+    <form method="get" class="mb-4 flex flex-col gap-2 sm:flex-row">
+        <input type="search" name="q" value="{{ search }}" class="field sm:flex-1"
+               placeholder="{% translate 'جستجو با ایمیل یا نام کاربری' %}">
+        <button type="submit" class="btn-secondary">{% translate "جستجو" %}</button>
+    </form>
+
+    <div class="panel">
+        <div class="panel-body">
+            <table class="rtable">
+                <thead class="table-head">
+                <tr>
+                    <th class="px-3 py-2 text-start">{% translate "کاربر" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "ایمیل" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "موجودی" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "فایل" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "عضویت" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "وضعیت" %}</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                {% for item in users %}
+                    <tr>
+                        <td class="px-3 py-2 font-medium" data-label='{% translate "کاربر" %}'>{{ item.username }}</td>
+                        <td class="px-3 py-2 muted" data-label='{% translate "ایمیل" %}'>{{ item.email }}</td>
+                        <td class="num px-3 py-2" data-label='{% translate "موجودی" %}'>{{ item.balance|money }}</td>
+                        <td class="num px-3 py-2" data-label='{% translate "فایل" %}'>{{ item.file_count }}</td>
+                        <td class="px-3 py-2 muted" data-label='{% translate "عضویت" %}'>{{ item.date_joined|date:"Y/m/d" }}</td>
+                        <td class="px-3 py-2" data-label='{% translate "وضعیت" %}'>
+                            {% if item.is_staff %}
+                                <span class="chip chip-brand">{% translate "کارمند" %}</span>
+                            {% elif item.is_active %}
+                                <span class="chip chip-money">{% translate "فعال" %}</span>
+                            {% else %}
+                                <span class="chip chip-muted">{% translate "غیرفعال" %}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="px-3 py-8 text-center text-sm muted">
+                            {% translate "کاربری پیدا نشد" %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if is_paginated %}{% include 'shared/pagination.html' %}{% endif %}
+{% endblock %}

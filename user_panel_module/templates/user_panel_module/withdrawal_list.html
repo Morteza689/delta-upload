@@ -1,0 +1,62 @@
+{% extends 'shared/panel_base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "تاریخچه برداشت" %}{% endblock %}
+{% block page_title %}{% translate "تاریخچه برداشت" %}{% endblock %}
+
+{% block content %}
+    <div class="panel">
+        <div class="panel-body">
+            <div class="overflow-x-auto">
+                <table class="rtable">
+                    <thead class="table-head">
+                    <tr>
+                        <th class="px-3 py-2 text-start">{% translate "شناسه" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "واریز به" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "مبلغ" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "تاریخ درخواست" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "تاریخ واریز" %}</th>
+                        <th class="px-3 py-2 text-start">{% translate "وضعیت" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-body">
+                    {% for withdraw in object_list %}
+                        <tr>
+                            <td class="px-3 py-2" data-label='{% translate "شناسه" %}'>{{ withdraw.id }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "واریز به" %}'>
+                                <span class="block text-xs">{{ withdraw.account.get_method_display }}</span>
+                                <code class="block text-[11px] faint" dir="ltr">{{ withdraw.account.short }}</code>
+                            </td>
+                            <td class="px-3 py-2" data-label='{% translate "مبلغ" %}'>
+                                <span class="num block font-medium">{{ withdraw.net_amount|money }}</span>
+                                {% if withdraw.fee %}
+                                    <span class="block text-[11px] faint num">
+                                        {% translate "کارمزد" %} {{ withdraw.fee|money }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td class="px-3 py-2" data-label='{% translate "تاریخ درخواست" %}'>{{ withdraw.created_deta|date:"Y/m/d H:i" }}</td>
+                            <td class="px-3 py-2" data-label='{% translate "تاریخ واریز" %}'>
+                                {% if withdraw.deta_is_paid %}{{ withdraw.deta_is_paid|date:"Y/m/d H:i" }}{% else %}—{% endif %}
+                            </td>
+                            <td class="px-3 py-2" data-label='{% translate "وضعیت" %}'>
+                                {% if withdraw.is_paid %}
+                                    <span class="chip chip-money">{% translate "پرداخت شده" %}</span>
+                                {% else %}
+                                    <span class="chip chip-pending">{% translate "در انتظار پرداخت" %}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="px-3 py-8 text-center faint">
+                                {% translate "هنوز برداشتی ثبت نشده است" %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

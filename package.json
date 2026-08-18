@@ -1,0 +1,15 @@
+{
+  "name": "d-up",
+  "version": "1.0.0",
+  "private": true,
+  "description": "D-UP file sharing — Tailwind build",
+  "scripts": {
+    "css": "tailwindcss -i ./static/src/input.css -o ./static/css/tailwind.css",
+    "build": "npm run css -- --minify",
+    "watch": "npm run css -- --watch"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

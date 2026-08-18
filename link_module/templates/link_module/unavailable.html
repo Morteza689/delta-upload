@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "لینک در دسترس نیست" %}{% endblock %}
+
+{% block body %}
+    <div class="mx-auto max-w-md py-12 text-center">
+        <p class="metric mb-3" style="color: rgb(var(--line-strong))">410</p>
+        <h1 class="mb-3 text-xl font-bold">{% translate "این لینک دیگر کار نمی‌کند" %}</h1>
+
+        <p class="mb-6 text-sm muted">
+            {% if reason == 'expired' %}
+                {% translate "مهلت این لینک تمام شده است." %}
+            {% elif reason == 'used_up' %}
+                {% translate "این لینک به سقف تعداد استفاده رسیده است." %}
+            {% else %}
+                {% translate "این لینک غیرفعال شده است." %}
+            {% endif %}
+        </p>
+
+        <div class="flex flex-col justify-center gap-2 sm:flex-row">
+            <a class="btn-primary" href="{% url 'shorten_page' %}">
+                {% translate "ساخت لینک کوتاه" %}
+            </a>
+            <a class="btn-secondary" href="{% url 'home_page' %}">
+                {% translate "صفحه اصلی" %}
+            </a>
+        </div>
+    </div>
+{% endblock %}

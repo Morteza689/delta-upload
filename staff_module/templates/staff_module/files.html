@@ -1,0 +1,80 @@
+{% extends 'staff_module/base.html' %}
+{% load i18n dup_filters %}
+
+{% block title %}{% translate "فایل ها" %}{% endblock %}
+{% block page_title %}{% translate "فایل ها" %}{% endblock %}
+
+{% block content %}
+    <form method="get" class="mb-4 flex flex-col gap-2 sm:flex-row">
+        <input type="search" name="q" value="{{ search }}" class="field sm:flex-1"
+               placeholder="{% translate 'جستجو با نام، اسلاگ یا ایمیل آپلودکننده' %}">
+        <button type="submit" class="btn-secondary">{% translate "جستجو" %}</button>
+    </form>
+
+    <div class="panel">
+        <div class="panel-body">
+            <table class="rtable">
+                <thead class="table-head">
+                <tr>
+                    <th class="px-3 py-2 text-start">{% translate "نام" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "آپلودکننده" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "حجم" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "دانلود" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "انتشار" %}</th>
+                    <th class="px-3 py-2 text-start">{% translate "عملیات" %}</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                {% for item in files %}
+                    <tr>
+                        <td class="max-w-xs truncate px-3 py-2" data-label='{% translate "نام" %}'>
+                            {% if item.is_public_now %}
+                                <a class="hover:underline" style="color: rgb(var(--brand))"
+                                   href="{% url 'download_page' slug=item.slug %}">
+                                    {{ item.name|default:item.slug }}
+                                </a>
+                            {% else %}
+                                {{ item.name|default:item.slug }}
+                            {% endif %}
+                        </td>
+                        <td class="px-3 py-2 muted" data-label='{% translate "آپلودکننده" %}'>{{ item.author|default:"—" }}</td>
+                        <td class="px-3 py-2" data-label='{% translate "حجم" %}'>{{ item.size_bytes|convertor_byte }}</td>
+                        <td class="num px-3 py-2" data-label='{% translate "دانلود" %}'>{{ item.number_of_download }}</td>
+                        <td class="px-3 py-2" data-label='{% translate "انتشار" %}'>
+                            {% if not item.is_active %}
+                                <span class="chip chip-muted">{% translate "غیرفعال" %}</span>
+                            {% elif item.is_public_now %}
+                                <span class="chip chip-money">{% translate "عمومی" %}</span>
+                            {% else %}
+                                <span class="chip chip-muted">{% translate "خصوصی" %}</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-3 py-2" data-label='{% translate "عملیات" %}'>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="file_id" value="{{ item.pk }}">
+                                <button type="submit"
+                                        class="{% if item.is_active %}btn-danger{% else %}btn-secondary{% endif %} btn-sm">
+                                    {% if item.is_active %}
+                                        {% translate "غیرفعال کن" %}
+                                    {% else %}
+                                        {% translate "فعال کن" %}
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="px-3 py-8 text-center text-sm muted">
+                            {% translate "فایلی پیدا نشد" %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if is_paginated %}{% include 'shared/pagination.html' %}{% endif %}
+{% endblock %}

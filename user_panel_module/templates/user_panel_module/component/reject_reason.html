@@ -1,0 +1,37 @@
+{% load i18n %}
+{% comment %}
+Why a view was rejected, in plain language.
+
+The reason code stored in the database is fixed and English, for queries and
+logs, but what the user sees has to explain what happened: "too_fast" means
+nothing to them.
+{% endcomment %}
+{% if reason == 'too_fast' %}
+    {% translate "خیلی سریع رد شد (احتمالاً ربات)" %}
+{% elif reason == 'too_slow' %}
+    {% translate "فاصله‌ی زیاد بین دو صفحه" %}
+{% elif reason == 'duplicate' %}
+    {% translate "بازدید تکراری همان کاربر" %}
+{% elif reason == 'cooldown' %}
+    {% translate "فاصله‌ی کم تا بازدید قبلی همان کاربر" %}
+{% elif reason == 'self_view' %}
+    {% translate "بازدید خودتان" %}
+{% elif reason == 'visitor_mismatch' %}
+    {% translate "لینک مرحله دوم از جای دیگری باز شد" %}
+{% elif reason == 'bot_agent' %}
+    {% translate "درخواست از ابزار خودکار، نه مرورگر" %}
+{% elif reason == 'no_cookies' %}
+    {% translate "مرورگر کوکی نگه نداشت" %}
+{% elif reason == 'already_counted' %}
+    {% translate "قبلاً شمرده شده بود" %}
+{% elif reason == 'file_daily_cap' %}
+    {% translate "سقف درآمد روزانه این فایل" %}
+{% elif reason == 'user_daily_cap' %}
+    {% translate "سقف درآمد روزانه حساب شما" %}
+{% elif reason == 'no_setting' %}
+    {% translate "تبلیغات فعال نبود" %}
+{% elif reason == 'no_author' %}
+    {% translate "فایل صاحب مشخصی ندارد" %}
+{% else %}
+    {{ reason }}
+{% endif %}

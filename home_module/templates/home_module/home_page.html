@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load i18n static dup_filters %}
+
+{% block title %}{% translate "دلتا آپلود — آپلود کن، درآمد بساز" %}{% endblock %}
+
+{% block body %}
+
+    {# ===================== Hero, with the 3D scene ===================== #}
+    <section class="relative -mt-6 overflow-hidden py-8 sm:-mt-8 sm:py-12 lg:py-20">
+        <div class="glow pointer-events-none absolute inset-0 -z-10"></div>
+
+        <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+
+            <div class="text-center lg:text-start">
+                <span class="chip chip-brand mb-4">
+                    {% translate "سهم شما از هر دانلود: ۶۰٪" %}
+                </span>
+
+                <h1 class="mb-4 text-3xl font-bold leading-tight sm:mb-5 sm:text-4xl lg:text-5xl">
+                    {% translate "فایلت را آپلود کن،" %}
+                    <span style="color: rgb(var(--brand))">
+                        {% translate "از هر دانلود درآمد بگیر" %}
+                    </span>
+                </h1>
+
+                <p class="mb-6 text-base muted sm:mb-8 sm:text-lg ">
+                    {% translate "لینک بساز، هر جا می‌خواهی بگذار. هر بار که کسی فایلت را می‌گیرد، سهم تو واریز می‌شود. می‌توانی فایل را رایگان بگذاری یا برایش قیمت تعیین کنی." %}
+                </p>
+
+                <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
+                    {% if user.is_authenticated %}
+                        <a class="btn-primary" href="{% url 'upload_page' %}">
+                            {% translate "آپلود فایل" %}
+                        </a>
+                        <a class="btn-secondary" href="{% url 'user_dashbord' %}">
+                            {% translate "پنل کاربری" %}
+                        </a>
+                    {% else %}
+                        <a class="btn-primary" href="{% url 'register_page' %}">
+                            {% translate "شروع رایگان" %}
+                        </a>
+                        {% comment %}
+                        The no-signup route belongs right beside the main
+                        button. Someone who does not trust us yet will not fill
+                        in a registration form, but will send one file and see
+                        what happens.
+                        {% endcomment %}
+                        <a class="btn-secondary" href="{% url 'guest_upload_page' %}">
+                            {% translate "آپلود بدون ثبت‌نام" %}
+                        </a>
+                    {% endif %}
+                </div>
+
+                {% if not user.is_authenticated %}
+                    <p class="mt-4 text-sm muted">
+                        {% blocktranslate with mb=guest_size_limit_mb %}بدون حساب کاربری تا {{ mb }} مگابایت — فایل بعد از مهلتی که خودت انتخاب می‌کنی پاک می‌شود.{% endblocktranslate %}
+                    </p>
+                {% endif %}
+            </div>
+
+            {% comment %}
+            The 3D scene. Height and card size shrink on a phone, otherwise the
+            absolutely positioned cards overlap on a narrow screen.
+            {% endcomment %}
+            <div class="scene mx-auto h-[300px] w-full max-w-md select-none
+                        sm:h-[400px] lg:h-[440px]"
+                 data-hero-scene>
+                <div class="stage relative h-full w-full" data-hero-stage>
+
+                    {# Back layer: the raw file #}
+                    <div class="card3d layer-back floaty-slow absolute left-0 top-2 w-40 sm:top-4 sm:w-52">
+                        <div class="rounded-2xl border hairline bg-[rgb(var(--surface))] p-4 shadow-xl
+                                     ">
+                            <div class="mb-3 flex items-center gap-2">
+                                <div class="flex h-9 w-9 items-center justify-center rounded-lg
+                                            bg-[rgb(var(--brand)/0.12)] text-[rgb(var(--brand))]">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2" class="h-5 w-5" aria-hidden="true">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                        <path d="M14 2v6h6"/>
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="truncate text-sm font-medium">project.zip</p>
+                                    <p class="text-xs faint">248 MB</p>
+                                </div>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="width:100%"></div>
+                            </div>
+                            <p class="mt-2 text-[11px] faint">{% translate "آپلود شد" %}</p>
+                        </div>
+                    </div>
+
+                    {# Flow line between the layers #}
+                    <svg class="pointer-events-none absolute inset-0 h-full w-full"
+                         viewBox="0 0 400 440" fill="none" aria-hidden="true">
+                        <path d="M120 120 C 200 160, 220 200, 250 250"
+                              stroke="currentColor" stroke-width="2"
+                              class="flow-line text-[rgb(var(--brand)/0.55)]"/>
+                        <path d="M250 260 C 230 320, 200 340, 160 370"
+                              stroke="currentColor" stroke-width="2"
+                              class="flow-line text-[rgb(var(--money)/0.55)]"/>
+                    </svg>
+
+                    {# Middle layer: the download link #}
+                    <div class="card3d layer-mid floaty absolute end-0 top-1/2 w-48 -translate-y-1/2 sm:w-60">
+                        <div class="rounded-2xl border hairline bg-[rgb(var(--surface))] p-4 shadow-2xl">
+                            <p class="mb-2 text-xs font-medium faint">
+                                {% translate "لینک دانلود" %}
+                            </p>
+                            <div class="mb-3 overflow-hidden rounded-lg bg-[rgb(var(--ink))] px-3 py-2" dir="ltr">
+                                <code class="text-[11px]" style="color: rgb(var(--paper))">d-up.ir/dl/a1b2c3</code>
+                            </div>
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="faint">{% translate "بازدید" %}</span>
+                                <span class="font-bold" style="color: rgb(var(--brand))">1,284</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Front layer: earnings #}
+                    <div class="card3d layer-front floaty-fast absolute bottom-2 start-2 w-40 sm:bottom-6 sm:start-4 sm:w-48">
+                        <div class="rounded-2xl border hairline bg-[rgb(var(--surface))] p-4 shadow-2xl">
+                            <div class="flex items-center gap-2">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-full
+                                            bg-[rgb(var(--money)/0.12)] text-[rgb(var(--money))]">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2" class="h-5 w-5" aria-hidden="true">
+                                        <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs faint">{% translate "درآمد شما" %}</p>
+                                    <p class="text-lg font-bold money">
+                                        $12.40
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ======================== How it works ========================= #}
+    <section class="py-10 sm:py-14">
+        <h2 class="mb-8 text-center text-xl font-bold sm:mb-10 sm:text-2xl">
+            {% translate "در سه قدم" %}
+        </h2>
+
+        <div class="grid gap-4 sm:gap-6 md:grid-cols-3">
+            {% for step in steps %}
+                <div class="panel relative overflow-hidden">
+                    <div class="panel-body">
+                        {% comment %}
+                        The step number sits inside the card, not bleeding off
+                        the top of it. It used to be pulled up by a negative
+                        offset while the card clipped its overflow, so every
+                        digit arrived with its top sliced off and read as a
+                        rendering fault rather than a decoration.
+
+                        aria-hidden because the number is decoration: the
+                        steps are already in order, and a screen reader
+                        announcing "one" before the heading is noise.
+                        {% endcomment %}
+                        <span class="pointer-events-none absolute select-none text-6xl
+                                     font-bold leading-none sm:text-7xl"
+                              style="top: 0.5rem; inset-inline-end: 0.75rem;
+                                     color: rgb(var(--line))"
+                              aria-hidden="true">{{ forloop.counter }}</span>
+
+                        {# Kept clear of the number so a long line never runs under it. #}
+                        <h3 class="relative mb-2 pe-14 font-bold">{{ step.title }}</h3>
+                        <p class="relative text-sm muted">
+                            {{ step.body }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    {# ========================== Features =========================== #}
+    <section class="py-10 sm:py-14">
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+            {% for feature in features %}
+                <div class="panel">
+                    <div class="panel-body">
+                        <h3 class="panel-title mb-2">{{ feature.title }}</h3>
+                        <p class="text-sm muted">{{ feature.body }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    {# ============================= API ============================= #}
+    <section class="py-10 sm:py-14">
+        <div class="panel overflow-hidden">
+            <div class="grid items-center gap-6 p-4 sm:p-6 lg:grid-cols-2 lg:gap-8 lg:p-10">
+                <div>
+                    <h2 class="mb-3 text-xl font-bold sm:text-2xl">{% translate "سایت داری؟ از API استفاده کن" %}</h2>
+                    <p class="mb-5 muted">
+                        {% translate "فایل‌های سایتت را با یک درخواست آپلود کن و لینک صفحه‌ی دانلود بگیر. درآمدش به حساب خودت می‌نشیند." %}
+                    </p>
+                    <a class="btn-primary" href="{% url 'api_docs_page' %}">
+                        {% translate "راهنمای API" %}
+                    </a>
+                </div>
+<pre class="overflow-x-auto rounded-xl p-5 text-xs leading-relaxed" style="background-color: rgb(var(--ink)); color: rgb(var(--paper))" dir="ltr"><code>curl -X POST https://d-up.ir/api/v1/files/ \
+  -H "Authorization: Bearer $DUP_API_KEY" \
+  -F "file=@video.mp4" \
+  -F "visibility=public"
+
+<span class="text-[rgb(var(--money))]">{
+  "download_page_url": "https://d-up.ir/dl/a1b2c3d4"
+}</span></code></pre>
+            </div>
+        </div>
+    </section>
+
+    {# ======================== Closing call ========================= #}
+    <section class="py-10 text-center sm:py-14">
+        <h2 class="mb-3 text-xl font-bold sm:text-2xl">{% translate "همین حالا شروع کن" %}</h2>
+        <p class="mb-6 muted">
+            {% translate "ساخت حساب رایگان است و برای شروع نیازی به پرداخت نداری." %}
+        </p>
+        {% if not user.is_authenticated %}
+            <div class="flex flex-col justify-center gap-3 sm:flex-row">
+                <a class="btn-primary" href="{% url 'register_page' %}">
+                    {% translate "ساخت حساب" %}
+                </a>
+                <a class="btn-secondary" href="{% url 'guest_upload_page' %}">
+                    {% translate "یا بدون حساب آپلود کن" %}
+                </a>
+            </div>
+        {% else %}
+            <a class="btn-primary" href="{% url 'upload_page' %}">
+                {% translate "آپلود فایل" %}
+            </a>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'src/hero-3d.js' %}" defer></script>
+{% endblock %}
