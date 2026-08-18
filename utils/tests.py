@@ -335,14 +335,33 @@ class ProjectChecksTests(TestCase):
             r"\s*=\s*(['\"])(.*?)\2",
             re.M,
         )
+        # A dotted import path is not a secret. Several settings name a
+        # callable by path, and their names end in _KEY the same way.
+        import_path = re.compile(r'^[a-z_][a-z0-9_]*(\.[a-z_][a-z0-9_]*)+$',
+                                 re.I)
+
         literals = [
             name for name, _quote, value in assignment.findall(source)
             if value and name != 'DEV_SECRET_KEY'
+            and not import_path.match(value)
         ]
         self.assertEqual(
             literals, [],
             'these hold a literal secret; read them from os.environ instead',
         )
+
+    def test_a_dotted_path_is_not_mistaken_for_a_secret(self):
+        """The rule above must not fire on a setting that names a callable."""
+        import re
+
+        import_path = re.compile(r'^[a-z_][a-z0-9_]*(\.[a-z_][a-z0-9_]*)+$',
+                                 re.I)
+
+        self.assertTrue(import_path.match('utils.http_service.ratelimit_key'))
+        # A real password does not survive the same rule.
+        for secret in ('hunter2', 'My@Delta-example', 's3cr3t key',
+                       'GJXEADS-BMP4646', 'a.b c.d'):
+            self.assertIsNone(import_path.match(secret), secret)
 
     def test_the_env_file_is_ignored_by_git(self):
         """Otherwise the same secrets reach the repository by another route."""

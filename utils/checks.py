@@ -99,9 +99,14 @@ def check_payment_secrets(app_configs, **kwargs):
     return problems
 
 
-@register('dup')
+@register('dup', deploy=True)
 def check_static_files_served(app_configs, **kwargs):
     """With DEBUG off, something has to serve STATIC_URL.
+
+    Registered as a deploy check, so it runs under `check --deploy` and not on
+    every management command. Otherwise it makes a first deploy impossible:
+    collectstatic has not run yet, so the check fails, so migrate refuses to
+    run — and the only way out is to know which order defeats it.
 
     Django deliberately serves nothing there and assumes a web server in front
     is doing it. When nothing is, the site answers every request correctly and

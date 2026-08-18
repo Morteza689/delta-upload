@@ -88,6 +88,27 @@ class ChecksTests(TestCase):
             (Path(root) / 'something.css').write_text('a{}', encoding='utf-8')
             self.assertEqual(self.run_check(STATIC_ROOT=root), [])
 
+    def test_it_only_runs_under_check_deploy(self):
+        """Otherwise a first deploy cannot be done at all.
+
+        Registered normally, this check runs before every management command.
+        On a new server collectstatic has not run, so the check fails, so
+        migrate refuses — and collectstatic itself is the only command that
+        gets through. That happened on the first deploy of this project.
+        """
+        from django.core.checks.registry import registry
+
+        def named(checks):
+            return [c for c in checks
+                    if c.__name__ == 'check_static_files_served']
+
+        # Present when deployment checks are asked for, absent otherwise.
+        self.assertEqual(len(named(registry.deployment_checks)), 1)
+        self.assertEqual(named(registry.registered_checks), [])
+        self.assertEqual(named(registry.get_checks()), [])
+        self.assertEqual(
+            len(named(registry.get_checks(include_deployment_checks=True))), 1)
+
 
 class DeliveryTests(TestCase):
     """Every asset a page names must actually come back.

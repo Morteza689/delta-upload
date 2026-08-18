@@ -36,3 +36,24 @@ def get_client_ip(request: HttpRequest) -> str:
         return remote_addr
 
     return parts[index]
+
+
+def ratelimit_key(request: HttpRequest) -> str:
+    """The address django-ratelimit counts against.
+
+    Pointed at by RATELIMIT_IP_META_KEY. Left to itself the library reads
+    REMOTE_ADDR directly and raises ImproperlyConfigured when it is empty,
+    which is exactly the case behind a unix socket: there is no peer address to
+    report, because the peer is a file. Every POST on the site answered 500 —
+    login, upload, all of it — while every GET was fine.
+
+    It also has to be this function rather than the header name, so the same
+    trusted-proxy rules apply here as everywhere else. Handing the library
+    HTTP_X_FORWARDED_FOR directly would let anyone become a new visitor per
+    request by sending their own.
+
+    An address we cannot determine shares one bucket instead of raising. That
+    direction is the safe one: a shared limit can only refuse more than it
+    should, never less.
+    """
+    return get_client_ip(request) or 'unknown'

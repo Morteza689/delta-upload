@@ -438,6 +438,54 @@ if not DEBUG:
         SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
+# --- Logging ---
+#
+# Without this, an unhandled exception in production goes nowhere. Django's
+# default sends django.request errors to the mail_admins handler, which needs
+# ADMINS and a working mailer; with neither, a 500 leaves one line in the
+# access log saying 500 and no trace of what happened.
+#
+# Everything goes to the console because the process runs under a supervisor
+# (systemd, docker) that already collects and rotates its output. Writing our
+# own file would be a second place to look and a second thing to rotate.
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'plain': {
+            'format': '{asctime} {levelname} {name} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'plain',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+        # The one that carries the traceback of a 500. Django attaches it to
+        # this logger and nowhere else.
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # Our own modules log payment failures, Telegram errors and mail
+        # delivery problems. Silence here means finding out from a user.
+        'dup': {
+            'handlers': ['console'],
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}
+
+
 # --- Cache and rate limiting ---
 #
 # Rate limit counters live in the cache, so it must be shared across workers.
@@ -475,6 +523,15 @@ RATELIMIT_ENABLE = not TESTING
 # Fail open if the cache dies: a Redis outage should not take the site down.
 # The error is logged so it does not pass unnoticed.
 RATELIMIT_FAIL_OPEN = True
+
+# Which address a limit is counted against.
+#
+# The library reads REMOTE_ADDR itself and raises when it is empty. Behind a
+# unix socket it always is, so every POST on the site answered 500 while every
+# GET looked fine. Naming a header instead would be worse: the same
+# trusted-proxy rules have to apply here as everywhere else, or anyone can
+# become a new visitor on every request by sending their own header.
+RATELIMIT_IP_META_KEY = 'utils.http_service.ratelimit_key'
 
 
 # --- Captcha ---
