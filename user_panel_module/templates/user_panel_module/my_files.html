@@ -60,6 +60,20 @@
                             <td class="px-3 py-2" data-label='{% translate "عملیات" %}'>
                                 {# Wrapping, not nowrap: three buttons on a narrow screen otherwise push the table sideways. #}
                                 <div class="flex flex-wrap gap-1">
+                                    {% if file.is_public_now %}
+                                        {% comment %}
+                                        Only for a file that is actually reachable. Handing
+                                        someone the link to a private or expired file gives
+                                        them an address that answers 404, and the owner finds
+                                        out from the person they sent it to.
+
+                                        The address is absolute because the point of the
+                                        button is pasting it somewhere else.
+                                        {% endcomment %}
+                                        <button type="button" class="btn-secondary btn-sm js-copy"
+                                                title="{% translate "کپی لینک اشتراک‌گذاری" %}"
+                                                data-copy-text="{{ request.scheme }}://{{ request.get_host }}{{ file.get_absolute_url }}">{% translate "کپی لینک" %}</button>
+                                    {% endif %}
                                     <a class="btn-secondary btn-sm"
                                        href="{% url 'file_edit' pk=file.id %}">
                                         {% translate "ویرایش" %}

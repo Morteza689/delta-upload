@@ -4296,3 +4296,9 @@ msgstr "Cryptocurrency"
 
 msgid "کمیسیون سایت"
 msgstr "Site commission"
+
+msgid "کپی لینک"
+msgstr "Copy link"
+
+msgid "کپی لینک اشتراک‌گذاری"
+msgstr "Copy the share link"

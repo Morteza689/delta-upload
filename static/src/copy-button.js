@@ -1,15 +1,33 @@
-// Copy button for API keys and any other text.
+// Copy button for API keys, share links and any other text.
+//
+// Two ways to say what to copy:
+//   data-copy-target="#selector"  read it from an element on the page
+//   data-copy-text="..."          the text itself
+//
+// The second exists for lists. A row in a table of files has nowhere to point
+// at, and adding a hidden element per row purely to give the button a selector
+// is markup that exists to satisfy the script rather than the reader.
 (function () {
   'use strict';
+
+  function textToCopy(button) {
+    if (typeof button.dataset.copyText === 'string') {
+      return button.dataset.copyText;
+    }
+    var target = document.querySelector(button.dataset.copyTarget || '');
+    return target ? target.textContent : null;
+  }
 
   document.addEventListener('click', function (event) {
     var button = event.target.closest('.js-copy');
     if (!button) return;
 
-    var target = document.querySelector(button.dataset.copyTarget);
-    if (!target) return;
+    var raw = textToCopy(button);
+    if (raw === null) return;
 
-    var text = target.textContent.trim();
+    var text = raw.trim();
+    if (!text) return;
+
     var original = button.textContent;
 
     function done() {
