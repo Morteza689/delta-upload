@@ -5,6 +5,7 @@ signs up can ever log in. Password reset told people a link had been sent when
 nothing had. Both were dead code before these tests.
 """
 import re
+from email.utils import parseaddr
 
 from captcha.models import CaptchaStore
 from django.contrib.auth import get_user_model
@@ -243,6 +244,50 @@ class EmailRenderingTests(TestCase):
         # A Latin address inside a right-to-left page otherwise renders broken
         # up and reversed.
         self.assertIn('dir="ltr"', html)
+
+    @override_settings(DEFAULT_FROM_EMAIL='noreply@d-up.ir',
+                       EMAIL_REPLY_TO='support@d-up.ir')
+    def test_replies_go_to_support_not_the_sender(self):
+        from utils.email_service import send_email
+
+        mail.outbox = []
+        self.assertTrue(send_email('x', 'a@b.c', {'activation_url': 'https://d-up.ir/a/1'},
+                                   'emails/activate_account.html'))
+        message = mail.outbox[0]
+        # Nobody reads noreply@, so an answer sent there is lost.
+        self.assertEqual(parseaddr(message.from_email)[1], 'noreply@d-up.ir')
+        self.assertEqual(message.reply_to, ['support@d-up.ir'])
+
+    @override_settings(DEFAULT_FROM_EMAIL='noreply@d-up.ir')
+    def test_the_sender_carries_the_site_name_in_the_readers_language(self):
+        from utils.email_service import send_email
+
+        mail.outbox = []
+        for language, name in (('fa', 'دلتا آپلود'), ('en', 'Delta Upload')):
+            send_email('x', 'a@b.c', {'activation_url': 'https://d-up.ir/a/1'},
+                       'emails/activate_account.html', language=language)
+        # The inbox shows the name, not a bare noreply address.
+        self.assertEqual([parseaddr(m.from_email) for m in mail.outbox],
+                         [('دلتا آپلود', 'noreply@d-up.ir'),
+                          ('Delta Upload', 'noreply@d-up.ir')])
+
+    @override_settings(DEFAULT_FROM_EMAIL='Support Desk <noreply@d-up.ir>')
+    def test_a_name_set_in_the_setting_is_kept(self):
+        from utils.email_service import send_email
+
+        mail.outbox = []
+        send_email('x', 'a@b.c', {'activation_url': 'https://d-up.ir/a/1'},
+                   'emails/activate_account.html')
+        self.assertEqual(mail.outbox[0].from_email, 'Support Desk <noreply@d-up.ir>')
+
+    @override_settings(DEFAULT_FROM_EMAIL='info@d-up.ir', EMAIL_REPLY_TO='')
+    def test_without_a_reply_to_replies_go_to_the_sender(self):
+        from utils.email_service import send_email
+
+        mail.outbox = []
+        send_email('x', 'a@b.c', {'activation_url': 'https://d-up.ir/a/1'},
+                   'emails/activate_account.html')
+        self.assertEqual(mail.outbox[0].reply_to, [])
 
     def test_a_missing_template_reports_rather_than_pretending(self):
         from utils.email_service import send_email

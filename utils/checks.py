@@ -74,7 +74,7 @@ def check_email_configured(app_configs, **kwargs):
 
     if looks_like_production() and settings.EMAIL_BACKEND == console:
         return [Warning(
-            'EMAIL_HOST_PASSWORD ست نشده و ایمیل‌ها فقط در لاگ چاپ می‌شوند.',
+            'نه EMAIL_API_KEY ست شده نه EMAIL_HOST_PASSWORD و ایمیل‌ها فقط در لاگ چاپ می‌شوند.',
             hint='بدون آن ایمیل فعال‌سازی حساب و بازیابی رمز به دست کاربر نمی‌رسد '
                  'و ثبت‌نام عملاً کار نمی‌کند.',
             id='dup.W003',

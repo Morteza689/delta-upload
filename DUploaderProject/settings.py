@@ -719,17 +719,30 @@ PAYMENT_GATEWAYS = {
 
 # Email.
 #
-# The password comes from the environment. Without it we fall back to the
-# console backend so registration still works in development without a real
-# mailbox password sitting in the repository.
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'mail.d-up.ir')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'info@d-up.ir')
+# The credential comes from the environment: the mailbox's API key, or failing
+# that its password. With neither we fall back to the console backend so
+# registration still works in development without a real credential sitting in
+# the repository.
+#
+# The mail server is mail.yaspardaz.ir even though it serves d-up.ir: there is
+# no mail.d-up.ir, and the certificate covers only the server's own name.
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'mail.yaspardaz.ir')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'noreply@d-up.ir')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+# API_... for the EMAIL_HOST_USER mailbox. The server takes it over XOAUTH2
+# rather than as a password; see utils/mail_backend.py.
+EMAIL_API_KEY = os.environ.get('EMAIL_API_KEY', '')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'info@d-up.ir')
+# The server refuses any sender but the login address.
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@d-up.ir')
+# Where replies go. Nobody reads the sender's inbox, so without this a user who
+# answers an activation email is writing to no one.
+EMAIL_REPLY_TO = os.environ.get('EMAIL_REPLY_TO', 'support@d-up.ir')
 
-if EMAIL_HOST_PASSWORD:
+if EMAIL_API_KEY:
+    EMAIL_BACKEND = 'utils.mail_backend.XOAuth2EmailBackend'
+elif EMAIL_HOST_PASSWORD:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

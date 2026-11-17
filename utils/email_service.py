@@ -10,6 +10,7 @@ except that returned nothing, so an SMTP password typo looked exactly like a
 delivered message and account activation silently stopped working.
 """
 import logging
+from email.utils import parseaddr
 
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
@@ -40,12 +41,33 @@ def site_context():
     return {
         'site_name': name,
         'site_url': base_url,
-        'support_email': settings.DEFAULT_FROM_EMAIL,
+        # The address as people say it, for the footer: d-up.ir, not
+        # https://d-up.ir.
+        'site_host': base_url.split('://', 1)[-1],
+        # The sender is a no-reply mailbox, so the address to write to is
+        # where replies go.
+        'support_email': settings.EMAIL_REPLY_TO or settings.DEFAULT_FROM_EMAIL,
+        # Only then is "reply to this email" true.
+        'replies_reach_support': bool(settings.EMAIL_REPLY_TO),
         # Passed explicitly because render_to_string without a request runs no
         # context processors, so the i18n ones are not there to supply them.
         'LANGUAGE_CODE': translation.get_language() or settings.LANGUAGE_CODE,
         'LANGUAGE_BIDI': translation.get_language_bidi(),
     }
+
+
+def sender():
+    """DEFAULT_FROM_EMAIL under the site's name, in the reader's language.
+
+    A bare noreply@ address is what the inbox shows in the sender column, and
+    it reads like a machine nobody stands behind. Only the header gets the
+    name: the envelope is still the bare address, which is what the mail
+    server checks against the login.
+    """
+    name, address = parseaddr(settings.DEFAULT_FROM_EMAIL)
+    if name or not address:
+        return settings.DEFAULT_FROM_EMAIL
+    return f'{_("دلتا آپلود")} <{address}>'
 
 
 def send_email(subject, to, context, template_name, text_template=None,
@@ -88,8 +110,9 @@ def _send(subject, to, context, template_name, text_template):
     message = EmailMultiAlternatives(
         subject=str(subject),
         body=text_body,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=sender(),
         to=[to],
+        reply_to=[settings.EMAIL_REPLY_TO] if settings.EMAIL_REPLY_TO else None,
     )
     message.attach_alternative(html_body, 'text/html')
 
