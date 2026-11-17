@@ -3411,6 +3411,12 @@ msgstr "Internal and local addresses cannot be shortened."
 msgid "این ایمیل از طرف %(site_name)s فرستاده شده است."
 msgstr "This email was sent by %(site_name)s."
 
+msgid "سؤالی داری؟ به همین ایمیل جواب بده تا به پشتیبانی برسد."
+msgstr "Questions? Reply to this email and it reaches support."
+
+msgid "حساب"
+msgstr "Account"
+
 msgid "یک کلیک تا فعال شدن حسابت."
 msgstr "One click and your account is live."
 
@@ -3462,8 +3468,10 @@ msgstr "Choose a new password"
 msgid "بازیابی رمز عبور در %(site_name)s"
 msgstr "Reset your %(site_name)s password"
 
-msgid "لینک تا %(valid_hours)s ساعت معتبر است."
-msgstr "The link is valid for %(valid_hours)s hours."
+msgid "لینک تا %(hours)s ساعت معتبر است."
+msgid_plural "لینک تا %(hours)s ساعت معتبر است."
+msgstr[0] "The link is valid for %(hours)s hour."
+msgstr[1] "The link is valid for %(hours)s hours."
 
 msgid ""
 "کسی برای این ایمیل در %(site_name)s درخواست بازیابی رمز داده است. اگر خودت "
@@ -3472,8 +3480,10 @@ msgstr ""
 "Someone asked to reset the %(site_name)s password for this address. If that "
 "was you, press the button below."
 
-msgid "این لینک تا %(valid_hours)s ساعت معتبر است و فقط یک بار کار می‌کند."
-msgstr "This link is valid for %(valid_hours)s hours and works once."
+msgid "این لینک تا %(hours)s ساعت معتبر است و فقط یک بار کار می‌کند."
+msgid_plural "این لینک تا %(hours)s ساعت معتبر است و فقط یک بار کار می‌کند."
+msgstr[0] "This link is valid for %(hours)s hour and works once."
+msgstr[1] "This link is valid for %(hours)s hours and works once."
 
 msgid ""
 "اگر این درخواست را تو نداده‌ای، کاری لازم نیست. رمز فعلی‌ات دست‌نخورده "

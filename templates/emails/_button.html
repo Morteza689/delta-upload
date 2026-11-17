@@ -1,0 +1,24 @@
+{% comment %}
+    The one action the message exists for. Takes url and label.
+
+    Centred and wide, the full width of a phone and capped on a desktop, so it
+    reads as the next step and not as one more line of text. The anchor is a
+    block filling the cell, so the whole button is the target and not just the
+    words.
+
+    A table around it, not a styled <a> on its own: Outlook ignores padding on
+    an anchor and the button collapses to plain text. bgcolor as well as the
+    style, for the same reader.
+{% endcomment %}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"
+       width="100%" style="width:100%; max-width:320px; margin:0 auto;">
+    <tr>
+        <td align="center" bgcolor="#E03E26"
+            style="background-color:#E03E26; border-radius:12px;">
+            <a href="{{ url }}"
+               style="display:block; padding:16px 24px; border-radius:12px;
+                      color:#FFFFFF; font-size:16px; line-height:22px; font-weight:bold;
+                      text-align:center; text-decoration:none;">{{ label }}</a>
+        </td>
+    </tr>
+</table>

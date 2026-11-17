@@ -1,0 +1,26 @@
+{% load i18n %}{% comment %}
+    The same address as the button, for when the button does not work. Takes
+    url.
+
+    Light and small on purpose: it is the fallback, and a heavy box here pulls
+    the eye away from the button above. Monospace and left to right, because
+    it is copied rather than read, and broken anywhere so a long token cannot
+    push past the edge of a phone. A real anchor with its own colour, or the
+    client links it itself in blue.
+{% endcomment %}
+<p style="margin:0 0 8px 0;">
+    {% translate "اگر دکمه کار نکرد، این آدرس را در مرورگر باز کن:" %}
+</p>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+       style="margin:0 0 16px 0;">
+    <tr>
+        <td dir="ltr" bgcolor="#FFFFFF"
+            style="background-color:#FFFFFF; border:1px solid #E2E2DD; border-radius:10px;
+                   padding:10px 12px; text-align:left; word-break:break-all;
+                   font-family:ui-monospace,Menlo,Consolas,'Courier New',monospace;
+                   font-size:12px; line-height:18px;">
+            <a href="{{ url }}" style="color:#5C5C63; text-decoration:none;">{{ url }}</a>
+        </td>
+    </tr>
+</table>

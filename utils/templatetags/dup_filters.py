@@ -4,10 +4,27 @@ Formatting only: sizes, money, and the name a file is shown under. Nothing
 here touches the database or decides anything.
 """
 from django import template
+from django.utils import translation
 
 from utils import currency
 
 register = template.Library()
+
+PERSIAN_DIGITS = str.maketrans('0123456789', '۰۱۲۳۴۵۶۷۸۹')
+
+
+@register.filter(name='local_digits')
+def local_digits(value):
+    """Persian numerals in Persian, Latin ones otherwise.
+
+    The pages get theirs from Vazirmatn's ss01 feature, which an email cannot
+    use: there is no web font in a mail client, so the digits have to be the
+    characters themselves.
+    """
+    text = str(value)
+    if (translation.get_language() or '').startswith('fa'):
+        return text.translate(PERSIAN_DIGITS)
+    return text
 
 
 @register.filter(name='split')

@@ -1,11 +1,14 @@
 {% load i18n %}{% blocktranslate %}حساب تو در {{ site_name }} ساخته شد.{% endblocktranslate %}
-
+{% if user.email %}{% translate "حساب" %}: {{ user.email }}
+{% endif %}
 {% translate "برای فعال کردنش این آدرس را باز کن:" %}
 
 {{ activation_url }}
 
 {% translate "اگر این حساب را تو نساخته‌ای، این ایمیل را نادیده بگیر. بدون باز کردن لینک بالا هیچ حسابی فعال نمی‌شود." %}
-
+{% if replies_reach_support %}
+{% translate "سؤالی داری؟ به همین ایمیل جواب بده تا به پشتیبانی برسد." %}
+{% endif %}
 --
 {{ site_name }}
-{{ site_url }}
+{{ site_host }}
